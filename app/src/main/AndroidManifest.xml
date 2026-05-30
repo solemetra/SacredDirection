@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.qiblaapp2">
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <!-- Возвращаем основные разрешения -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.SacredDirection"
+        android:supportsRtl="true"
+        tools:targetApi="31">
+
+        <!-- Main Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SacredDirection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Compass Activity removed -->
+
+        <!-- Prayer Times Activity (НОВЫЙ) -->
+        <activity
+            android:name=".PrayerTimesActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SacredDirection" />
+
+        <!-- Privacy Policy Activity -->
+        <activity
+            android:name=".PrivacyPolicyActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SacredDirection" />
+
+        <!-- Dua Activity -->
+        <activity
+            android:name=".DuaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SacredDirection" />
+
+        <activity android:name=".SettingsActivity" />
+        
+        <!-- Возвращаем receivers для будильников -->
+        <receiver android:name="com.example.qiblaapp2.SoundAlarmReceiver" android:exported="false"/>
+        
+        <receiver 
+            android:name=".PrayerTimesUpdateReceiver" 
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.qiblaapp2.UPDATE_PRAYER_TIMES" />
+            </intent-filter>
+        </receiver>
+        
+        <!-- Prayer Times Widget -->
+        <receiver 
+            android:name=".PrayerTimesWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+            <meta-data 
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_prayer_times_info" />
+        </receiver>
+        
+        <!-- Widget Update Service -->
+        <service 
+            android:name=".WidgetUpdateService"
+            android:enabled="true"
+            android:exported="false" />
+        
+        <!-- НЕ добавляем PrayerAlarmService - он вызывал краш -->
+
+    </application>
+
+</manifest>

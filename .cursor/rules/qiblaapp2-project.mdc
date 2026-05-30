@@ -1,0 +1,88 @@
+---
+description: Контекст проекта Sacred Direction (QiblaApp2) — рабочее приложение, виджет, ограничения
+alwaysApply: true
+---
+
+# QiblaApp2 / Sacred Direction
+
+## Критично
+
+- Проект **рабочий**. Не менять код, файлы, сборку без **явной команды** пользователя.
+- Аудио **есть**: `app/src/main/res/raw/` — `dua.mp3`, `adhan_fajr.mp3`, `adhan_prayer.mp3` (glob IDE может их не видеть).
+- Package: `com.example.qiblaapp2`, приложение: **Sacred Direction**, Kotlin + XML (без Compose в app-модуле).
+- **Аудитория — весь мир.** Не привязывать решения к «промыслу» / одной локации: пользователь тестировал там локально, приложение для пользователей по всему миру.
+
+## Стек
+
+Android (minSdk 24, targetSdk 34), OSMDroid, `PrayerTimesCalculator` (PrayTimes), `timezonemap.TimezoneMapper` (~26k строк Java).
+
+Экраны: `MainActivity` (карта/кибла), `PrayerTimesActivity`, `DuaActivity`, `SettingsActivity`, `PrivacyPolicyActivity`.
+
+SharedPreferences: `prayer_settings` (latitude, longitude, asr_method, alarm_states и т.д.).
+
+## Виджет (исправление после reboot, май 2026)
+
+**Проблема:** после перезагрузки виджет показывал `00:00` (заглушка из `widget_prayer_times.xml`), пока не открыли приложение.
+
+**Причина:** нет обновления при `BOOT_COMPLETED`; `WidgetUpdateService` не стартует после reboot; `updateAllWidgets` раньше слал broadcast.
+
+**Сделано:**
+- `AndroidManifest.xml`: `RECEIVE_BOOT_COMPLETED`, intent-filter BOOT/QUICKBOOT, `PrayerTimesWidgetProvider` `exported="true"`.
+- `PrayerTimesWidgetProvider.kt`: `onReceive` на boot → `onUpdate` + `startService(WidgetUpdateService)`; timezone через `TimezoneMapper` (как в `PrayerTimesActivity`); `updateAllWidgets` вызывает `updateAppWidget` напрямую.
+
+**Файлы виджета:** `PrayerTimesWidgetProvider.kt`, `WidgetUpdateService.kt`, `res/layout/widget_prayer_times.xml`, `res/xml/widget_prayer_times_info.xml`.
+
+Обновление виджета из app: `MainActivity` (GPS), `PrayerTimesActivity`, `SettingsActivity` → `updateAllWidgets()`.
+
+`PrayerTimesUpdateReceiver` — только будильники, **не** обновляет виджет.
+
+## Карта (май 2026)
+
+**Источник:** только **OpenStreetMap Mapnik** (`tile.openstreetmap.org`). CARTO / Esri / Wikimedia убраны.
+
+**Кеш osmdroid** (`MainActivity.initOsmdroid`): max **1.5 GB**, trim **1.2 GB**, срок хранения тайлов **60 дней**, 4 потока загрузки.
+
+**Заметка:** без VPN `tile.openstreetmap.org` может быть недоступен в некоторых сетях; кеш помогает после загрузки с VPN.
+
+**Не трогать карту без команды.**
+
+## Компас
+
+Вкладка компаса **удалена**. В карточке Settings (`settingsExtraCard`): About, версия, Privacy Policy (без локации). Брендинг — только в шапке экрана.
+
+## Вкладка Dua (`DuaActivity`, `activity_dua.xml`)
+
+**Содержимое:** шапка Sacred Direction / Dua, арабский текст + перевод (`strings.xml`), кнопка Play (`R.raw.dua`).
+
+**Известные проблемы (не исправлены, пока пользователь не попросит):**
+- Pause убран — только Play (короткое аудио).
+
+**Решение UX:** Dua остаётся **4-й вкладкой**.
+
+## Privacy Policy и модерация магазинов (май 2026)
+
+**Решение пользователя:** пока **не менять** код под compliance; если модераторы (Huawei AppGallery и др.) попросят — переделать.
+
+**Сейчас в приложении (достаточно для базовой логики):**
+- Первый запуск: диалог согласия `maybeShowPrivacyConsent()` в `MainActivity` (Agree / Disagree / Privacy Policy), prefs `app_consent` → `privacy_accepted`.
+- В Settings: ссылка **Privacy Policy** → `PrivacyPolicyActivity` (офлайн `assets/privacy_policy.html`, онлайн telegra.ph).
+- При публикации: URL политики указать в **AppGallery Connect** (и аналогах).
+
+**Известный риск (не исправлен, ждём замечаний модераторов):**
+- **Порядок в `MainActivity.onCreate`:** сначала `checkAllRequirements()` (может запросить location permission), **потом** `maybeShowPrivacyConsent()`. По Huawei 2.4 / GDPR лучше **наоборот**: согласие → потом GPS.
+- **`privacy_policy.html`:** упоминает magnetometer/компас — компас удалён; текст политики устарел.
+- **Отзыв согласия (Huawei 7.6):** в политике только «удалить приложение»; можно добавить явную формулировку + email.
+
+**Если модераторы попросят переделать — чеклист:**
+1. Согласие с политикой **до** `requestLocationPermission()`.
+2. Обновить `privacy_policy.html` (убрать magnetometer, только GPS для киблы/молитв).
+3. Синхронизировать URL в консоли магазина с текстом в приложении.
+4. Опционально: кнопка «Withdraw consent» в Settings.
+
+## Безопасность (не трогать без запроса)
+
+В корне: `sacred-direction.jks`, `certificate.pem` — не коммитить.
+
+## Git
+
+Репозиторий может быть не инициализирован. Коммиты только по запросу пользователя.

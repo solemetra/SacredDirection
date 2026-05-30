@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Верхнее окно с заголовком -->
+    <FrameLayout
+        android:id="@+id/headerSectionSettings"
+        android:layout_width="344dp"
+        android:layout_height="115dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/header_section_bg"
+        android:clipChildren="false"
+        android:elevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/dark_text"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="@color/dark_text"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Основной блок настроек -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="170dp"
+        android:layout_marginBottom="80dp">
+        
+        <LinearLayout
+            android:id="@+id/settingsContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="20dp">
+
+        <!-- Карточка с настройками -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/header_section_bg"
+            android:padding="20dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal">
+
+            <!-- Asr -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Calculation Asr Method"
+                android:textColor="@color/dark_text"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <RadioGroup
+                android:id="@+id/radioGroupAsr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <RadioButton
+                    android:id="@+id/radioAsrShafii"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shafi'i"
+                    android:textColor="@color/dark_text" />
+                <RadioButton
+                    android:id="@+id/radioAsrHanafi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hanafi"
+                    android:textColor="@color/dark_text"
+                    android:layout_marginStart="24dp" />
+            </RadioGroup>
+
+            <!-- Fixed Fajr -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fixed Fajr Time"
+                    android:textColor="@color/dark_text"
+                    android:textSize="16sp" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchFajrFixed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.5 hours before sunrise"
+                android:textColor="@color/gray_text"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp" />
+
+            <!-- Fixed Isha -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Fixed Isha Time"
+                    android:textColor="@color/dark_text"
+                    android:textSize="16sp" />
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchIshaFixed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1.5 hours after Maghrib"
+                android:textColor="@color/gray_text"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="8dp" />
+
+            <!-- High Latitude -->
+            <!-- Удалено: TextView и Spinner для Fajr & Isha in High Latitudes -->
+        </LinearLayout>
+
+        <!-- About & Privacy Policy -->
+        <LinearLayout
+            android:id="@+id/settingsExtraCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/header_section_bg"
+            android:paddingTop="20dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="28dp"
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about"
+                android:textColor="@color/dark_text"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/textSettingsVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_text"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/btnPrivacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/privacy_open"
+                android:textColor="@color/blue_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="?android:attr/selectableItemBackground" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    </ScrollView>
+
+    <!-- Фон с кругами, смещённый вниз -->
+    <FrameLayout
+        android:id="@+id/settingsCirclesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="420dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="-180dp"
+        android:elevation="-1dp">
+
+        <View
+            android:layout_width="420dp"
+            android:layout_height="420dp"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/compass_big_circle_gradient" />
+
+        <View
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/compass_middle_circle" />
+
+        <View
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/compass_center_circle" />
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center|bottom"
+            android:background="@drawable/compass_figma_circle" />
+    </FrameLayout>
+
+    <include layout="@layout/bottom_navigation" />
+
+</FrameLayout> 

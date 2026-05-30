@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- === ТОЛЬКО НОВЫЕ ЦВЕТА (никаких дублей!) === -->
+    <color name="blue_primary">#499EFF</color>
+    <color name="blue_primary_variant">#2196F3</color>
+    <color name="blue_primary_light">#81C4FF</color>
+
+    <color name="blue_background">#F3F8FF</color>
+    <color name="blue_surface">#FFFFFF</color>
+    <color name="blue_border">#ECF4FF</color>
+    <color name="blue_shadow">#BBD0ED</color>
+
+    <color name="dark_text">#131313</color>
+    <color name="gray_text">#666666</color>
+    <color name="white_text">#FFFFFF</color>
+
+    <!-- === ИСЛАМСКИЕ ЗЕЛЕНЫЕ (новые названия) === -->
+    <color name="green_primary">#2E7D32</color>
+    <color name="green_dark">#1B5E20</color>
+    <color name="green_light">#4CAF50</color>
+    <color name="green_accent">#8BC34A</color>
+    
+    <!-- Background color for adaptive launcher icon -->
+    <color name="ic_launcher_background">#0F5132</color>
+</resources>
