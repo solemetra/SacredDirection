@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sacred Direction</string>
+
+    <!-- Navigation -->
+    <string name="nav_direction">Direction</string>
+    <string name="nav_compass">Compass</string>
+    <string name="nav_dua">Dua</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="searching_location">Searching for location...</string>
+    <string name="qibla_direction">🕌 Qibla Direction: %1$d°</string>
+    <string name="distance_to_kaaba">📍 Distance: %1$d km</string>
+    <string name="your_location">Your Location</string>
+    <string name="pray_towards_qibla">Pray towards Qibla</string>
+    <string name="kaaba_title">🕋 Kaaba</string>
+    <string name="kaaba_description">Holy Kaaba in Mecca, Saudi Arabia</string>
+
+    <!-- Compass Activity -->
+    <string name="qibla_compass">🕌 Qibla Compass</string>
+    <string name="searching_gps">Searching GPS...</string>
+    <string name="north">N</string>
+    <string name="south">S</string>
+    <string name="east">E</string>
+    <string name="west">W</string>
+    <string name="qibla_bearing">Qibla: %1$d° | Device: %2$d°</string>
+
+    <!-- Dua Activity -->
+    <string name="dua_bismillah">﷽</string>
+    <string name="play_dua">Play Dua</string>
+    <string name="pause_dua">⏸️ Pause</string>
+    <string name="dua_arabic">اللَّهُمَّ اغْفِرْ لِلْمُسْلِمِينَ وَالْمُسْلِمَاتِ ، وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ ، الأَحْيَاءِ مِنْهُمْ وَالأَمْوَاتِ</string>
+    <string name="dua_translation">O Allah, forgive the Muslim men and women, believing men and women, the living and the dead</string>
+    <string name="jazakallahu_khairan">جزاك الله خيرا</string>
+    <string name="may_allah_reward">May Allah reward you with goodness</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_title">⚙️ Settings</string>
+    <string name="appearance">Appearance</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="notifications">Notifications</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="prayer_notifications">Prayer Time Notifications</string>
+    <string name="compass_settings">Compass Settings</string>
+    <string name="enable_vibration">Enable Vibration</string>
+    <string name="calibrate_compass">Calibrate Compass</string>
+    <string name="calculation_method">Prayer Calculation Method</string>
+    <string name="data_management">Data Management</string>
+    <string name="backup_settings">Backup Settings</string>
+    <string name="restore_settings">Restore Settings</string>
+    <string name="about">About</string>
+    <string name="version">Version %1$s</string>
+
+    <!-- Permissions -->
+    <string name="location_permission_required">Location permission is required for Qibla direction</string>
+    <string name="notification_permission_required">Notification permission is required for prayer reminders</string>
+
+    <!-- Errors -->
+    <string name="location_not_found">Unable to find location</string>
+    <string name="gps_disabled">GPS is disabled. Please enable it in settings</string>
+    <string name="compass_not_available">Compass sensor not available on this device</string>
+
+    <!-- Calibration -->
+    <string name="calibration_title">Compass Calibration</string>
+    <string name="calibration_instructions">To calibrate your compass:\n\n1. Hold your device away from metal objects\n2. Move your device in a figure-8 pattern\n3. Rotate the device in all directions\n\nThis will improve compass accuracy.</string>
+    <string name="start_calibration">Start Calibration</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Toast Messages -->
+    <string name="settings_backed_up">Settings backed up successfully</string>
+    <string name="settings_restored">Settings restored successfully</string>
+    <string name="calibration_complete">Compass calibration complete</string>
+    <string name="distance_unit_km">KM</string>
+    <string name="pause_error">Pause error</string>
+    <string name="alarm_on">Alarm ON</string>
+    <string name="alarm_off">Alarm OFF</string>
+    <string name="unknown_location">-</string>
+    
+    <!-- Privacy Consent -->
+    <string name="privacy_title">Privacy Policy</string>
+    <string name="privacy_message">We use location and magnetometer data only to compute the Qibla direction and prayer times. Please review the Privacy Policy and confirm your consent.</string>
+    <string name="privacy_agree">Agree</string>
+    <string name="privacy_disagree">Disagree</string>
+    <string name="privacy_open">Privacy Policy</string>
+    
+    <!-- Compass Calibration -->
+    <string name="compass_calibration">Calibration: %d%%</string>
+    <string name="calibration_poor">Poor</string>
+    <string name="calibration_fair">Fair</string>
+    <string name="calibration_good">Good</string>
+    <string name="move_device_slowly">Move device slowly</string>
+    <string name="compass_calibration_title">Compass Calibration</string>
+    <string name="move_device_to_calibrate">Move device slowly to calibrate compass</string>
+    <string name="widget_description">Prayer times widget showing all 5 daily prayers</string>
+
+    <!-- Prayer Methods -->
+    <string-array name="high_latitude_methods">
+        <item>Auto</item>
+        <item>1/7th night</item>
+        <item>1/7th night, median</item>
+        <item>Angle-based</item>
+        <item>Midnight</item>
+    </string-array>
+</resources>
