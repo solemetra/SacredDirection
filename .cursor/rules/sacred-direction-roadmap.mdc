@@ -22,8 +22,8 @@ alwaysApply: true
 - High Latitude — в коде Auto (0), в UI нет
 - Calculation Method (MWL) — зашит в `PrayerTimesCalculator`, выбора нет
 - `package=` в AndroidManifest — Gradle warning
-- Release + AppGallery Connect (URL политики, скрины, тест)
-- MapTiler/Mapbox — на будущее (API key, красивее карты)
+- Huawei: загрузить **1.1(3)** в AppGallery (в магазине пока 1.0(2)); свежий signed APK
+- MapTiler/Mapbox — personal flavor (API key в local.properties); MapTiler без номеров домов
 
 ---
 
@@ -75,6 +75,12 @@ alwaysApply: true
 3. **1.3** — методы расчёта + языки
 4. **1.4** — azkar или офлайн-карта — по отзывам
 
+## Сделано (май 2026, инфраструктура)
+
+- Git init, `.gitignore` (ключи исключены)
+- GitHub **Private**: solemetra/SacredDirection + README.md
+- Обучение: release vs store version, Public/Private, keystore
+
 ## Вопрос пользователю (не решён)
 
-Что ближе в первую очередь: **напоминания**, **языки** или **методы расчёта**?
+Что ближе в первую очередь: **напоминания**, **языки**, **методы расчёта** или **personal flavor с картами**?

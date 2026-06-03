@@ -14,4 +14,30 @@ object MapTileSources {
         arrayOf("https://tile.openstreetmap.org/"),
         "© OpenStreetMap contributors"
     )
+
+    val CARTO_VOYAGER: OnlineTileSourceBase = XYTileSource(
+        "CartoVoyager",
+        0,
+        20,
+        256,
+        ".png",
+        arrayOf(
+            "https://a.basemaps.cartocdn.com/rastertiles/voyager/",
+            "https://b.basemaps.cartocdn.com/rastertiles/voyager/",
+            "https://c.basemaps.cartocdn.com/rastertiles/voyager/"
+        ),
+        "© OpenStreetMap contributors © CARTO"
+    )
+
+    fun mapTilerStreets(apiKey: String): OnlineTileSourceBase {
+        return XYTileSource(
+            "MapTilerStreets",
+            0,
+            20,
+            256,
+            ".png?key=$apiKey",
+            arrayOf("https://api.maptiler.com/maps/streets-v2/"),
+            "© OpenStreetMap contributors © MapTiler"
+        )
+    }
 }

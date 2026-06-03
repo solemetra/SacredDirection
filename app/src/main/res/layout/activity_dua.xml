@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -78,18 +79,17 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="160dp"
         android:layout_marginBottom="80dp"
-        android:fillViewport="true"
+        android:scrollbars="none"
         android:clipToPadding="false"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="16dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -97,38 +97,65 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/dua_card_background"
                 android:orientation="vertical"
-                android:padding="24dp"
-                android:layout_marginBottom="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="16dp"
+                android:layout_marginBottom="10dp"
                 android:elevation="4dp">
 
+                <!-- Бисмилля — отдельный блок -->
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textBismillah"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/dua_bismillah"
-                    android:textSize="32sp"
                     android:textColor="#2E7D32"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="16dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dua_arabic"
-                    android:textSize="30sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#1B5E20"
-                    android:gravity="center"
-                    android:lineSpacingExtra="8dp" />
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:includeFontPadding="true"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="12sp"
+                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="#332E7D32" />
+
+                <!-- Арабский текст дуа -->
                 <TextView
+                    android:id="@+id/textDuaArabic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/dua_translation"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    android:textColor="#666666"
                     android:gravity="center"
-                    android:layout_marginTop="12dp" />
+                    android:text="@string/dua_arabic"
+                    android:textColor="#1B5E20"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:lineSpacingExtra="8dp"
+                    android:includeFontPadding="true" />
+
+                <!-- Перевод -->
+                <TextView
+                    android:id="@+id/textDuaTranslation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:text="@string/dua_translation"
+                    android:textColor="#666666"
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    android:lineSpacingExtra="2dp" />
 
             </LinearLayout>
 
@@ -139,11 +166,14 @@
                 android:background="@drawable/play_button_background"
                 android:text="@string/play_dua"
                 android:drawableLeft="@drawable/ic_play"
-                android:drawablePadding="12dp"
+                android:drawablePadding="10dp"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:padding="20dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
                 android:elevation="4dp"
                 android:foreground="?attr/selectableItemBackground" />
 

@@ -27,7 +27,6 @@ class PrayerTimesActivity : AppCompatActivity() {
     // prayerTimesUpdateReceiver теперь статический класс в отдельном файле
 
     private val alarmStates = BooleanArray(5) { true } // Fajr, Dhuhr, Asr, Maghrib, Isha
-    private var showSunrise = true
     private val alarmManager by lazy { getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +40,12 @@ class PrayerTimesActivity : AppCompatActivity() {
         setupNavigation()
         setupAlarmButtons()
         updateCityName()
-        setupSunriseSunsetToggle()
+        setupDateToggle()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateDateDisplay(SimpleDate.now())
     }
 
     override fun onDestroy() {
@@ -97,12 +101,8 @@ class PrayerTimesActivity : AppCompatActivity() {
         val timesList = listOf(times.fajr, times.dhuhr, times.asr, times.maghrib, times.isha)
          scheduleSoundAlarms(timesList)
 
-        // Установить григорианскую дату
-        val dateTextView = findViewById<TextView>(R.id.textGregorianDate)
-        val calendar = java.util.Calendar.getInstance()
-        calendar.set(today.year, today.month - 1, today.day)
-        val format = java.text.SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH)
-        dateTextView?.text = format.format(calendar.time)
+        // Дата (Gregorian / Hijri — переключение по нажатию)
+        updateDateDisplay(today)
 
         findViewById<TextView>(R.id.fajrTime)?.apply {
             text = times.fajr
@@ -129,6 +129,18 @@ class PrayerTimesActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textSunsetTime)?.text = times.maghrib
         // Обновляем виджет с новыми временами
         PrayerTimesWidgetProvider.updateAllWidgets(this)
+    }
+
+    private fun updateDateDisplay(today: SimpleDate) {
+        findViewById<TextView>(R.id.textGregorianDate)?.text =
+            HijriPrefs.formatDateForPrayerScreen(this, today.year, today.month, today.day)
+    }
+
+    private fun setupDateToggle() {
+        findViewById<TextView>(R.id.textGregorianDate)?.setOnClickListener {
+            HijriPrefs.toggleShowingHijri(this)
+            updateDateDisplay(SimpleDate.now())
+        }
     }
 
     private fun highlightActiveTab() {
@@ -273,31 +285,6 @@ class PrayerTimesActivity : AppCompatActivity() {
                 }
             }.start()
         }
-    }
-
-    private fun setupSunriseSunsetToggle() {
-        val sunriseBlock = findViewById<LinearLayout>(R.id.sunriseBlock)
-        val sunsetBlock = findViewById<LinearLayout>(R.id.sunsetBlock)
-
-        fun showSunriseView() {
-            sunriseBlock.visibility = View.VISIBLE
-            sunsetBlock.visibility = View.GONE
-            showSunrise = true
-        }
-
-        fun showSunsetView() {
-            sunriseBlock.visibility = View.GONE
-            sunsetBlock.visibility = View.VISIBLE
-            showSunrise = false
-        }
-
-        // Начальное состояние — показываем sunrise
-        showSunriseView()
-
-        // Переключение по нажатию на весь блок (включая заголовок и иконку)
-        // Нажатие на видимый блок показывает противоположный
-        sunriseBlock.setOnClickListener { showSunsetView() }
-        sunsetBlock.setOnClickListener { showSunriseView() }
     }
 
     private fun scheduleSoundAlarms(times: List<String>) {

@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private lateinit var textQiblaDirection: TextView
     private lateinit var textDistanceValue: TextView
     private lateinit var textDistanceUnit: TextView
-
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
         private const val GPS_ENABLE_REQUEST_CODE = 1002
@@ -119,7 +118,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     private fun setupMap() {
         try {
-            mapView.setTileSource(MapTileSources.OSM_MAPNIK)
+            applyMapStyle()
             mapView.setUseDataConnection(true)
             mapView.setMultiTouchControls(true)
             mapView.controller.setZoom(16.0)
@@ -132,6 +131,12 @@ class MainActivity : AppCompatActivity(), LocationListener {
             mapView.invalidate()
         } catch (e: Exception) {
             showError("Map Error", "Failed to initialize map: ${e.message}")
+        }
+    }
+
+    private fun applyMapStyle() {
+        if (MapStylePrefs.applyTo(mapView, this)) {
+            showToast(getString(R.string.map_style_maptiler_no_key))
         }
     }
 
@@ -663,7 +668,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         try {
             mapView.onResume()
             mapView.setUseDataConnection(true)
-            mapView.invalidate()
+            applyMapStyle()
             checkAllRequirements()
         } catch (e: Exception) {
             showError("Resume Error", e.message ?: "Unknown error")
