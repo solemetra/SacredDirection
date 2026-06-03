@@ -6,6 +6,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +31,8 @@ class SettingsActivity : AppCompatActivity() {
         highlightActiveTab()
         setupNavigation()
         setupAboutCard()
+        setupMapStyle()
+        setupHijri()
 
         val prefs = getSharedPreferences("prayer_settings", MODE_PRIVATE)
 
@@ -52,6 +56,48 @@ class SettingsActivity : AppCompatActivity() {
         switchIshaFixed.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit { putBoolean("isha_fixed", isChecked) }
             sendPrayerTimesUpdateBroadcast()
+        }
+    }
+
+    private fun setupMapStyle() {
+        val radioGroupMap = findViewById<RadioGroup>(R.id.radioGroupMapStyle)
+        val current = MapStylePrefs.getStyle(this)
+        radioGroupMap.check(
+            if (current == MapStylePrefs.STYLE_MAPTILER) R.id.radioMapMaptiler else R.id.radioMapOsm
+        )
+        radioGroupMap.setOnCheckedChangeListener { _, checkedId ->
+            val style = if (checkedId == R.id.radioMapMaptiler) {
+                MapStylePrefs.STYLE_MAPTILER
+            } else {
+                MapStylePrefs.STYLE_OSM
+            }
+            MapStylePrefs.setStyle(this, style)
+            if (style == MapStylePrefs.STYLE_MAPTILER && BuildConfig.MAPTILER_API_KEY.isBlank()) {
+                Toast.makeText(this, R.string.map_style_maptiler_no_key, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun setupHijri() {
+        val textOffset = findViewById<TextView>(R.id.textHijriOffset)
+        val btnMinus = findViewById<Button>(R.id.btnHijriMinus)
+        val btnPlus = findViewById<Button>(R.id.btnHijriPlus)
+
+        fun refreshOffsetUi() {
+            val offset = HijriPrefs.getDayOffset(this)
+            textOffset.text = HijriPrefs.offsetLabel(this)
+            btnMinus.isEnabled = offset > -1
+            btnPlus.isEnabled = offset < 1
+        }
+
+        refreshOffsetUi()
+        btnMinus.setOnClickListener {
+            HijriPrefs.setDayOffset(this, HijriPrefs.getDayOffset(this) - 1)
+            refreshOffsetUi()
+        }
+        btnPlus.setOnClickListener {
+            HijriPrefs.setDayOffset(this, HijriPrefs.getDayOffset(this) + 1)
+            refreshOffsetUi()
         }
     }
 

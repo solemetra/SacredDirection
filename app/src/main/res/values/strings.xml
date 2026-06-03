@@ -27,7 +27,7 @@
     <string name="qibla_bearing">Qibla: %1$d° | Device: %2$d°</string>
 
     <!-- Dua Activity -->
-    <string name="dua_bismillah">﷽</string>
+    <string name="dua_bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</string>
     <string name="play_dua">Play Dua</string>
     <string name="pause_dua">⏸️ Pause</string>
     <string name="dua_arabic">اللَّهُمَّ اغْفِرْ لِلْمُسْلِمِينَ وَالْمُسْلِمَاتِ ، وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ ، الأَحْيَاءِ مِنْهُمْ وَالأَمْوَاتِ</string>
@@ -75,7 +75,22 @@
     <string name="pause_error">Pause error</string>
     <string name="alarm_on">Alarm ON</string>
     <string name="alarm_off">Alarm OFF</string>
+
+    <!-- Settings -->
+    <string name="map_style_title">Map style</string>
+    <string name="map_style_osm">OSM</string>
+    <string name="map_style_maptiler">MapTiler</string>
+    <string name="map_style_maptiler_no_key">MapTiler key missing. Using OSM.</string>
+
+    <string name="hijri_settings_title">Hijri date</string>
+    <string name="hijri_settings_hint">Umm al-Qura. Adjust ±1 day to match your mosque if needed.</string>
+    <string name="hijri_offset_label">Day adjustment</string>
+    <string name="hijri_offset_minus">−1</string>
+    <string name="hijri_offset_plus">+1</string>
+    <string name="hijri_tap_date_hint">Tap date on Prayer tab to switch Gregorian / Hijri</string>
     <string name="unknown_location">-</string>
+    <string name="prayer_sunrise">Sunrise</string>
+    <string name="prayer_sunset">Sunset</string>
     
     <!-- Privacy Consent -->
     <string name="privacy_title">Privacy Policy</string>

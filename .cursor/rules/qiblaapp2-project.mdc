@@ -36,6 +36,8 @@ SharedPreferences: `prayer_settings` (latitude, longitude, asr_method, alarm_sta
 
 `PrayerTimesUpdateReceiver` — только будильники, **не** обновляет виджет.
 
+**После reboot (май 2026, принято пользователем):** сначала ~секунды `00:00` (заглушка XML), потом реальные времена появляются сами — **нормально**, fix работает. Опционально позже: кеш времён в prefs или `--:--` в layout.
+
 ## Карта (май 2026)
 
 **Источник:** только **OpenStreetMap Mapnik** (`tile.openstreetmap.org`). CARTO / Esri / Wikimedia убраны.
@@ -81,8 +83,39 @@ SharedPreferences: `prayer_settings` (latitude, longitude, asr_method, alarm_sta
 
 ## Безопасность (не трогать без запроса)
 
-В корне: `sacred-direction.jks`, `certificate.pem` — не коммитить.
+В корне: `sacred-direction.jks`, `certificate.pem`, `sacred-direction.zip` (внутри jks+pem) — **не коммитить**.
 
-## Git
+Подпись release: `sacred-direction.jks`, в Gradle `signingConfigs` **не прописан** — подпись через **Build → Generate Signed APK** в Android Studio.
 
-Репозиторий может быть не инициализирован. Коммиты только по запросу пользователя.
+## Git / GitHub (май 2026)
+
+- **Инициализирован**, ветка `main`
+- **Private:** https://github.com/solemetra/SacredDirection.git
+- **README.md** в корне (English overview)
+- `.gitignore`: `*.jks`, `*.pem`, `*.zip`, `*.apk`, `local.properties`, `/app/build/`, `/release/`
+- Git user (локально): solemetra / solemetra@gmail.com
+- **Коммиты только по запросу** пользователя
+- Push: при HTTP 408 — Wi‑Fi, `git -c http.postBuffer=524288000 push`, или GitHub Desktop
+
+**Private vs Public (объяснено пользователю-начинающему):**
+- Private = код/README видит только автор; чужим 404 на GitHub
+- Пользователи качают app из **Huawei AppGallery**, не с GitHub
+- APK через GitHub Releases возможен только если Public + Release (или Private только для автора)
+- Без `.jks` никто не может обновить app автора в магазине; Public код можно форкнуть с **другим** package/подписью (смотреть LICENSE)
+
+## Huawei AppGallery (май 2026)
+
+- Консоль: https://developer.huawei.com/consumer/en/service/josp/agc/index.html
+- В магазине была **1.0 (versionCode 2)**; в коде **1.1 (versionCode 3)**
+- **Важно:** Huawei берёт версию из **APK**, не из `build.gradle` на диске. Загружать **свежий подписанный** APK после **Generate Signed APK**, не старый из `release/` или `app/release/`
+- Правильный путь сборки: `app/build/outputs/apk/release/` → подписанный APK
+- Ошибка заливки **1.0(1)** — залили старый APK; новый должен показывать **1.1(3)**
+- Privacy URL в консоли: https://telegra.ph/Privacy-Policy-09-18-69
+
+## Карты — идеи personal-сборки (не реализовано)
+
+Обсуждено: flavor `store` (OSM) vs `personal` (MapTiler/CARTO). MapTiler — 3D красиво, но **нет номеров домов**; OSM/CARTO Voyager — номера есть. Ключ MapTiler — только в `local.properties`. **Не трогать карту без команды.**
+
+## Стиль общения с пользователем
+
+Пользователь **начинающий** — объяснять **коротко и простыми словами** (Git, release, Public/Private, подпись APK).
