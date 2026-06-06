@@ -10,112 +10,88 @@ alwaysApply: true
 - Проект **рабочий**. Не менять код, файлы, сборку без **явной команды** пользователя.
 - Аудио **есть**: `app/src/main/res/raw/` — `dua.mp3`, `adhan_fajr.mp3`, `adhan_prayer.mp3` (glob IDE может их не видеть).
 - Package: `com.example.qiblaapp2`, приложение: **Sacred Direction**, Kotlin + XML (без Compose в app-модуле).
-- **Аудитория — весь мир.** Не привязывать решения к «промыслу» / одной локации: пользователь тестировал там локально, приложение для пользователей по всему миру.
+- **Аудитория — весь мир.** Не привязывать решения к одной локации.
 
 ## Стек
 
-Android (minSdk 24, targetSdk 34), OSMDroid, `PrayerTimesCalculator` (PrayTimes), `timezonemap.TimezoneMapper` (~26k строк Java).
+Android (minSdk 24, targetSdk 34), OSMDroid, `PrayerTimesCalculator` (PrayTimes), `timezonemap.TimezoneMapper`.
 
-Экраны: `MainActivity` (карта/кибла), `PrayerTimesActivity`, `DuaActivity`, `SettingsActivity`, `PrivacyPolicyActivity`.
+Экраны: `MainActivity`, `PrayerTimesActivity`, `DuaActivity`, `SettingsActivity`, `PrivacyPolicyActivity`.
 
-SharedPreferences: `prayer_settings` (latitude, longitude, asr_method, alarm_states и т.д.).
+SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_states, **hijri_day_offset** (−1..+1), **show_hijri_date** (bool).
 
-## Виджет (исправление после reboot, май 2026)
+Новые классы (июнь 2026): `HijriPrefs.kt`, `MapStylePrefs.kt`, `MapTileSources.kt`.
 
-**Проблема:** после перезагрузки виджет показывал `00:00` (заглушка из `widget_prayer_times.xml`), пока не открыли приложение.
+## Вкладки (нижняя панель)
 
-**Причина:** нет обновления при `BOOT_COMPLETED`; `WidgetUpdateService` не стартует после reboot; `updateAllWidgets` раньше слал broadcast.
+1. **Карта/Кибла** — `MainActivity`
+2. **Молитвы** — `PrayerTimesActivity`
+3. **Dua** — `DuaActivity`
+4. **Settings** — `SettingsActivity`
 
-**Сделано:**
-- `AndroidManifest.xml`: `RECEIVE_BOOT_COMPLETED`, intent-filter BOOT/QUICKBOOT, `PrayerTimesWidgetProvider` `exported="true"`.
-- `PrayerTimesWidgetProvider.kt`: `onReceive` на boot → `onUpdate` + `startService(WidgetUpdateService)`; timezone через `TimezoneMapper` (как в `PrayerTimesActivity`); `updateAllWidgets` вызывает `updateAppWidget` напрямую.
+## Карта (июнь 2026)
 
-**Файлы виджета:** `PrayerTimesWidgetProvider.kt`, `WidgetUpdateService.kt`, `res/layout/widget_prayer_times.xml`, `res/xml/widget_prayer_times_info.xml`.
+- **По умолчанию:** OSM Mapnik (`tile.openstreetmap.org`).
+- **Опционально:** MapTiler Streets — выбор в **Settings** (не long-press на карте).
+- Ключ: `MAPTILER_API_KEY` в `local.properties` → `BuildConfig.MAPTILER_API_KEY` в `app/build.gradle`. Без ключа — toast и OSM.
+- `MapStylePrefs`: prefs `map_settings` / `map_style` (`osm` | `maptiler`). `MainActivity` применяет стиль в setup/onResume.
+- **Кеш osmdroid:** max 1.5 GB, trim 1.2 GB, 60 дней, 4 потока.
+- **Не трогать карту без команды.** Flavor store/personal — обсуждалось, не сделано.
 
-Обновление виджета из app: `MainActivity` (GPS), `PrayerTimesActivity`, `SettingsActivity` → `updateAllWidgets()`.
+## Hijri (июнь 2026, сделано)
 
-`PrayerTimesUpdateReceiver` — только будильники, **не** обновляет виджет.
+- Расчёт: `IslamicCalendar` Umm al-Qura (API 26+), иначе fallback `IslamicCalendar()`.
+- **Вкладка Молитвы:** нажатие на `textGregorianDate` → toggle Gregorian / Hijri (`show_hijri_date` в prefs).
+- **Gregorian:** `d MMMM yyyy` (EN). **Hijri:** только **день + месяц по-английски**, без года (напр. `3 Muharram`) — не арабские цифры/названия.
+- **Settings → Hijri date:** только заголовок и кнопки **−1 / 0 / +1** (без подсказок — мало места). Offset **постоянный** в prefs, не «на год». На +1 кнопка **+** disabled (на Huawei выглядит «пропавшей») — это норма, не баг.
+- Месяцы в `HijriPrefs.kt` (массив EN). Dhu al-Hijjah = 12-й месяц (хадж).
 
-**После reboot (май 2026, принято пользователем):** сначала ~секунды `00:00` (заглушка XML), потом реальные времена появляются сами — **нормально**, fix работает. Опционально позже: кеш времён в prefs или `--:--` в layout.
+## Вкладка Молитвы — UI (июнь 2026)
 
-## Карта (май 2026)
+- **Шапка:** карточка `header_section_bg` по центру (как Dua): город (серый 15sp) → дата (22sp, tap = Hijri/Gregorian) → одна строка **Sunrise + Sunset** (без tap-переключения).
+- **Карточки намазов:** высота **94dp**, padding vertical **11dp**, названия 19sp, время 17sp, кнопка будильника 43dp.
+- **Alarm ON/OFF:** ширина подписи 76dp, `includeFontPadding="false"`, `paddingBottom="1dp"`, блок будильника `wrap_content` + `center_vertical`, `clipChildren="false"` на карточке — fix обрезки **снизу** на Huawei/Honor (было из-за ужатия 99→94dp). Пользователь **отклонил** только ON/OFF, убрать текст, две строки.
+- ScrollView `marginTop` **168dp** под шапку.
 
-**Источник:** только **OpenStreetMap Mapnik** (`tile.openstreetmap.org`). CARTO / Esri / Wikimedia убраны.
+## Settings — UI (июнь 2026)
 
-**Кеш osmdroid** (`MainActivity.initOsmdroid`): max **1.5 GB**, trim **1.2 GB**, срок хранения тайлов **60 дней**, 4 потока загрузки.
+- Мини-карточки: расчёт Asr + Fixed Fajr/Isha | **Map style** OSM и MapTiler **в одну строку** | **Hijri** (заголовок + кнопки) | About + Privacy.
+- Map: `@string/map_style_osm` / `maptiler` без описаний в скобках.
 
-**Заметка:** без VPN `tile.openstreetmap.org` может быть недоступен в некоторых сетях; кеш помогает после загрузки с VPN.
+## Dua (июнь 2026)
 
-**Не трогать карту без команды.**
+- Отдельный блок Bismillah, divider, арабский 26sp, перевод EN в `strings.xml`. Pause убран — только Play.
 
 ## Компас
 
-Вкладка компаса **удалена**. В карточке Settings (`settingsExtraCard`): About, версия, Privacy Policy (без локации). Брендинг — только в шапке экрана.
+Вкладка компаса **удалена**. Не возвращать без команды.
 
-## Вкладка Dua (`DuaActivity`, `activity_dua.xml`)
+## Локализация (не сделано, запрос пользователя «запомни»)
 
-**Содержимое:** шапка Sacred Direction / Dua, арабский текст + перевод (`strings.xml`), кнопка Play (`R.raw.dua`).
+- Сейчас только `values/strings.xml` (EN). Много текста **зашито в layout** (Fajr Time, Settings, Alarm ON…).
+- **Русский:** план — `values-ru/strings.xml`, вынести hardcoded в `@string`, месяцы хиджры в ресурсы, перевод дуа; privacy HTML отдельно. Оценка ~полдня. **Ждёт явной команды «сделай русский».**
 
-**Известные проблемы (не исправлены, пока пользователь не попросит):**
-- Pause убран — только Play (короткое аудио).
+## Privacy (без изменений по решению пользователя)
 
-**Решение UX:** Dua остаётся **4-й вкладкой**.
+- Согласие **после** GPS в `MainActivity` — риск для модерации, ждём замечаний.
+- `privacy_policy.html` — устарел (компас). URL: telegra.ph/Privacy-Policy-09-18-69
 
-## Privacy Policy и модерация магазинов (май 2026)
+## Виджет
 
-**Решение пользователя:** пока **не менять** код под compliance; если модераторы (Huawei AppGallery и др.) попросят — переделать.
+- BOOT_COMPLETED fix принят (~сек `00:00` после reboot — норма).
+- Подписи Fajr/Dhuhr в `widget_prayer_times.xml` — пока hardcoded EN.
 
-**Сейчас в приложении (достаточно для базовой логики):**
-- Первый запуск: диалог согласия `maybeShowPrivacyConsent()` в `MainActivity` (Agree / Disagree / Privacy Policy), prefs `app_consent` → `privacy_accepted`.
-- В Settings: ссылка **Privacy Policy** → `PrivacyPolicyActivity` (офлайн `assets/privacy_policy.html`, онлайн telegra.ph).
-- При публикации: URL политики указать в **AppGallery Connect** (и аналогах).
+## Git / GitHub
 
-**Известный риск (не исправлен, ждём замечаний модераторов):**
-- **Порядок в `MainActivity.onCreate`:** сначала `checkAllRequirements()` (может запросить location permission), **потом** `maybeShowPrivacyConsent()`. По Huawei 2.4 / GDPR лучше **наоборот**: согласие → потом GPS.
-- **`privacy_policy.html`:** упоминает magnetometer/компас — компас удалён; текст политики устарел.
-- **Отзыв согласия (Huawei 7.6):** в политике только «удалить приложение»; можно добавить явную формулировку + email.
-
-**Если модераторы попросят переделать — чеклист:**
-1. Согласие с политикой **до** `requestLocationPermission()`.
-2. Обновить `privacy_policy.html` (убрать magnetometer, только GPS для киблы/молитв).
-3. Синхронизировать URL в консоли магазина с текстом в приложении.
-4. Опционально: кнопка «Withdraw consent» в Settings.
-
-## Безопасность (не трогать без запроса)
-
-В корне: `sacred-direction.jks`, `certificate.pem`, `sacred-direction.zip` (внутри jks+pem) — **не коммитить**.
-
-Подпись release: `sacred-direction.jks`, в Gradle `signingConfigs` **не прописан** — подпись через **Build → Generate Signed APK** в Android Studio.
-
-## Git / GitHub (май 2026)
-
-- **Инициализирован**, ветка `main`
 - **Private:** https://github.com/solemetra/SacredDirection.git
-- **README.md** в корне (English overview)
-- `.gitignore`: `*.jks`, `*.pem`, `*.zip`, `*.apk`, `local.properties`, `/app/build/`, `/release/`
-- Git user (локально): solemetra / solemetra@gmail.com
-- **Коммиты только по запросу** пользователя
-- Push: при HTTP 408 — Wi‑Fi, `git -c http.postBuffer=524288000 push`, или GitHub Desktop
+- Последний push (июнь 2026): коммит **a4a8408** — Hijri, map style, Prayer UI, README.
+- **Коммиты только по запросу** пользователя. Не коммитить: `.jks`, `local.properties`, APK.
 
-**Private vs Public (объяснено пользователю-начинающему):**
-- Private = код/README видит только автор; чужим 404 на GitHub
-- Пользователи качают app из **Huawei AppGallery**, не с GitHub
-- APK через GitHub Releases возможен только если Public + Release (или Private только для автора)
-- Без `.jks` никто не может обновить app автора в магазине; Public код можно форкнуть с **другим** package/подписью (смотреть LICENSE)
+## Huawei AppGallery
 
-## Huawei AppGallery (май 2026)
+- В коде **1.1 (versionCode 3)**. Загружать **свежий signed APK** из `app/build/outputs/apk/release/`.
+- В магазине ранее была ошибка со старым 1.0 APK.
 
-- Консоль: https://developer.huawei.com/consumer/en/service/josp/agc/index.html
-- В магазине была **1.0 (versionCode 2)**; в коде **1.1 (versionCode 3)**
-- **Важно:** Huawei берёт версию из **APK**, не из `build.gradle` на диске. Загружать **свежий подписанный** APK после **Generate Signed APK**, не старый из `release/` или `app/release/`
-- Правильный путь сборки: `app/build/outputs/apk/release/` → подписанный APK
-- Ошибка заливки **1.0(1)** — залили старый APK; новый должен показывать **1.1(3)**
-- Privacy URL в консоли: https://telegra.ph/Privacy-Policy-09-18-69
+## Стиль общения
 
-## Карты — идеи personal-сборки (не реализовано)
-
-Обсуждено: flavor `store` (OSM) vs `personal` (MapTiler/CARTO). MapTiler — 3D красиво, но **нет номеров домов**; OSM/CARTO Voyager — номера есть. Ключ MapTiler — только в `local.properties`. **Не трогать карту без команды.**
-
-## Стиль общения с пользователем
-
-Пользователь **начинающий** — объяснять **коротко и простыми словами** (Git, release, Public/Private, подпись APK).
+Пользователь **начинающий** — коротко и простыми словами (Git, release, Hijri offset, локализация).

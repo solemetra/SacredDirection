@@ -31,6 +31,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.view.HapticFeedbackConstants
+import android.view.MotionEvent
 import java.util.Locale
 
 class MainActivity : AppCompatActivity(), LocationListener {
@@ -50,12 +54,17 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private var isGpsEnabled = false
     private var hasInternetConnection = false
     private var notificationDialogShown = false
+    private var initialSetupDone = false
+    private var gpsPromptShownThisSession = false
 
     // Добавить переменную для хранения линии направления
     private var qiblaLine: Polyline? = null
 
     private val gpsEnableLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
-        // Можно обработать результат, если нужно
+        refreshGpsState()
+        if (isLocationPermissionGranted && isGpsEnabled) {
+            startLocationUpdates()
+        }
     }
 
     private var lastLocationUpdateTime: Long = 0L
@@ -73,7 +82,12 @@ class MainActivity : AppCompatActivity(), LocationListener {
         private const val TILE_CACHE_MAX_BYTES = 1536L * 1024 * 1024   // 1.5 GB
         private const val TILE_CACHE_TRIM_BYTES = 1200L * 1024 * 1024 // trim to ~1.2 GB
         private const val TILE_CACHE_EXPIRY_MS = 60L * 24 * 60 * 60 * 1000 // 60 days
+        private const val MAP_STYLE_HOLD_MS = 5000L
     }
+
+    private val mapStyleHoldHandler = Handler(Looper.getMainLooper())
+    private var mapStyleHoldRunnable: Runnable? = null
+    private var mapStyleHoldTriggered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,20 +95,15 @@ class MainActivity : AppCompatActivity(), LocationListener {
         try {
             initOsmdroid()
             setContentView(R.layout.activity_main)
+            TabUiHelper.applyBottomNavInsets(this)
             
             initViews()
             setupMap()
             setupLocationButton()
+            setupMapStyleEasterEgg()
             setupNavigation()
 
-            // Check all requirements
-            checkAllRequirements()
-            
-            // Check notification permission (Android 13+)
-            checkNotificationPermission()
-
-            // Show privacy consent on first launch
-            maybeShowPrivacyConsent()
+            runInitialSetup()
 
         } catch (e: Exception) {
             showError("App Initialization Error", e.message ?: "Unknown error")
@@ -134,10 +143,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    private fun applyMapStyle() {
-        if (MapStylePrefs.applyTo(mapView, this)) {
-            showToast(getString(R.string.map_style_maptiler_no_key))
-        }
+    private fun applyMapStyle(): Boolean {
+        return MapStylePrefs.applyTo(mapView, this)
     }
 
     private fun initViews() {
@@ -155,6 +162,18 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     private fun setupLocationButton() {
         myLocationButton.setOnClickListener {
+            if (mapStyleHoldTriggered) {
+                mapStyleHoldTriggered = false
+                return@setOnClickListener
+            }
+            if (!isLocationPermissionGranted) {
+                requestLocationPermissionIfNeeded()
+                return@setOnClickListener
+            }
+            if (!isGpsEnabled) {
+                promptGpsIfNeeded(force = true)
+                return@setOnClickListener
+            }
             if (currentUserLocation != null) {
                 mapView.controller.animateTo(currentUserLocation)
                 mapView.controller.setZoom(18.0)
@@ -163,63 +182,106 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    private fun checkAllRequirements() {
-        // 1. Check internet connection
-        checkInternetConnection()
+    private fun setupMapStyleEasterEgg() {
+        myLocationButton.setOnTouchListener { view, event ->
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    mapStyleHoldTriggered = false
+                    cancelMapStyleHold()
+                    mapStyleHoldRunnable = Runnable {
+                        mapStyleHoldRunnable = null
+                        mapStyleHoldTriggered = true
+                        toggleMapStyle()
+                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+                    }
+                    mapStyleHoldHandler.postDelayed(mapStyleHoldRunnable!!, MAP_STYLE_HOLD_MS)
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> cancelMapStyleHold()
+            }
+            false
+        }
+    }
 
-        // 2. Check location permissions
-        checkLocationPermission()
+    private fun cancelMapStyleHold() {
+        mapStyleHoldRunnable?.let { mapStyleHoldHandler.removeCallbacks(it) }
+        mapStyleHoldRunnable = null
+    }
 
-        // 3. Check GPS
-        checkGpsStatus()
+    private fun toggleMapStyle() {
+        val nextStyle = if (MapStylePrefs.getStyle(this) == MapStylePrefs.STYLE_MAPTILER) {
+            MapStylePrefs.STYLE_OSM
+        } else {
+            MapStylePrefs.STYLE_MAPTILER
+        }
+        MapStylePrefs.setStyle(this, nextStyle)
+        if (applyMapStyle()) {
+            showToast(getString(R.string.map_style_maptiler_no_key))
+        } else {
+            val label = if (nextStyle == MapStylePrefs.STYLE_MAPTILER) {
+                R.string.map_style_easter_egg_maptiler
+            } else {
+                R.string.map_style_easter_egg_osm
+            }
+            showToast(getString(label))
+        }
+    }
 
+    private fun runInitialSetup() {
+        if (initialSetupDone) return
+        initialSetupDone = true
+        refreshConnectivity()
+        refreshLocationPermissionState()
+        if (!isLocationPermissionGranted) {
+            requestLocationPermissionIfNeeded()
+        } else {
+            onLocationPermissionReady()
+        }
         updateLocationInfo()
     }
 
-    private fun checkInternetConnection() {
+    private fun refreshConnectivity() {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
         try {
             val network = connectivityManager.activeNetwork
             val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
-
-            hasInternetConnection = networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
-
-            if (!hasInternetConnection) {
-                showToast("No internet connection. Map may not work correctly.")
-            }
-        } catch (e: Exception) {
+            hasInternetConnection =
+                networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+        } catch (_: Exception) {
             hasInternetConnection = false
-            showToast("Error checking internet connection")
         }
     }
 
-    private fun checkLocationPermission() {
+    private fun refreshLocationPermissionState() {
         isLocationPermissionGranted = ContextCompat.checkSelfPermission(
             this, Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
-
-        if (!isLocationPermissionGranted) {
-            requestLocationPermission()
-        }
     }
 
-    private fun requestLocationPermission() {
+    private fun refreshGpsState() {
+        if (!::locationManager.isInitialized) {
+            locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        }
+        isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    private fun requestLocationPermissionIfNeeded() {
+        refreshLocationPermissionState()
+        if (isLocationPermissionGranted) {
+            onLocationPermissionReady()
+            return
+        }
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Show explanation to user
             AlertDialog.Builder(this)
-                .setTitle("Location Permission")
-                .setMessage("Location permission is required to determine Qibla direction.")
-                .setPositiveButton("Allow") { _, _ ->
+                .setTitle(getString(R.string.location_permission_title))
+                .setMessage(getString(R.string.location_permission_required))
+                .setPositiveButton(getString(R.string.location_permission_allow)) { _, _ ->
                     ActivityCompat.requestPermissions(
                         this,
                         arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                         LOCATION_PERMISSION_REQUEST_CODE
                     )
                 }
-                .setNegativeButton("Cancel") { _, _ ->
-                    showToast("App cannot work without location permission")
-                }
+                .setNegativeButton(getString(R.string.location_permission_not_now), null)
                 .show()
         } else {
             ActivityCompat.requestPermissions(
@@ -230,36 +292,35 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    private fun checkGpsStatus() {
-        try {
-            locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-            isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    private fun onLocationPermissionReady() {
+        refreshGpsState()
+        promptGpsIfNeeded(force = false)
+    }
 
-            if (!isGpsEnabled) {
-                showGpsDisabledDialog()
-            } else if (isLocationPermissionGranted) {
-                startLocationUpdates()
-            }
-        } catch (e: Exception) {
-            showError("GPS Error", "Failed to check GPS status: ${e.message}")
+    private fun promptGpsIfNeeded(force: Boolean) {
+        refreshGpsState()
+        if (isGpsEnabled) {
+            startLocationUpdates()
+            return
         }
+        if (!force && gpsPromptShownThisSession) return
+        gpsPromptShownThisSession = true
+        showGpsDisabledDialog()
     }
 
     private fun showGpsDisabledDialog() {
         AlertDialog.Builder(this)
-            .setTitle("GPS Disabled")
-            .setMessage("GPS needs to be enabled to determine location.")
-            .setPositiveButton("Open Settings") { _, _ ->
+            .setTitle(getString(R.string.gps_disabled_title))
+            .setMessage(getString(R.string.gps_disabled))
+            .setPositiveButton(getString(R.string.gps_open_settings)) { _, _ ->
                 val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 try {
                     gpsEnableLauncher.launch(intent)
-                } catch (e: Exception) {
-                    showToast("Failed to open GPS settings")
+                } catch (_: Exception) {
+                    showToast(getString(R.string.gps_settings_failed))
                 }
             }
-            .setNegativeButton("Cancel") { _, _ ->
-                showToast("GPS is required for app to work")
-            }
+            .setNegativeButton(getString(R.string.location_permission_not_now), null)
             .show()
     }
 
@@ -504,11 +565,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 isLocationPermissionGranted = true
-                showToast("Permission granted")
-                checkGpsStatus()
+                onLocationPermissionReady()
             } else {
                 isLocationPermissionGranted = false
-                showToast("App cannot work without location permission")
                 updateLocationInfo()
             }
         } else if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
@@ -542,8 +601,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == GPS_ENABLE_REQUEST_CODE) {
-            // Check GPS after returning from settings
-            checkGpsStatus()
+            refreshGpsState()
+            if (isLocationPermissionGranted && isGpsEnabled) {
+                startLocationUpdates()
+            }
         }
     }
 
@@ -669,7 +730,13 @@ class MainActivity : AppCompatActivity(), LocationListener {
             mapView.onResume()
             mapView.setUseDataConnection(true)
             applyMapStyle()
-            checkAllRequirements()
+            refreshConnectivity()
+            refreshLocationPermissionState()
+            refreshGpsState()
+            if (isLocationPermissionGranted && isGpsEnabled) {
+                startLocationUpdates()
+            }
+            updateLocationInfo()
         } catch (e: Exception) {
             showError("Resume Error", e.message ?: "Unknown error")
         }
@@ -677,6 +744,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     override fun onPause() {
         super.onPause()
+        cancelMapStyleHold()
         try {
             mapView.onPause()
             if (::locationManager.isInitialized) {
@@ -696,28 +764,5 @@ class MainActivity : AppCompatActivity(), LocationListener {
         } catch (e: Exception) {
             // Ignore errors on destroy
         }
-    }
-
-    private fun maybeShowPrivacyConsent() {
-        val prefs = getSharedPreferences("app_consent", Context.MODE_PRIVATE)
-        val accepted = prefs.getBoolean("privacy_accepted", false)
-        if (accepted) return
-
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.privacy_title))
-            .setMessage(getString(R.string.privacy_message))
-            .setPositiveButton(getString(R.string.privacy_agree)) { _, _ ->
-                prefs.edit { putBoolean("privacy_accepted", true) }
-            }
-            .setNegativeButton(getString(R.string.privacy_disagree)) { _, _ ->
-                finish()
-            }
-            .setNeutralButton(getString(R.string.privacy_open)) { _, _ ->
-                try {
-                    startActivity(Intent(this, PrivacyPolicyActivity::class.java))
-                } catch (_: Exception) {}
-            }
-            .setCancelable(false)
-            .show()
     }
 }

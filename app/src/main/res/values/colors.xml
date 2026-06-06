@@ -13,6 +13,7 @@
     <color name="dark_text">#131313</color>
     <color name="gray_text">#666666</color>
     <color name="white_text">#FFFFFF</color>
+    <color name="prayer_time">#FF0000</color>
 
     <!-- === ИСЛАМСКИЕ ЗЕЛЕНЫЕ (новые названия) === -->
     <color name="green_primary">#2E7D32</color>
@@ -20,6 +21,8 @@
     <color name="green_light">#4CAF50</color>
     <color name="green_accent">#8BC34A</color>
     
+    <color name="dua_arabic_wash">#0D2E7D32</color>
+
     <!-- Background color for adaptive launcher icon -->
     <color name="ic_launcher_background">#0F5132</color>
 </resources>

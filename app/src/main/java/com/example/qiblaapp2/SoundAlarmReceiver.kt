@@ -11,34 +11,33 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 class SoundAlarmReceiver : BroadcastReceiver() {
+
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null || intent == null) return
         
         val prayerName = intent.getStringExtra("prayerName") ?: "Prayer"
         val isFajr = intent.getBooleanExtra("isFajr", false)
         
-        // Простое уведомление
         showNotification(context, prayerName)
-        
-        // Комбинированный подход для максимальной надежности
         playShortSystemSound(context)
         tryPlayCustomAzan(context, isFajr)
-        
-        // Перепланируем будильники
-        rescheduleAlarms(context)
+        PrayerAlarmScheduler.rescheduleAll(context.applicationContext)
     }
     
     private fun showNotification(context: Context, prayerName: String) {
         NotificationHelper.createNotificationChannels(context)
-        
+
         val notification = NotificationCompat.Builder(context, NotificationHelper.PRAYER_CHANNEL_ID)
-            .setContentTitle("Prayer Time: $prayerName")
-            .setContentText("It's time for $prayerName prayer")
+            .setContentTitle(context.getString(R.string.reminder_notification_title, prayerName))
+            .setContentText(context.getString(R.string.reminder_notification_body, prayerName))
             .setSmallIcon(R.drawable.ic_compass)
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setAutoCancel(true)
+            .setDefaults(NotificationCompat.DEFAULT_SOUND or NotificationCompat.DEFAULT_VIBRATE)
             .build()
-        
+
         NotificationManagerCompat.from(context).notify(prayerName.hashCode(), notification)
     }
     
@@ -103,10 +102,5 @@ class SoundAlarmReceiver : BroadcastReceiver() {
             // Если кастомный звук не сработал - не критично, 
             // системный звук уже проиграл
         }
-    }
-
-    private fun rescheduleAlarms(context: Context) {
-        val updateIntent = Intent("com.example.qiblaapp2.UPDATE_PRAYER_TIMES")
-        context.sendBroadcast(updateIntent)
     }
 }

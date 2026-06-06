@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bottom tab bar -->
+    <dimen name="bottom_nav_height">68dp</dimen>
+    <dimen name="bottom_nav_padding_vertical">8dp</dimen>
+
+    <!-- Content area -->
+    <dimen name="screen_top_margin">32dp</dimen>
+    <dimen name="screen_horizontal_margin">24dp</dimen>
+    <dimen name="header_card_width">344dp</dimen>
+    <dimen name="header_fixed_height">115dp</dimen>
+    <dimen name="header_content_gap">10dp</dimen>
+    <dimen name="scroll_content_bottom_padding">16dp</dimen>
+
+    <!-- Map tab: location button above bottom nav -->
+    <dimen name="fab_margin_above_bottom_nav">24dp</dimen>
+    <dimen name="fab_bottom_offset">92dp</dimen>
+</resources>

@@ -50,7 +50,7 @@ app/src/main/java/com/example/qiblaapp2/
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **1.1** (`versionCode` 3)
+Current version: **1.2** (`versionCode` 4)
 
 ## Privacy
 
