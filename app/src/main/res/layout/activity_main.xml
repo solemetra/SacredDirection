@@ -15,7 +15,7 @@
         android:layout_height="56dp"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="@dimen/fab_bottom_offset"
         android:background="@drawable/my_location_button_bg"
         android:src="@android:drawable/ic_menu_mylocation"
         android:scaleType="center"
@@ -61,10 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DIRECTION TO QIBLA"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Uppercase"
                     android:fontFamily="sans-serif"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -76,9 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gray_text"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineSmall.Metric"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -89,9 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gray_text"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.MetricHint"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -125,10 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DISTANCE TO QIBLA"
-                    android:textAllCaps="true"
-                    android:textColor="@color/gray_text"
-                    android:textSize="14sp"
-                    android:textStyle="normal"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Uppercase"
                     android:fontFamily="sans-serif"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -140,9 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="--"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gray_text"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineMedium.Metric"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -154,9 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="KM"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/gray_text"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelMedium.Unit"
                     android:fontFamily="sans-serif-medium"
                     android:shadowColor="#80000000"
                     android:shadowDx="0"
@@ -167,97 +153,11 @@
     </LinearLayout>
 
     <!-- Нижняя навигация поверх карты -->
-    <LinearLayout
+    <include
         android:id="@+id/bottomNavigation"
+        layout="@layout/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bottom_nav_background"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:elevation="16dp">
-
-        <!-- Direction (Активный экран) -->
-        <LinearLayout
-            android:id="@+id/btnDirection"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_tab1_direction"
-                android:tint="@color/blue_primary" />
-
-        </LinearLayout>
-
-        <!-- Prayer Times -->
-        <LinearLayout
-            android:id="@+id/btnPrayerTimes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_tab3_notification"
-                android:tint="@color/gray_text" />
-
-        </LinearLayout>
-
-        <!-- Dua -->
-        <LinearLayout
-            android:id="@+id/btnDua"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_tab4_dua"
-                android:tint="@color/gray_text" />
-
-        </LinearLayout>
-
-        <!-- Settings (новая вкладка) -->
-        <LinearLayout
-            android:id="@+id/btnSettings"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_tab5_settings"
-                android:tint="@color/gray_text" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="@dimen/bottom_nav_height"
+        android:layout_gravity="bottom" />
 
 </FrameLayout>

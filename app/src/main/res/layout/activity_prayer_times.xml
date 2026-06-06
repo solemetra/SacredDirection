@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- Шапка: карточка с городом, датой и восходом -->
     <FrameLayout
         android:id="@+id/headerSection"
-        android:layout_width="344dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="@dimen/screen_horizontal_margin"
+        android:layout_marginTop="@dimen/screen_top_margin"
+        android:layout_marginEnd="@dimen/screen_horizontal_margin"
         android:background="@drawable/header_section_bg"
         android:clipChildren="false"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/header_card_width">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,8 +39,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:text="City"
-                android:textColor="@color/gray_text"
-                android:textSize="15sp" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium.Secondary" />
 
             <TextView
                 android:id="@+id/textGregorianDate"
@@ -44,9 +50,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="3 June 2026"
-                android:textColor="@color/dark_text"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.TitleLarge.Date" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -68,16 +72,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:text="@string/prayer_sunrise"
-                    android:textColor="@color/gray_text"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
 
                 <TextView
                     android:id="@+id/textSunriseTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="06:00"
-                    android:textColor="@color/dark_text"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,8 +87,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:text="·"
-                    android:textColor="@color/gray_text"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
 
                 <ImageView
                     android:layout_width="18dp"
@@ -101,34 +102,38 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
                     android:text="@string/prayer_sunset"
-                    android:textColor="@color/gray_text"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
 
                 <TextView
                     android:id="@+id/textSunsetTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="18:00"
-                    android:textColor="@color/dark_text"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall" />
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 
     <!-- Основной контент с карточками -->
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/headerSection"
-        android:layout_above="@+id/bottomNavigation"
-        android:layout_marginTop="168dp">
+        android:id="@+id/prayerScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/scroll_content_bottom_padding"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerSection">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="24dp"
-            android:paddingBottom="20dp">
+            android:paddingStart="@dimen/screen_horizontal_margin"
+            android:paddingEnd="@dimen/screen_horizontal_margin"
+            android:paddingTop="@dimen/header_content_gap">
 
             <!-- Карточка Fajr -->
             <LinearLayout
@@ -140,7 +145,7 @@
                 android:paddingEnd="13dp"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="2dp"
                 android:clipChildren="false"
                 android:clipToPadding="false">
@@ -157,16 +162,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fajr Time"
-                        android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/fajrTime"
-                        android:textSize="17sp"
-                        android:textColor="#FF0000"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.PrayerTime"
                         android:layout_marginTop="7dp" />
 
                 </LinearLayout>
@@ -191,9 +193,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:ellipsize="none"
@@ -215,7 +215,7 @@
                 android:paddingEnd="13dp"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="2dp"
                 android:clipChildren="false"
                 android:clipToPadding="false">
@@ -231,16 +231,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dhuhr Time"
-                        android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/dhuhrTime"
-                        android:textSize="17sp"
-                        android:textColor="#FF0000"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.PrayerTime"
                         android:layout_marginTop="7dp" />
 
                 </LinearLayout>
@@ -264,9 +261,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:ellipsize="none"
@@ -288,7 +283,7 @@
                 android:paddingEnd="13dp"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="2dp"
                 android:clipChildren="false"
                 android:clipToPadding="false">
@@ -304,16 +299,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Asr Time"
-                        android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/asrTime"
-                        android:textSize="17sp"
-                        android:textColor="#FF0000"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.PrayerTime"
                         android:layout_marginTop="7dp" />
 
                 </LinearLayout>
@@ -337,9 +329,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:ellipsize="none"
@@ -361,7 +351,7 @@
                 android:paddingEnd="13dp"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="2dp"
                 android:clipChildren="false"
                 android:clipToPadding="false">
@@ -377,16 +367,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Maghrib Time"
-                        android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/maghribTime"
-                        android:textSize="17sp"
-                        android:textColor="#FF0000"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.PrayerTime"
                         android:layout_marginTop="7dp" />
 
                 </LinearLayout>
@@ -410,9 +397,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:ellipsize="none"
@@ -434,7 +419,7 @@
                 android:paddingEnd="13dp"
                 android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="2dp"
                 android:clipChildren="false"
                 android:clipToPadding="false">
@@ -450,16 +435,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Isha Time"
-                        android:textSize="19sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/ishaTime"
-                        android:textSize="17sp"
-                        android:textColor="#FF0000"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.PrayerTime"
                         android:layout_marginTop="7dp" />
 
                 </LinearLayout>
@@ -483,9 +465,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
-                        android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_text"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
                         android:singleLine="true"
                         android:ellipsize="none"
@@ -503,7 +483,12 @@
 
     <!-- Нижняя панель -->
     <include
+        android:id="@+id/bottomNavigation"
         layout="@layout/bottom_navigation"
-        android:layout_gravity="bottom" />
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

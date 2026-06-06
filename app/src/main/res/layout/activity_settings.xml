@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/headerSectionSettings"
-        android:layout_width="344dp"
-        android:layout_height="115dp"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/header_fixed_height"
+        android:layout_marginStart="@dimen/screen_horizontal_margin"
+        android:layout_marginTop="@dimen/screen_top_margin"
+        android:layout_marginEnd="@dimen/screen_horizontal_margin"
         android:background="@drawable/header_section_bg"
         android:clipChildren="false"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/header_card_width">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,9 +32,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/app_name"
-                android:textColor="@color/dark_text"
-                android:textSize="33sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineLarge.AppName" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -35,18 +40,22 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="Settings"
-                android:textColor="@color/dark_text"
-                android:textSize="15sp" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium" />
 
         </LinearLayout>
     </FrameLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="160dp"
-        android:layout_marginBottom="80dp"
-        android:scrollbars="none">
+        android:id="@+id/settingsScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/scroll_content_bottom_padding"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerSectionSettings">
 
         <LinearLayout
             android:id="@+id/settingsContent"
@@ -54,9 +63,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="12dp">
+            android:paddingStart="@dimen/screen_horizontal_margin"
+            android:paddingEnd="@dimen/screen_horizontal_margin"
+            android:paddingTop="@dimen/header_content_gap">
 
             <LinearLayout
                 android:id="@+id/settingsPrayerCard"
@@ -69,16 +78,14 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:elevation="4dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Calculation Asr Method"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
 
                 <RadioGroup
                     android:id="@+id/radioGroupAsr"
@@ -94,7 +101,7 @@
                         android:minHeight="36dp"
                         android:text="Shafi'i"
                         android:textColor="@color/dark_text"
-                        android:textSize="15sp" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <RadioButton
                         android:id="@+id/radioAsrHanafi"
                         android:layout_width="wrap_content"
@@ -102,7 +109,7 @@
                         android:minHeight="36dp"
                         android:text="Hanafi"
                         android:textColor="@color/dark_text"
-                        android:textSize="15sp"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
                         android:layout_marginStart="20dp" />
                 </RadioGroup>
 
@@ -118,7 +125,7 @@
                         android:layout_weight="1"
                         android:text="Fixed Fajr Time"
                         android:textColor="@color/dark_text"
-                        android:textSize="15sp" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switchFajrFixed"
                         android:layout_width="wrap_content"
@@ -128,8 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1.5 hours before sunrise"
-                    android:textColor="@color/gray_text"
-                    android:textSize="13sp"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
                     android:layout_marginStart="4dp" />
 
                 <LinearLayout
@@ -144,7 +150,7 @@
                         android:layout_weight="1"
                         android:text="Fixed Isha Time"
                         android:textColor="@color/dark_text"
-                        android:textSize="15sp" />
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switchIshaFixed"
                         android:layout_width="wrap_content"
@@ -154,58 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1.5 hours after Maghrib"
-                    android:textColor="@color/gray_text"
-                    android:textSize="13sp"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
                     android:layout_marginStart="4dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/settingsMapCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/header_section_bg"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="10dp"
-                android:elevation="4dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/map_style_title"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroupMapStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="2dp">
-                    <RadioButton
-                        android:id="@+id/radioMapOsm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="34dp"
-                        android:text="@string/map_style_osm"
-                        android:textColor="@color/dark_text"
-                        android:textSize="15sp" />
-                    <RadioButton
-                        android:id="@+id/radioMapMaptiler"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="34dp"
-                        android:text="@string/map_style_maptiler"
-                        android:textColor="@color/dark_text"
-                        android:textSize="15sp"
-                        android:layout_marginStart="20dp" />
-                </RadioGroup>
             </LinearLayout>
 
             <LinearLayout
@@ -219,57 +175,89 @@
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:elevation="4dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hijri_settings_title"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleHijriOffset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHijriMinus"
+                        style="@style/Widget.SacredDirection.SegmentedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/hijri_offset_minus" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHijriZero"
+                        style="@style/Widget.SacredDirection.SegmentedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/hijri_offset_zero" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnHijriPlus"
+                        style="@style/Widget.SacredDirection.SegmentedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/hijri_offset_plus" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/settingsReminderCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/header_section_bg"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:elevation="4dp"
+                android:layout_marginBottom="@dimen/header_content_gap">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rowReminderPermissions"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:gravity="center_vertical"
-                    android:layout_marginTop="6dp">
-
-                    <Button
-                        android:id="@+id/btnHijriMinus"
-                        android:layout_width="48dp"
-                        android:layout_height="36dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
-                        android:text="@string/hijri_offset_minus"
-                        android:textSize="14sp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp" />
+                    android:minHeight="44dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp">
 
                     <TextView
-                        android:id="@+id/textHijriOffset"
-                        android:layout_width="40dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="@color/dark_text"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:layout_weight="1"
+                        android:text="@string/reminder_perm_title"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
+                        android:textColor="@color/dark_text" />
 
-                    <Button
-                        android:id="@+id/btnHijriPlus"
-                        android:layout_width="48dp"
-                        android:layout_height="36dp"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:padding="0dp"
-                        android:text="@string/hijri_offset_plus"
-                        android:textSize="14sp"
-                        android:insetTop="0dp"
-                        android:insetBottom="0dp" />
+                    <TextView
+                        android:id="@+id/textReminderPermSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium"
+                        android:textColor="@color/gray_text" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -284,24 +272,21 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="14dp"
                 android:elevation="4dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/about"
-                    android:textColor="@color/dark_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section"
                     android:layout_marginBottom="4dp" />
 
                 <TextView
                     android:id="@+id/textSettingsVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/gray_text"
-                    android:textSize="14sp" />
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium.Secondary" />
 
                 <TextView
                     android:id="@+id/btnPrivacyPolicy"
@@ -309,9 +294,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="@string/privacy_open"
-                    android:textColor="@color/blue_primary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Link"
                     android:padding="4dp"
                     android:background="?android:attr/selectableItemBackground" />
 
@@ -320,39 +303,13 @@
         </LinearLayout>
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/settingsCirclesContainer"
-        android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="-180dp"
-        android:elevation="-1dp">
+    <include
+        android:id="@+id/bottomNavigation"
+        layout="@layout/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <View
-            android:layout_width="420dp"
-            android:layout_height="420dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_big_circle_gradient" />
-
-        <View
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_middle_circle" />
-
-        <View
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_center_circle" />
-
-        <View
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_figma_circle" />
-    </FrameLayout>
-
-    <include layout="@layout/bottom_navigation" />
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

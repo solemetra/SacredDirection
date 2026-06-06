@@ -1,19 +1,37 @@
 package com.example.qiblaapp2
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.Manifest
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
-import android.widget.Button
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
+
+    override var notificationRowTapped: Boolean = false
+
+    private val postNotificationsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        PrayerReminderPermissions.onNotificationPermissionResult(this, granted)
+        refreshReminderPermissionsUi()
+        PrayerReminderPermissionsSheet.refreshIfShowing(this)
+    }
+
+    override fun requestPostNotificationsPermission() {
+        postNotificationsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+    }
 
     private fun clearOldIntPrefs() {
         val prefs = getSharedPreferences("prayer_settings", MODE_PRIVATE)
@@ -28,11 +46,12 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         clearOldIntPrefs()
         setContentView(R.layout.activity_settings)
+        TabUiHelper.applyBottomNavInsets(this)
         highlightActiveTab()
         setupNavigation()
         setupAboutCard()
-        setupMapStyle()
         setupHijri()
+        setupReminderPermissionsCard()
 
         val prefs = getSharedPreferences("prayer_settings", MODE_PRIVATE)
 
@@ -59,45 +78,77 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupMapStyle() {
-        val radioGroupMap = findViewById<RadioGroup>(R.id.radioGroupMapStyle)
-        val current = MapStylePrefs.getStyle(this)
-        radioGroupMap.check(
-            if (current == MapStylePrefs.STYLE_MAPTILER) R.id.radioMapMaptiler else R.id.radioMapOsm
-        )
-        radioGroupMap.setOnCheckedChangeListener { _, checkedId ->
-            val style = if (checkedId == R.id.radioMapMaptiler) {
-                MapStylePrefs.STYLE_MAPTILER
+    override fun onResume() {
+        super.onResume()
+        refreshReminderPermissionsUi()
+        PrayerReminderPermissions.requestPostNotificationsIfNeeded(this)
+        PrayerReminderPermissionsSheet.refreshIfShowing(this)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PrayerReminderPermissions.REQUEST_NOTIFICATION) {
+            val granted = grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
+            PrayerReminderPermissions.onNotificationPermissionResult(this, granted)
+            refreshReminderPermissionsUi()
+        }
+    }
+
+    private fun setupReminderPermissionsCard() {
+        findViewById<View>(R.id.rowReminderPermissions).setOnClickListener {
+            PrayerReminderPermissions.showPermissionsSheet(this)
+        }
+        refreshReminderPermissionsUi()
+    }
+
+    private fun refreshReminderPermissionsUi() {
+        val granted = PrayerReminderPermissions.grantedPermissionCount(this)
+        val total = PrayerReminderPermissions.PERMISSION_ITEM_COUNT
+        findViewById<TextView>(R.id.textReminderPermSummary).apply {
+            text = if (granted >= total) {
+                getString(R.string.reminder_perm_summary_done)
             } else {
-                MapStylePrefs.STYLE_OSM
+                getString(R.string.reminder_perm_summary_count, granted, total)
             }
-            MapStylePrefs.setStyle(this, style)
-            if (style == MapStylePrefs.STYLE_MAPTILER && BuildConfig.MAPTILER_API_KEY.isBlank()) {
-                Toast.makeText(this, R.string.map_style_maptiler_no_key, Toast.LENGTH_SHORT).show()
-            }
+            setTextColor(
+                ContextCompat.getColor(
+                    this@SettingsActivity,
+                    if (granted >= total) R.color.green_primary else R.color.gray_text
+                )
+            )
         }
     }
 
     private fun setupHijri() {
-        val textOffset = findViewById<TextView>(R.id.textHijriOffset)
-        val btnMinus = findViewById<Button>(R.id.btnHijriMinus)
-        val btnPlus = findViewById<Button>(R.id.btnHijriPlus)
+        val toggle = findViewById<MaterialButtonToggleGroup>(R.id.toggleHijriOffset)
+        var updatingSelection = false
 
-        fun refreshOffsetUi() {
-            val offset = HijriPrefs.getDayOffset(this)
-            textOffset.text = HijriPrefs.offsetLabel(this)
-            btnMinus.isEnabled = offset > -1
-            btnPlus.isEnabled = offset < 1
+        fun selectOffset(offset: Int) {
+            updatingSelection = true
+            val buttonId = when (offset.coerceIn(-1, 1)) {
+                -1 -> R.id.btnHijriMinus
+                1 -> R.id.btnHijriPlus
+                else -> R.id.btnHijriZero
+            }
+            toggle.check(buttonId)
+            updatingSelection = false
         }
 
-        refreshOffsetUi()
-        btnMinus.setOnClickListener {
-            HijriPrefs.setDayOffset(this, HijriPrefs.getDayOffset(this) - 1)
-            refreshOffsetUi()
-        }
-        btnPlus.setOnClickListener {
-            HijriPrefs.setDayOffset(this, HijriPrefs.getDayOffset(this) + 1)
-            refreshOffsetUi()
+        selectOffset(HijriPrefs.getDayOffset(this))
+
+        toggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (updatingSelection || !isChecked) return@addOnButtonCheckedListener
+            val offset = when (checkedId) {
+                R.id.btnHijriMinus -> -1
+                R.id.btnHijriPlus -> 1
+                else -> 0
+            }
+            HijriPrefs.setDayOffset(this, offset)
         }
     }
 

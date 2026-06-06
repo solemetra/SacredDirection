@@ -53,7 +53,13 @@
     <string name="version">Version %1$s</string>
 
     <!-- Permissions -->
-    <string name="location_permission_required">Location permission is required for Qibla direction</string>
+    <string name="location_permission_required">Location is used to show Qibla direction and prayer times for your area.</string>
+    <string name="location_permission_title">Location access</string>
+    <string name="location_permission_allow">Allow</string>
+    <string name="location_permission_not_now">Not now</string>
+    <string name="gps_disabled_title">Turn on location</string>
+    <string name="gps_open_settings">Open settings</string>
+    <string name="gps_settings_failed">Could not open settings</string>
     <string name="notification_permission_required">Notification permission is required for prayer reminders</string>
 
     <!-- Errors -->
@@ -75,17 +81,49 @@
     <string name="pause_error">Pause error</string>
     <string name="alarm_on">Alarm ON</string>
     <string name="alarm_off">Alarm OFF</string>
+    <string name="reminder_before_prayer_hint">Reminder 10 min before each prayer</string>
+    <string name="reminder_settings_title">Permissions</string>
+    <string name="reminder_perm_title">Permissions</string>
+    <string name="reminder_perm_message">Tap each item below, then tap Allow on the system screen.</string>
+    <string name="reminder_perm_location">Location</string>
+    <string name="reminder_perm_location_desc">For Qibla direction and prayer times</string>
+    <string name="reminder_perm_status_allow">Allow</string>
+    <string name="reminder_perm_status_done">Done</string>
+    <string name="reminder_perm_next_location">Next: tap Location on the Direction tab, then Allow</string>
+    <string name="reminder_perm_next_notifications">Next: tap Notifications, then Allow</string>
+    <string name="reminder_perm_next_exact">Next: tap Exact alarms, then Allow</string>
+    <string name="reminder_perm_next_battery">Next: tap Background, then Allow</string>
+    <string name="reminder_perm_all_ready">All set — continue</string>
+    <string name="reminder_perm_notifications">Notifications</string>
+    <string name="reminder_perm_notifications_desc">For prayer reminders and banners</string>
+    <string name="reminder_perm_exact_alarms">Exact alarms</string>
+    <string name="reminder_perm_exact_alarms_desc">Precise timing, 10 min before prayer</string>
+    <string name="reminder_perm_battery">Unrestricted battery</string>
+    <string name="reminder_perm_battery_desc">Reliable reminders after sleep or reboot</string>
+    <string name="reminder_perm_summary_done">All set</string>
+    <string name="reminder_perm_summary_count">%1$d/%2$d done</string>
+    <string name="reminder_perm_later">Later</string>
+    <string name="reminder_test_notification_title">Sacred Direction</string>
+    <string name="reminder_test_notification_body">Prayer reminders are working</string>
+    <string name="reminder_perm_allow_notifications">Allow notifications</string>
+    <string name="reminder_perm_allow_exact">Allow exact alarms</string>
+    <string name="reminder_perm_allow_battery">Allow background</string>
+    <string name="reminder_notification_title">%1$s in 10 minutes</string>
+    <string name="reminder_notification_body">%1$s prayer starts soon</string>
 
     <!-- Settings -->
     <string name="map_style_title">Map style</string>
     <string name="map_style_osm">OSM</string>
     <string name="map_style_maptiler">MapTiler</string>
     <string name="map_style_maptiler_no_key">MapTiler key missing. Using OSM.</string>
+    <string name="map_style_easter_egg_maptiler">MapTiler</string>
+    <string name="map_style_easter_egg_osm">OSM</string>
 
     <string name="hijri_settings_title">Hijri date</string>
     <string name="hijri_settings_hint">Umm al-Qura. Adjust ±1 day to match your mosque if needed.</string>
     <string name="hijri_offset_label">Day adjustment</string>
     <string name="hijri_offset_minus">−1</string>
+    <string name="hijri_offset_zero">0</string>
     <string name="hijri_offset_plus">+1</string>
     <string name="hijri_tap_date_hint">Tap date on Prayer tab to switch Gregorian / Hijri</string>
     <string name="unknown_location">-</string>
@@ -94,7 +132,7 @@
     
     <!-- Privacy Consent -->
     <string name="privacy_title">Privacy Policy</string>
-    <string name="privacy_message">We use location and magnetometer data only to compute the Qibla direction and prayer times. Please review the Privacy Policy and confirm your consent.</string>
+    <string name="privacy_message">We use your location to show Qibla direction and prayer times. Please review the Privacy Policy and confirm your consent.</string>
     <string name="privacy_agree">Agree</string>
     <string name="privacy_disagree">Disagree</string>
     <string name="privacy_open">Privacy Policy</string>

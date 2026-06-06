@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Small phones: a bit more scroll padding at the end -->
+    <dimen name="scroll_content_bottom_padding">20dp</dimen>
+</resources>

@@ -15,6 +15,41 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/blue_background</item>
         <item name="android:windowLightStatusBar">true</item>
+        <!-- MD3 type scale defaults -->
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.SacredDirection.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.SacredDirection.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.SacredDirection.DisplaySmall</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.SacredDirection.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SacredDirection.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.SacredDirection.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SacredDirection.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.SacredDirection.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.SacredDirection.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.SacredDirection.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.SacredDirection.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.SacredDirection.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.SacredDirection.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.SacredDirection.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.SacredDirection.LabelSmall</item>
+        <item name="radioButtonStyle">@style/Widget.SacredDirection.RadioButton</item>
+    </style>
+
+    <style name="Widget.SacredDirection.RadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/dark_text</item>
+        <item name="android:textAppearance">@style/TextAppearance.SacredDirection.BodyLarge.Control</item>
+    </style>
+
+    <style name="Widget.SacredDirection.SegmentedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextAppearance.SacredDirection.LabelLarge</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="strokeColor">@color/blue_border</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="backgroundTint">@color/hijri_segment_bg</item>
+        <item name="android:textColor">@color/hijri_segment_text</item>
+        <item name="rippleColor">@color/blue_primary_light</item>
     </style>
 
     <!-- Dark Theme -->
@@ -32,5 +67,21 @@
     <!-- Settings Theme -->
     <style name="Theme.SacredDirection.Settings" parent="Theme.SacredDirection">
         <item name="android:textColorPrimary">@color/blue_primary</item>
+    </style>
+
+    <style name="Theme.SacredDirection.BottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.SacredDirection.BottomSheet</item>
+        <item name="android:navigationBarColor">@color/blue_surface</item>
+    </style>
+
+    <style name="Widget.SacredDirection.BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SacredDirection.BottomSheet</item>
+    </style>
+
+    <style name="ShapeAppearance.SacredDirection.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
     </style>
 </resources>

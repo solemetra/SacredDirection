@@ -1,52 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/duaCirclesContainer"
-        android:layout_width="match_parent"
-        android:layout_height="420dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="-180dp"
-        android:elevation="-1dp">
-
-        <View
-            android:layout_width="420dp"
-            android:layout_height="420dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_big_circle_gradient" />
-
-        <View
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_middle_circle" />
-
-        <View
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_center_circle" />
-
-        <View
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center|bottom"
-            android:background="@drawable/compass_figma_circle" />
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/headerSectionDua"
-        android:layout_width="344dp"
-        android:layout_height="115dp"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="32dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/header_fixed_height"
+        android:layout_marginStart="@dimen/screen_horizontal_margin"
+        android:layout_marginTop="@dimen/screen_top_margin"
+        android:layout_marginEnd="@dimen/screen_horizontal_margin"
         android:background="@drawable/header_section_bg"
         android:clipChildren="false"
-        android:elevation="8dp">
+        android:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/header_card_width">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,9 +32,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/app_name"
-                android:textColor="@color/dark_text"
-                android:textSize="32sp"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineLarge.AppName" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,27 +40,30 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/nav_dua"
-                android:textColor="@color/dark_text"
-                android:textSize="14sp" />
+                android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium" />
 
         </LinearLayout>
     </FrameLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="160dp"
-        android:layout_marginBottom="80dp"
-        android:scrollbars="none"
+        android:id="@+id/duaScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="12dp">
+        android:paddingStart="@dimen/screen_horizontal_margin"
+        android:paddingEnd="@dimen/screen_horizontal_margin"
+        android:paddingBottom="@dimen/scroll_content_bottom_padding"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerSectionDua">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/header_content_gap">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,25 +74,22 @@
                 android:paddingEnd="16dp"
                 android:paddingTop="14dp"
                 android:paddingBottom="16dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
                 android:elevation="4dp">
 
-                <!-- Бисмилля — отдельный блок -->
                 <TextView
                     android:id="@+id/textBismillah"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/dua_bismillah"
-                    android:textColor="#2E7D32"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleLarge.Bismillah"
                     android:maxLines="1"
                     android:singleLine="true"
                     android:includeFontPadding="true"
                     app:autoSizeTextType="uniform"
                     app:autoSizeMinTextSize="12sp"
-                    app:autoSizeMaxTextSize="20sp"
+                    app:autoSizeMaxTextSize="22sp"
                     app:autoSizeStepGranularity="1sp"
                     android:paddingTop="4dp"
                     android:paddingBottom="4dp" />
@@ -131,31 +101,36 @@
                     android:layout_marginBottom="12dp"
                     android:background="#332E7D32" />
 
-                <!-- Арабский текст дуа -->
-                <TextView
-                    android:id="@+id/textDuaArabic"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/dua_arabic"
-                    android:textColor="#1B5E20"
-                    android:textStyle="bold"
-                    android:textSize="30sp"
-                    android:lineSpacingExtra="8dp"
-                    android:includeFontPadding="true" />
+                    android:background="@drawable/dua_arabic_section_bg"
+                    android:orientation="vertical"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
 
-                <!-- Перевод -->
-                <TextView
-                    android:id="@+id/textDuaTranslation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:gravity="center"
-                    android:text="@string/dua_translation"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
-                    android:textStyle="italic"
-                    android:lineSpacingExtra="2dp" />
+                    <TextView
+                        android:id="@+id/textDuaArabic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/dua_arabic"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineMedium.Arabic"
+                        android:lineSpacingExtra="8dp"
+                        android:includeFontPadding="true" />
+
+                    <TextView
+                        android:id="@+id/textDuaTranslation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center"
+                        android:text="@string/dua_translation"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Italic"
+                        android:lineSpacingExtra="2dp" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -167,9 +142,7 @@
                 android:text="@string/play_dua"
                 android:drawableLeft="@drawable/ic_play"
                 android:drawablePadding="10dp"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Button"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:paddingTop="14dp"
@@ -181,7 +154,12 @@
     </ScrollView>
 
     <include
+        android:id="@+id/bottomNavigation"
         layout="@layout/bottom_navigation"
-        android:layout_gravity="bottom" />
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bottom_nav_height"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
