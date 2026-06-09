@@ -22,3 +22,6 @@ local.properties
 /app/build/
 /release/
 /app/release/
+
+__pycache__/
+*.pyc

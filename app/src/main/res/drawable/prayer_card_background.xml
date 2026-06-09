@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF" />
-    <stroke
-        android:width="2dp"
-        android:color="@color/blue_border" />
-    <corners android:radius="24dp" />
-</shape>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/neo_surface_card"
+    android:insetRight="@dimen/neo_depth_offset_subtle"
+    android:insetBottom="@dimen/neo_depth_offset_subtle" />

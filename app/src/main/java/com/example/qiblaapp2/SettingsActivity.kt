@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.Manifest
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -13,7 +12,6 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 
@@ -47,7 +45,7 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         clearOldIntPrefs()
         setContentView(R.layout.activity_settings)
         TabUiHelper.applyBottomNavInsets(this)
-        highlightActiveTab()
+        TabUiHelper.highlightBottomTab(this, TabUiHelper.BottomTab.SETTINGS)
         setupNavigation()
         setupAboutCard()
         setupHijri()
@@ -63,15 +61,15 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
             sendPrayerTimesUpdateBroadcast()
         }
 
-        val switchFajrFixed = findViewById<SwitchCompat>(R.id.switchFajrFixed)
-        switchFajrFixed.isChecked = prefs.getBoolean("fajr_fixed", false)
+        val switchFajrFixed = findViewById<NeumorphicSwitchView>(R.id.switchFajrFixed)
+        switchFajrFixed.setCheckedSilently(prefs.getBoolean("fajr_fixed", false))
         switchFajrFixed.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit { putBoolean("fajr_fixed", isChecked) }
             sendPrayerTimesUpdateBroadcast()
         }
 
-        val switchIshaFixed = findViewById<SwitchCompat>(R.id.switchIshaFixed)
-        switchIshaFixed.isChecked = prefs.getBoolean("isha_fixed", false)
+        val switchIshaFixed = findViewById<NeumorphicSwitchView>(R.id.switchIshaFixed)
+        switchIshaFixed.setCheckedSilently(prefs.getBoolean("isha_fixed", false))
         switchIshaFixed.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit { putBoolean("isha_fixed", isChecked) }
             sendPrayerTimesUpdateBroadcast()
@@ -159,26 +157,6 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         findViewById<TextView>(R.id.btnPrivacyPolicy).setOnClickListener {
             startActivity(Intent(this, PrivacyPolicyActivity::class.java))
         }
-    }
-
-    private fun highlightActiveTab() {
-        val btnDirection = findViewById<LinearLayout>(R.id.btnDirection)
-        val btnPrayerTimes = findViewById<LinearLayout>(R.id.btnPrayerTimes)
-        val btnDua = findViewById<LinearLayout>(R.id.btnDua)
-        val btnSettings = findViewById<LinearLayout>(R.id.btnSettings)
-
-        btnSettings.findViewById<ImageView>(R.id.iconSettings)?.setColorFilter(
-            ContextCompat.getColor(this, R.color.blue_primary)
-        )
-        btnDirection.findViewById<ImageView>(R.id.iconDirection)?.setColorFilter(
-            ContextCompat.getColor(this, R.color.gray_text)
-        )
-        btnPrayerTimes.findViewById<ImageView>(R.id.iconPrayer)?.setColorFilter(
-            ContextCompat.getColor(this, R.color.gray_text)
-        )
-        btnDua.findViewById<ImageView>(R.id.iconDua)?.setColorFilter(
-            ContextCompat.getColor(this, R.color.gray_text)
-        )
     }
 
     private fun setupNavigation() {

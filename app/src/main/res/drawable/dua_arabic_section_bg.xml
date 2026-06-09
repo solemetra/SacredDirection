@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/dua_arabic_wash" />
-    <corners android:radius="14dp" />
-</shape>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/neo_dua_arabic_section"
+    android:insetRight="@dimen/neo_depth_offset_subtle"
+    android:insetBottom="@dimen/neo_depth_offset_subtle" />

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFFFFF" />
-    <corners
-        android:topLeftRadius="24dp"
-        android:topRightRadius="24dp" />
-</shape>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/neo_floating_nav_pill"
+    android:insetRight="@dimen/neo_depth_offset"
+    android:insetBottom="@dimen/neo_depth_offset" />

@@ -5,93 +5,122 @@
     android:layout_height="@dimen/bottom_nav_height"
     android:layout_gravity="bottom"
     android:background="@drawable/bottom_nav_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="horizontal"
     android:paddingTop="@dimen/bottom_nav_padding_vertical"
-    android:paddingBottom="@dimen/bottom_nav_padding_vertical"
-    android:elevation="16dp">
+    android:paddingBottom="@dimen/bottom_nav_padding_vertical">
 
-    <!-- Direction (Активный экран) -->
     <LinearLayout
         android:id="@+id/btnDirection"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iconDirection"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_tab1_direction"
-            android:tint="@color/blue_primary" />
+        <FrameLayout
+            android:id="@+id/navIconCellDirection"
+            android:layout_width="@dimen/neo_nav_icon_cell_size"
+            android:layout_height="@dimen/neo_nav_icon_cell_size"
+            android:background="@drawable/neo_nav_icon_cell_flat">
 
+            <ImageView
+                android:id="@+id/iconDirection"
+                android:layout_width="@dimen/neo_nav_icon_glyph_size"
+                android:layout_height="@dimen/neo_nav_icon_glyph_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_direction"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nav_direction" />
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- Prayer Times -->
     <LinearLayout
         android:id="@+id/btnPrayerTimes"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iconPrayer"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_tab3_notification"
-            android:tint="@color/gray_text" />
+        <FrameLayout
+            android:id="@+id/navIconCellPrayer"
+            android:layout_width="@dimen/neo_nav_icon_cell_size"
+            android:layout_height="@dimen/neo_nav_icon_cell_size"
+            android:background="@drawable/neo_nav_icon_cell_flat">
 
+            <ImageView
+                android:id="@+id/iconPrayer"
+                android:layout_width="@dimen/neo_nav_icon_glyph_size"
+                android:layout_height="@dimen/neo_nav_icon_glyph_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_prayer"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nav_prayer" />
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- Dua -->
     <LinearLayout
         android:id="@+id/btnDua"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iconDua"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_tab4_dua"
-            android:tint="@color/gray_text" />
+        <FrameLayout
+            android:id="@+id/navIconCellDua"
+            android:layout_width="@dimen/neo_nav_icon_cell_size"
+            android:layout_height="@dimen/neo_nav_icon_cell_size"
+            android:background="@drawable/neo_nav_icon_cell_flat">
 
+            <ImageView
+                android:id="@+id/iconDua"
+                android:layout_width="@dimen/neo_nav_icon_glyph_size"
+                android:layout_height="@dimen/neo_nav_icon_glyph_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_dua"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nav_dua" />
+        </FrameLayout>
     </LinearLayout>
 
-    <!-- Settings (новая вкладка) -->
     <LinearLayout
         android:id="@+id/btnSettings"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iconSettings"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_tab5_settings"
-            android:tint="@color/gray_text" />
+        <FrameLayout
+            android:id="@+id/navIconCellSettings"
+            android:layout_width="@dimen/neo_nav_icon_cell_size"
+            android:layout_height="@dimen/neo_nav_icon_cell_size"
+            android:background="@drawable/neo_nav_icon_cell_flat">
 
+            <ImageView
+                android:id="@+id/iconSettings"
+                android:layout_width="@dimen/neo_nav_icon_glyph_size"
+                android:layout_height="@dimen/neo_nav_icon_glyph_size"
+                android:layout_gravity="center"
+                android:contentDescription="@string/nav_settings"
+                android:scaleType="fitCenter"
+                android:src="@drawable/nav_settings" />
+        </FrameLayout>
     </LinearLayout>
 
-</LinearLayout> 
+</LinearLayout>

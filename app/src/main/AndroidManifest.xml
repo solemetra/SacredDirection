@@ -60,7 +60,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.SacredDirection" />
 
-        <activity android:name=".SettingsActivity" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.SacredDirection.Settings" />
         
         <!-- Возвращаем receivers для будильников -->
         <receiver android:name="com.example.qiblaapp2.SoundAlarmReceiver" android:exported="false"/>

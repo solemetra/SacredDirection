@@ -96,7 +96,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
             initOsmdroid()
             setContentView(R.layout.activity_main)
             TabUiHelper.applyBottomNavInsets(this)
-            
+            TabUiHelper.highlightBottomTab(this, TabUiHelper.BottomTab.DIRECTION)
+
             initViews()
             setupMap()
             setupLocationButton()
