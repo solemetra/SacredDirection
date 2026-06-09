@@ -23,7 +23,7 @@ Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/servic
 - **Hijri date** — Umm al-Qura calendar; tap date on Prayer tab to switch Gregorian / Hijri; Settings adjustment ±1 day to match local mosque
 - **Widget** — prayer times on the home screen (updates after reboot)
 - **Dua** — Bismillah, Arabic text, translation, and audio playback
-- **Settings** — Asr method, fixed Fajr/Isha, map style (OSM or MapTiler), Hijri offset, About, Privacy Policy
+- **Settings** — Asr method, fixed Fajr/Isha, Hijri offset, permissions, About, Privacy Policy
 
 ## Why OpenStreetMap (not Google Maps)
 
@@ -31,14 +31,12 @@ Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/servic
 - **Store builds** — default is **OSM Mapnik** only; no Google API key, no satellite licensing surprises for reviewers.
 - **Qibla use case** — you need position, bearing, and a line to the Kaaba; street-level OSM detail is enough; fancy satellite imagery is optional, not required.
 
-**Default (release):** OSM Mapnik — house numbers, no API key.
-
-**Optional (local builds only):** MapTiler Streets via `MAPTILER_API_KEY` in `local.properties` (not committed); falls back to OSM if missing.
+**Tiles:** OSM Mapnik only — no third-party map API keys in release builds.
 
 ## Tech stack
 
 - Kotlin, XML layouts (no Compose)
-- [OSMDroid](https://github.com/osmdroid/osmdroid) + OpenStreetMap / MapTiler
+- [OSMDroid](https://github.com/osmdroid/osmdroid) + OpenStreetMap Mapnik
 - [PrayTimes](http://www.praytimes.org) (via `PrayerTimesCalculator`)
 - ICU `IslamicCalendar` (Umm al-Qura) for Hijri dates
 - `TimezoneMapper` for local timezone from coordinates
@@ -53,8 +51,7 @@ app/src/main/java/com/example/qiblaapp2/
   DuaActivity.kt               — Dua screen
   SettingsActivity.kt          — app settings
   HijriPrefs.kt                — Hijri date & offset
-  MapStylePrefs.kt             — OSM / MapTiler preference
-  MapTileSources.kt            — tile layer URLs
+  MapTileSources.kt            — OSM Mapnik tile source
   TabUiHelper.kt               — bottom nav highlight
   NeumorphicSwitchView.kt      — custom switches in Settings
   PrayerTimesWidgetProvider.kt — home screen widget
@@ -64,7 +61,7 @@ tools/nav-icons-svg/           — build script for tab PNG icons
 ## Build
 
 1. Open the project in **Android Studio**
-2. Copy `local.properties` (SDK path; optional `MAPTILER_API_KEY=...`)
+2. Copy `local.properties` (SDK path only)
 3. Sync Gradle
 4. Run **debug** on a device, or **Generate Signed APK** for release
 

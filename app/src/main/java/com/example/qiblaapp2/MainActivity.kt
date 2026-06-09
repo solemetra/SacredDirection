@@ -31,10 +31,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
-import android.view.HapticFeedbackConstants
-import android.view.MotionEvent
 import java.util.Locale
 
 class MainActivity : AppCompatActivity(), LocationListener {
@@ -82,12 +78,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         private const val TILE_CACHE_MAX_BYTES = 1536L * 1024 * 1024   // 1.5 GB
         private const val TILE_CACHE_TRIM_BYTES = 1200L * 1024 * 1024 // trim to ~1.2 GB
         private const val TILE_CACHE_EXPIRY_MS = 60L * 24 * 60 * 60 * 1000 // 60 days
-        private const val MAP_STYLE_HOLD_MS = 5000L
     }
-
-    private val mapStyleHoldHandler = Handler(Looper.getMainLooper())
-    private var mapStyleHoldRunnable: Runnable? = null
-    private var mapStyleHoldTriggered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +92,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
             initViews()
             setupMap()
             setupLocationButton()
-            setupMapStyleEasterEgg()
             setupNavigation()
 
             runInitialSetup()
@@ -128,7 +118,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     private fun setupMap() {
         try {
-            applyMapStyle()
+            applyOsmTileSource()
             mapView.setUseDataConnection(true)
             mapView.setMultiTouchControls(true)
             mapView.controller.setZoom(16.0)
@@ -144,8 +134,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-    private fun applyMapStyle(): Boolean {
-        return MapStylePrefs.applyTo(mapView, this)
+    private fun applyOsmTileSource() {
+        mapView.setTileSource(MapTileSources.OSM_MAPNIK)
     }
 
     private fun initViews() {
@@ -163,10 +153,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     private fun setupLocationButton() {
         myLocationButton.setOnClickListener {
-            if (mapStyleHoldTriggered) {
-                mapStyleHoldTriggered = false
-                return@setOnClickListener
-            }
             if (!isLocationPermissionGranted) {
                 requestLocationPermissionIfNeeded()
                 return@setOnClickListener
@@ -180,50 +166,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 mapView.controller.setZoom(18.0)
             }
             startLocationUpdates()
-        }
-    }
-
-    private fun setupMapStyleEasterEgg() {
-        myLocationButton.setOnTouchListener { view, event ->
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN -> {
-                    mapStyleHoldTriggered = false
-                    cancelMapStyleHold()
-                    mapStyleHoldRunnable = Runnable {
-                        mapStyleHoldRunnable = null
-                        mapStyleHoldTriggered = true
-                        toggleMapStyle()
-                        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-                    }
-                    mapStyleHoldHandler.postDelayed(mapStyleHoldRunnable!!, MAP_STYLE_HOLD_MS)
-                }
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> cancelMapStyleHold()
-            }
-            false
-        }
-    }
-
-    private fun cancelMapStyleHold() {
-        mapStyleHoldRunnable?.let { mapStyleHoldHandler.removeCallbacks(it) }
-        mapStyleHoldRunnable = null
-    }
-
-    private fun toggleMapStyle() {
-        val nextStyle = if (MapStylePrefs.getStyle(this) == MapStylePrefs.STYLE_MAPTILER) {
-            MapStylePrefs.STYLE_OSM
-        } else {
-            MapStylePrefs.STYLE_MAPTILER
-        }
-        MapStylePrefs.setStyle(this, nextStyle)
-        if (applyMapStyle()) {
-            showToast(getString(R.string.map_style_maptiler_no_key))
-        } else {
-            val label = if (nextStyle == MapStylePrefs.STYLE_MAPTILER) {
-                R.string.map_style_easter_egg_maptiler
-            } else {
-                R.string.map_style_easter_egg_osm
-            }
-            showToast(getString(label))
         }
     }
 
@@ -730,7 +672,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         try {
             mapView.onResume()
             mapView.setUseDataConnection(true)
-            applyMapStyle()
+            applyOsmTileSource()
             refreshConnectivity()
             refreshLocationPermissionState()
             refreshGpsState()
@@ -745,7 +687,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
     override fun onPause() {
         super.onPause()
-        cancelMapStyleHold()
         try {
             mapView.onPause()
             if (::locationManager.isInitialized) {

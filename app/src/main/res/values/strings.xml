@@ -114,12 +114,6 @@
     <string name="reminder_notification_body">%1$s prayer starts soon</string>
 
     <!-- Settings -->
-    <string name="map_style_title">Map style</string>
-    <string name="map_style_osm">OSM</string>
-    <string name="map_style_maptiler">MapTiler</string>
-    <string name="map_style_maptiler_no_key">MapTiler key missing. Using OSM.</string>
-    <string name="map_style_easter_egg_maptiler">MapTiler</string>
-    <string name="map_style_easter_egg_osm">OSM</string>
 
     <string name="hijri_settings_title">Hijri date</string>
     <string name="hijri_settings_hint">Umm al-Qura. Adjust ±1 day to match your mosque if needed.</string>

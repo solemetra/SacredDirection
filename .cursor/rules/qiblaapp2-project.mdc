@@ -20,7 +20,7 @@ Android (minSdk 24, targetSdk 34), OSMDroid, `PrayerTimesCalculator` (PrayTimes)
 
 SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_states, **hijri_day_offset** (−1..+1), **show_hijri_date** (bool).
 
-Новые классы (июнь 2026): `HijriPrefs.kt`, `MapStylePrefs.kt`, `MapTileSources.kt`.
+Новые классы (июнь 2026): `HijriPrefs.kt`, `MapTileSources.kt` (только OSM Mapnik).
 
 ## Вкладки (нижняя панель)
 
@@ -31,12 +31,9 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 
 ## Карта (июнь 2026)
 
-- **По умолчанию:** OSM Mapnik (`tile.openstreetmap.org`).
-- **Опционально:** MapTiler Streets — выбор в **Settings** (не long-press на карте).
-- Ключ: `MAPTILER_API_KEY` в `local.properties` → `BuildConfig.MAPTILER_API_KEY` в `app/build.gradle`. Без ключа — toast и OSM.
-- `MapStylePrefs`: prefs `map_settings` / `map_style` (`osm` | `maptiler`). `MainActivity` применяет стиль в setup/onResume.
+- **Только OSM Mapnik** (`tile.openstreetmap.org`) — `MapTileSources.kt`, без API-ключей.
 - **Кеш osmdroid:** max 1.5 GB, trim 1.2 GB, 60 дней, 4 потока.
-- **Не трогать карту без команды.** Flavor store/personal — обсуждалось, не сделано.
+- **Не трогать карту без команды.**
 
 ## Hijri (июнь 2026, сделано)
 
@@ -55,8 +52,7 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 
 ## Settings — UI (июнь 2026)
 
-- Мини-карточки: расчёт Asr + Fixed Fajr/Isha | **Map style** OSM и MapTiler **в одну строку** | **Hijri** (заголовок + кнопки) | About + Privacy.
-- Map: `@string/map_style_osm` / `maptiler` без описаний в скобках.
+- Мини-карточки: расчёт Asr + Fixed Fajr/Isha | **Hijri** (заголовок + кнопки) | About + Privacy.
 
 ## Dua (июнь 2026)
 
