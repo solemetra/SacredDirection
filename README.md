@@ -1,5 +1,8 @@
 # Sacred Direction
 
+> [!IMPORTANT]
+> ## 🇵🇸 Please read the Dua in the app — for us and for Palestine 🇵🇸
+
 Android app for **Qibla direction**, **prayer times**, a **home-screen widget**, and **Dua** with audio.
 
 Built with **Huawei AppGallery** in mind: many devices ship **without Google Play Services**, so Google Maps is not a reliable baseline. The map uses **OpenStreetMap** via OSMDroid instead — it works on Huawei/Honor and worldwide without a Google account or proprietary map SDK.
