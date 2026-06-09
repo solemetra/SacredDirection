@@ -11,7 +11,7 @@ alwaysApply: true
 
 | Фича | Детали |
 |------|--------|
-| Map OSM + MapTiler | Settings, `MapStylePrefs`, ключ в `local.properties` |
+| Map OSM only | `MapTileSources`, без MapTiler (убрано перед public GitHub) |
 | Hijri Umm al-Qura | `HijriPrefs`, tap дата на Молитвы, ±1 в Settings |
 | Prayer tab UI | Карточка-шапка, sunrise+sunset одна строка, компактные карточки намазов |
 | Settings UI | Мини-карточки, Map/Hijri компактно |

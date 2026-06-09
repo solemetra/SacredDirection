@@ -3,15 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file("local.properties")
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withInputStream { stream ->
-        localProperties.load(stream)
-    }
-}
-def mapTilerApiKey = localProperties.getProperty("MAPTILER_API_KEY", "")
-
 android {
     namespace 'com.example.qiblaapp2'
     compileSdk 34
@@ -22,7 +13,6 @@ android {
         targetSdk 34
         versionCode 6
         versionName "2.0"
-        buildConfigField "String", "MAPTILER_API_KEY", "\"${mapTilerApiKey}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
