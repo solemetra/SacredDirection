@@ -2,7 +2,19 @@
 
 Android app for **Qibla direction**, **prayer times**, a **home-screen widget**, and **Dua** with audio.
 
+Built with **Huawei AppGallery** in mind: many devices ship **without Google Play Services**, so Google Maps is not a reliable baseline. The map uses **OpenStreetMap** via OSMDroid instead — it works on Huawei/Honor and worldwide without a Google account or proprietary map SDK.
+
 Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/service/josp/agc/index.html) (package: `com.example.qiblaapp2`).
+
+## Screenshots
+
+| Map & Qibla | Prayer times |
+|:---:|:---:|
+| ![Map and Qibla bearing](docs/screenshots/01-map-qibla.png) | ![Prayer times](docs/screenshots/02-prayer-times.png) |
+
+| Dua | Settings |
+|:---:|:---:|
+| ![Dua](docs/screenshots/03-dua.png) | ![Settings](docs/screenshots/04-settings.png) |
 
 ## Features
 
@@ -13,10 +25,15 @@ Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/servic
 - **Dua** — Bismillah, Arabic text, translation, and audio playback
 - **Settings** — Asr method, fixed Fajr/Isha, map style (OSM or MapTiler), Hijri offset, About, Privacy Policy
 
-## Map tiles
+## Why OpenStreetMap (not Google Maps)
 
-- **OSM Mapnik** (default) — house numbers, no API key
-- **MapTiler Streets** (optional) — set `MAPTILER_API_KEY` in `local.properties` (not committed); falls back to OSM if the key is missing
+- **Huawei / no GMS** — Google Maps SDK expects Google Play services; OSM tiles load over HTTPS like a normal web map.
+- **Store builds** — default is **OSM Mapnik** only; no Google API key, no satellite licensing surprises for reviewers.
+- **Qibla use case** — you need position, bearing, and a line to the Kaaba; street-level OSM detail is enough; fancy satellite imagery is optional, not required.
+
+**Default (release):** OSM Mapnik — house numbers, no API key.
+
+**Optional (local builds only):** MapTiler Streets via `MAPTILER_API_KEY` in `local.properties` (not committed); falls back to OSM if missing.
 
 ## Tech stack
 
