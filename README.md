@@ -1,7 +1,18 @@
 # Sacred Direction
 
+<table>
+<tr>
+<td width="220" valign="middle">
+<img src="docs/images/palestine-flag.png" alt="Palestine flag" width="200">
+</td>
+<td valign="middle">
+
 > [!IMPORTANT]
-> ## 🇵🇸 Please read the Dua in the app — for us and for Palestine 🇵🇸
+> ### Please read the Dua in the app — for us and for Palestine
+
+</td>
+</tr>
+</table>
 
 Android app for **Qibla direction**, **prayer times**, a **home-screen widget**, and **Dua** with audio.
 
