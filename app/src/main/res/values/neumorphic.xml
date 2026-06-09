@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Neumorphic on warm milk base #F0EEE9 -->
+    <dimen name="neo_depth_offset">3dp</dimen>
+    <dimen name="neo_depth_offset_subtle">2dp</dimen>
+    <dimen name="neo_depth_offset_pressed">1dp</dimen>
+    <dimen name="neo_nav_icon_cell_size">48dp</dimen>
+    <dimen name="neo_nav_icon_glyph_size">45dp</dimen>
+    <dimen name="nav_indicator_width">22dp</dimen>
+    <dimen name="nav_indicator_height">2dp</dimen>
+    <dimen name="nav_indicator_radius">1dp</dimen>
+    <dimen name="nav_indicator_bottom_margin">2dp</dimen>
+    <dimen name="neo_fab_size">56dp</dimen>
+    <dimen name="neo_alarm_button_size">43dp</dimen>
+    <dimen name="neo_alarm_on_depth">4dp</dimen>
+
+    <dimen name="neo_radius_card">24dp</dimen>
+    <dimen name="neo_radius_card_medium">20dp</dimen>
+    <dimen name="neo_radius_card_small">16dp</dimen>
+
+    <dimen name="neo_switch_track_width">52dp</dimen>
+    <dimen name="neo_switch_track_height">28dp</dimen>
+    <dimen name="neo_switch_thumb_margin">2dp</dimen>
+
+    <color name="neo_base">@color/blue_background</color>
+    <color name="neo_surface">@color/blue_surface</color>
+    <color name="neo_surface_high">@color/blue_surface_high</color>
+    <color name="neo_shadow_dark">#2E000000</color>
+    <color name="neo_shadow_soft">#57A39E94</color>
+    <color name="neo_highlight_stroke">#66FFFFFF</color>
+    <color name="neo_border_subtle">#1A000000</color>
+
+    <color name="neo_switch_track">#DAD6CE</color>
+    <color name="neo_switch_thumb_top">#F9F7F2</color>
+    <color name="neo_switch_thumb_bottom">#E0DCD4</color>
+    <color name="neo_switch_led_on">#B8A078</color>
+    <color name="neo_switch_led_off">#A39E94</color>
+</resources>

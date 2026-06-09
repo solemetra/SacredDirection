@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="@dimen/neo_depth_offset_subtle">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neo_shadow_soft" />
+            <corners
+                android:topLeftRadius="@dimen/neo_radius_card_medium"
+                android:topRightRadius="@dimen/neo_radius_card_medium" />
+        </shape>
+    </item>
+    <item android:bottom="@dimen/neo_depth_offset_subtle">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neo_surface_high" />
+            <corners
+                android:topLeftRadius="@dimen/neo_radius_card_medium"
+                android:topRightRadius="@dimen/neo_radius_card_medium" />
+        </shape>
+    </item>
+</layer-list>

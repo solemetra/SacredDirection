@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#E8F2FF" />
+    <solid android:color="#F3F0EA" />
     <corners android:radius="12dp" />
     <stroke
         android:width="1dp"
-        android:color="@color/blue_primary" />
+        android:color="@color/alarm_label_on" />
 </shape>

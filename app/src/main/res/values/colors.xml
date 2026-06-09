@@ -4,14 +4,30 @@
     <color name="blue_primary">#499EFF</color>
     <color name="blue_primary_variant">#2196F3</color>
     <color name="blue_primary_light">#81C4FF</color>
+    <!-- MD3-style active tab pill under neumorphic icon -->
+    <color name="nav_indicator_active">#99499EFF</color>
 
-    <color name="blue_background">#F3F8FF</color>
-    <color name="blue_surface">#FFFFFF</color>
-    <color name="blue_border">#ECF4FF</color>
+    <!-- App milk base — #F0EEE9 Cloud Dancer PANTONE 11-4201 + OSM harmony -->
+    <color name="blue_background">#F0EEE9</color>
+    <!-- Warm milk surfaces — stepped above #F0EEE9, no pure white -->
+    <color name="blue_surface">#F6F4EF</color>
+    <color name="blue_surface_high">#F9F7F2</color>
+    <color name="blue_border">#DCD8D1</color>
     <color name="blue_shadow">#BBD0ED</color>
 
     <color name="dark_text">#131313</color>
     <color name="gray_text">#666666</color>
+    <!-- Nav TTF glyph fill — stepped vs pill #F6F4EF so icons stay readable -->
+    <color name="neo_nav_icon_fill">#C8C2B8</color>
+    <color name="neo_nav_icon_fill_active">#FDFBF7</color>
+    <color name="alarm_label_on">#7A746A</color>
+    <color name="alarm_label_off">#B5AFA4</color>
+    <color name="dua_text_primary">#5C574F</color>
+    <color name="dua_text_secondary">#8A847A</color>
+
+    <!-- NeumorphicSwitchView thumb emboss -->
+    <color name="neo_icon_emboss_shadow">#6E6A63</color>
+    <color name="neo_icon_emboss_highlight">#E6E2DA</color>
     <color name="white_text">#FFFFFF</color>
     <color name="prayer_time">#FF0000</color>
 

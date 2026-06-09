@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Bottom tab bar -->
-    <dimen name="bottom_nav_height">68dp</dimen>
-    <dimen name="bottom_nav_padding_vertical">8dp</dimen>
+    <!-- Bottom tab bar — floating neumorphic pill -->
+    <dimen name="bottom_nav_height">70dp</dimen>
+    <dimen name="bottom_nav_padding_vertical">3dp</dimen>
+    <dimen name="bottom_nav_floating_radius">35dp</dimen>
+    <dimen name="bottom_nav_floating_margin_horizontal">20dp</dimen>
+    <dimen name="bottom_nav_floating_margin_bottom">16dp</dimen>
 
     <!-- Content area -->
     <dimen name="screen_top_margin">32dp</dimen>
@@ -10,9 +13,9 @@
     <dimen name="header_card_width">344dp</dimen>
     <dimen name="header_fixed_height">115dp</dimen>
     <dimen name="header_content_gap">10dp</dimen>
-    <dimen name="scroll_content_bottom_padding">16dp</dimen>
+    <dimen name="scroll_content_bottom_padding">24dp</dimen>
 
     <!-- Map tab: location button above bottom nav -->
     <dimen name="fab_margin_above_bottom_nav">24dp</dimen>
-    <dimen name="fab_bottom_offset">92dp</dimen>
+    <dimen name="fab_bottom_offset">110dp</dimen>
 </resources>

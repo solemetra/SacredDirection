@@ -72,7 +72,7 @@ class PrayerTimesActivity : AppCompatActivity(), ReminderPermissionHost {
 
         updatePrayerTimesDisplay()
 
-        highlightActiveTab()
+        TabUiHelper.highlightBottomTab(this, TabUiHelper.BottomTab.PRAYER)
 
         setupNavigation()
 
@@ -293,46 +293,6 @@ class PrayerTimesActivity : AppCompatActivity(), ReminderPermissionHost {
 
 
 
-    private fun highlightActiveTab() {
-
-        val btnDirection = findViewById<LinearLayout>(R.id.btnDirection)
-
-        val btnPrayerTimes = findViewById<LinearLayout>(R.id.btnPrayerTimes)
-
-        val btnDua = findViewById<LinearLayout>(R.id.btnDua)
-
-        val btnSettings = findViewById<LinearLayout>(R.id.btnSettings)
-
-
-
-        btnPrayerTimes.findViewById<ImageView>(R.id.iconPrayer)?.setColorFilter(
-
-            ContextCompat.getColor(this, R.color.blue_primary)
-
-        )
-
-        btnDirection.findViewById<ImageView>(R.id.iconDirection)?.setColorFilter(
-
-            ContextCompat.getColor(this, R.color.gray_text)
-
-        )
-
-        btnDua.findViewById<ImageView>(R.id.iconDua)?.setColorFilter(
-
-            ContextCompat.getColor(this, R.color.gray_text)
-
-        )
-
-        btnSettings.findViewById<ImageView>(R.id.iconSettings)?.setColorFilter(
-
-            ContextCompat.getColor(this, R.color.gray_text)
-
-        )
-
-    }
-
-
-
     private fun setupNavigation() {
 
         findViewById<LinearLayout>(R.id.btnDirection)?.setOnClickListener {
@@ -417,7 +377,7 @@ class PrayerTimesActivity : AppCompatActivity(), ReminderPermissionHost {
 
             textView.text = getString(R.string.alarm_on)
 
-            textView.setTextColor(ContextCompat.getColor(this, R.color.dark_text))
+            textView.setTextColor(ContextCompat.getColor(this, R.color.alarm_label_on))
 
         } else {
 
@@ -425,7 +385,7 @@ class PrayerTimesActivity : AppCompatActivity(), ReminderPermissionHost {
 
             textView.text = getString(R.string.alarm_off)
 
-            textView.setTextColor(ContextCompat.getColor(this, R.color.gray_text))
+            textView.setTextColor(ContextCompat.getColor(this, R.color.alarm_label_off))
 
         }
 

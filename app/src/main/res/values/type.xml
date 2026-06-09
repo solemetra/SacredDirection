@@ -1,62 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Material Design 3 type scale (Roboto / system default) -->
+    <!-- Plus Jakarta Sans app-wide (Arabic falls back to system) -->
 
     <style name="TextAppearance.SacredDirection.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
     <style name="TextAppearance.SacredDirection.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <!-- Semantic variants used in layouts -->
 
     <style name="TextAppearance.SacredDirection.HeadlineLarge.AppName" parent="TextAppearance.SacredDirection.HeadlineLarge">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:letterSpacing">0.03</item>
+        <item name="android:textColor">@color/dark_text</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.TitleLarge.Date" parent="TextAppearance.SacredDirection.TitleLarge">
@@ -97,9 +130,19 @@
         <item name="android:textColor">@color/blue_primary</item>
     </style>
 
-    <style name="TextAppearance.SacredDirection.LabelLarge.Button" parent="TextAppearance.SacredDirection.LabelLarge">
+    <style name="TextAppearance.SacredDirection.LabelLarge.Link.Warm" parent="TextAppearance.SacredDirection.LabelLarge">
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/alarm_label_on</item>
+    </style>
+
+    <style name="TextAppearance.SacredDirection.LabelLarge.Button" parent="TextAppearance.SacredDirection.LabelLarge">
+        <item name="android:textFontWeight">600</item>
         <item name="android:textColor">@color/white_text</item>
+    </style>
+
+    <style name="TextAppearance.SacredDirection.LabelLarge.ButtonSecondary" parent="TextAppearance.SacredDirection.LabelLarge">
+        <item name="android:textFontWeight">600</item>
+        <item name="android:textColor">@color/alarm_label_on</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.LabelLarge.Uppercase" parent="TextAppearance.SacredDirection.LabelLarge">
@@ -134,17 +177,21 @@
 
     <style name="TextAppearance.SacredDirection.TitleLarge.Bismillah" parent="TextAppearance.SacredDirection.TitleLarge">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/green_primary</item>
+        <item name="android:textColor">@color/dua_text_primary</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.HeadlineMedium.Arabic" parent="TextAppearance.SacredDirection.HeadlineMedium">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/green_dark</item>
+        <item name="android:textColor">@color/dua_text_primary</item>
     </style>
 
     <style name="TextAppearance.SacredDirection.BodySmall.Italic" parent="TextAppearance.SacredDirection.BodySmall">
         <item name="android:textStyle">italic</item>
-        <item name="android:textColor">@color/gray_text</item>
+        <item name="android:textColor">@color/dua_text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.SacredDirection.LabelSmall.PlayDua" parent="TextAppearance.SacredDirection.LabelSmall">
+        <item name="android:textColor">@color/alarm_label_on</item>
     </style>
 
 </resources>

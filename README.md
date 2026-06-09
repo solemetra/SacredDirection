@@ -6,7 +6,7 @@ Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/servic
 
 ## Features
 
-- **Map & Qibla** — direction and distance to the Kaaba, line on the map (OSMDroid)
+- **Map & Qibla** — GPS bearing, direction name, line to the Kaaba on the map (OSMDroid; no magnetometer compass)
 - **Prayer times** — Fajr, Dhuhr, Asr, Maghrib, Isha; optional adhan alarms; compact header card with city, date, sunrise & sunset on one line
 - **Hijri date** — Umm al-Qura calendar; tap date on Prayer tab to switch Gregorian / Hijri; Settings adjustment ±1 day to match local mosque
 - **Widget** — prayer times on the home screen (updates after reboot)
@@ -38,7 +38,10 @@ app/src/main/java/com/example/qiblaapp2/
   HijriPrefs.kt                — Hijri date & offset
   MapStylePrefs.kt             — OSM / MapTiler preference
   MapTileSources.kt            — tile layer URLs
+  TabUiHelper.kt               — bottom nav highlight
+  NeumorphicSwitchView.kt      — custom switches in Settings
   PrayerTimesWidgetProvider.kt — home screen widget
+tools/nav-icons-svg/           — build script for tab PNG icons
 ```
 
 ## Build
@@ -50,7 +53,7 @@ app/src/main/java/com/example/qiblaapp2/
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **1.2** (`versionCode` 4)
+Current version: **2.0** (`versionCode` 6)
 
 ## Privacy
 

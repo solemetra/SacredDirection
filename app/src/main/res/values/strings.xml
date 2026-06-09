@@ -4,6 +4,7 @@
 
     <!-- Navigation -->
     <string name="nav_direction">Direction</string>
+    <string name="nav_prayer">Prayer times</string>
     <string name="nav_compass">Compass</string>
     <string name="nav_dua">Dua</string>
     <string name="nav_settings">Settings</string>
@@ -51,6 +52,7 @@
     <string name="restore_settings">Restore Settings</string>
     <string name="about">About</string>
     <string name="version">Version %1$s</string>
+    <string name="about_color_palette">Cloud Dancer PANTONE 11-4201</string>
 
     <!-- Permissions -->
     <string name="location_permission_required">Location is used to show Qibla direction and prayer times for your area.</string>
@@ -126,6 +128,8 @@
     <string name="hijri_offset_zero">0</string>
     <string name="hijri_offset_plus">+1</string>
     <string name="hijri_tap_date_hint">Tap date on Prayer tab to switch Gregorian / Hijri</string>
+    <string name="switch_fixed_fajr">Fixed Fajr time</string>
+    <string name="switch_fixed_isha">Fixed Isha time</string>
     <string name="unknown_location">-</string>
     <string name="prayer_sunrise">Sunrise</string>
     <string name="prayer_sunset">Sunset</string>

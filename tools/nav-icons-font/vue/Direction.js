@@ -1,0 +1,25 @@
+import { defineComponent, h } from 'vue';
+
+export const Direction = defineComponent({
+  name: 'Direction',
+  props: {
+    class: {
+      type: String,
+      default: ''
+    }
+  },
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      {
+        viewBox: '0 0 20 20',
+        
+        class: `sacred_direction_nav ${props.class}`,
+        ...attrs
+      },
+      [
+        h('path', {"d": "M9,0C4.028,0,0,4.028,0,9s4.028,9,9,9s9-4.028,9-9S13.972,0,9,0z M9,14.538V9H3.475l9.679-4.154L9,14.538z", "fillRule": "evenodd"})
+      ]
+    );
+  }
+});

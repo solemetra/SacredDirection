@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Floating bottom nav: full pill, convex on map / milk screens -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:left="@dimen/neo_depth_offset"
+        android:top="@dimen/neo_depth_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neo_shadow_soft" />
+            <corners android:radius="@dimen/bottom_nav_floating_radius" />
+        </shape>
+    </item>
+    <item
+        android:right="@dimen/neo_depth_offset"
+        android:bottom="@dimen/neo_depth_offset">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neo_surface" />
+            <corners android:radius="@dimen/bottom_nav_floating_radius" />
+            <stroke
+                android:width="1dp"
+                android:color="@color/blue_border" />
+        </shape>
+    </item>
+</layer-list>

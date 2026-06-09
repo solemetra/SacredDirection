@@ -2,6 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.SacredDirection" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_primary</item>
         <item name="colorPrimaryVariant">@color/blue_primary_variant</item>
@@ -11,7 +13,7 @@
         <item name="colorSecondaryVariant">@color/blue_primary_variant</item>
         <item name="colorOnSecondary">@color/white_text</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">#FFFFFF</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/blue_background</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/blue_background</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -39,17 +41,55 @@
         <item name="android:textAppearance">@style/TextAppearance.SacredDirection.BodyLarge.Control</item>
     </style>
 
-    <style name="Widget.SacredDirection.SegmentedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.SacredDirection.SegmentedButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textAppearance">@style/TextAppearance.SacredDirection.LabelLarge</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
         <item name="android:minHeight">40dp</item>
-        <item name="strokeColor">@color/blue_border</item>
-        <item name="strokeWidth">1dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cornerRadius">0dp</item>
         <item name="backgroundTint">@color/hijri_segment_bg</item>
         <item name="android:textColor">@color/hijri_segment_text</item>
-        <item name="rippleColor">@color/blue_primary_light</item>
+        <item name="rippleColor">@color/neo_shadow_soft</item>
+    </style>
+
+    <style name="Widget.SacredDirection.SegmentedButton.Left" parent="Widget.SacredDirection.SegmentedButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SacredDirection.HijriSegment.Left</item>
+    </style>
+
+    <style name="Widget.SacredDirection.SegmentedButton.Middle" parent="Widget.SacredDirection.SegmentedButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SacredDirection.HijriSegment.Middle</item>
+    </style>
+
+    <style name="Widget.SacredDirection.SegmentedButton.Right" parent="Widget.SacredDirection.SegmentedButton">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SacredDirection.HijriSegment.Right</item>
+    </style>
+
+    <style name="ShapeAppearance.SacredDirection.HijriSegment.Left" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/neo_radius_card_small</item>
+        <item name="cornerSizeBottomLeft">@dimen/neo_radius_card_small</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SacredDirection.HijriSegment.Middle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SacredDirection.HijriSegment.Right" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopRight">@dimen/neo_radius_card_small</item>
+        <item name="cornerSizeBottomRight">@dimen/neo_radius_card_small</item>
     </style>
 
     <!-- Dark Theme -->
@@ -64,14 +104,19 @@
         <item name="android:windowBackground">#121212</item>
     </style>
 
-    <!-- Settings Theme -->
+    <!-- Settings — warm milk accents (no blue) -->
     <style name="Theme.SacredDirection.Settings" parent="Theme.SacredDirection">
-        <item name="android:textColorPrimary">@color/blue_primary</item>
+        <item name="android:textColorPrimary">@color/dark_text</item>
+        <item name="colorPrimary">@color/alarm_label_on</item>
+        <item name="colorSecondary">@color/alarm_label_on</item>
+        <item name="colorAccent">@color/alarm_label_on</item>
+        <item name="colorControlActivated">@color/alarm_label_on</item>
+        <item name="colorControlHighlight">@color/neo_shadow_soft</item>
     </style>
 
     <style name="Theme.SacredDirection.BottomSheet" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.SacredDirection.BottomSheet</item>
-        <item name="android:navigationBarColor">@color/blue_surface</item>
+        <item name="android:navigationBarColor">@color/blue_background</item>
     </style>
 
     <style name="Widget.SacredDirection.BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">

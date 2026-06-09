@@ -62,19 +62,49 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 
 - Отдельный блок Bismillah, divider, арабский 26sp, перевод EN в `strings.xml`. Pause убран — только Play.
 
-## Компас
+## Компас — решение пользователя (июнь 2026, «запомни»)
 
-Вкладка компаса **удалена**. Не возвращать без команды.
+- Вкладка компаса **удалена**. **Не возвращать** (магнитометр / Qibla compass) — пользователь считает, что компас **всё равно показывает неправильно**.
+- В приложении остаётся: **кибла по GPS** — угол°, название стороны света, **линия на карте** к Каабе; при повороте телефона направление **не меняется** (так задумано).
+- Не предлагать компас «для модерации», если пользователь не попросит явно.
+
+## Huawei AppGallery — отказ 1.2 (июнь 2026, «запомни»)
+
+**Причина:** rule 1.14 — в скринах/описании был компас, в APK нет; модератор ожидал стрелку при повороте устройства.
+
+**Повторная подача (июнь 2026, пользователь сделал):**
+- Версия **2.0 (versionCode 6)**, signed APK загружен.
+- Скрины, full/brief intro, New features — **без compass**; позиционирование: Qibla on map from GPS + prayer times + widget + Dua.
+- Отправлено на проверку AppGallery Connect.
+
+**Риск:** повторный отказ, если Huawei настаивает на магнитном компасе — пользователь принимает.
+
+**Appeal (EN, когда будете готовы):** *Compass removed intentionally. App shows Qibla bearing and map line from GPS only. Store listing and screenshots updated to match actual features.*
 
 ## Локализация (не сделано, запрос пользователя «запомни»)
 
 - Сейчас только `values/strings.xml` (EN). Много текста **зашито в layout** (Fajr Time, Settings, Alarm ON…).
 - **Русский:** план — `values-ru/strings.xml`, вынести hardcoded в `@string`, месяцы хиджры в ресурсы, перевод дуа; privacy HTML отдельно. Оценка ~полдня. **Ждёт явной команды «сделай русский».**
 
-## Privacy (без изменений по решению пользователя)
+## Privacy (июнь 2026 — обновлено)
 
-- Согласие **после** GPS в `MainActivity` — риск для модерации, ждём замечаний.
-- `privacy_policy.html` — устарел (компас). URL: telegra.ph/Privacy-Policy-09-18-69
+- **Telegraph + `assets/privacy_policy.html`:** Solemetra (не ФИО), без magnetometer, GPS + OSM tiles, хранение на устройстве, effective June 3, 2026.
+- URL: https://telegra.ph/Privacy-Policy-09-18-69 (тот же в AppGallery Connect).
+- Согласие **после** GPS в `MainActivity` — **не чинили**; ждём замечаний модераторов.
+
+## UI neumorphic + типографика (июнь 2026)
+
+- Молочный фон `#F0EEE9`, drawable `neo_*` (карточки, nav pill, alarm circles, sheet buttons).
+- **Plus Jakarta Sans** app-wide (`res/font/`, `type.xml`, `themes.xml`).
+- **Нижняя навигация:** PNG `nav_direction/prayer/dua/settings` в `drawable-*dpi/`, сборка `tools/nav-icons-svg/`, `TabUiHelper` (scale/alpha активной вкладки).
+- **Dua Play:** `neo_dua_play_raised/pressed/active` (градиент, без offset-тени).
+- **Map FAB:** `neo_map_location_fab` + `ic_my_location` (плоский диск, crosshair).
+- **NeumorphicSwitchView** — Settings (Asr switches). Эксперимент `neo_surface_card_soft` на Settings — **откатили**.
+
+## Чистка мёртвого кода (июнь 2026)
+
+- Удалены: `NeumorphicTextView`, `NeumorphicTextPainter`, `attrs.xml`, compass/tab drawables (~45 файлов), `_zenith_ref/`.
+- Оставлен `ic_compass.xml` — только preview виджета в `widget_prayer_times_info.xml`.
 
 ## Виджет
 
@@ -84,14 +114,13 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 ## Git / GitHub
 
 - **Private:** https://github.com/solemetra/SacredDirection.git
-- Последний push (июнь 2026): коммит **a4a8408** — Hijri, map style, Prayer UI, README.
-- **Коммиты только по запросу** пользователя. Не коммитить: `.jks`, `local.properties`, APK.
+- **Коммиты по запросу.** Не коммитить: `.jks`, `local.properties`, APK, `release/`.
 
-## Huawei AppGallery
+## Huawei AppGallery — техника
 
-- В коде **1.1 (versionCode 3)**. Загружать **свежий signed APK** из `app/build/outputs/apk/release/`.
-- В магазине ранее была ошибка со старым 1.0 APK.
+- В коде **2.0 (versionCode 6)** — Huawei берёт версию из **APK**.
+- Privacy URL: https://telegra.ph/Privacy-Policy-09-18-69
 
 ## Стиль общения
 
-Пользователь **начинающий** — коротко и простыми словами (Git, release, Hijri offset, локализация).
+**Команда пользователя: пиши КОРОТКО.** Минимум текста, без длинных таблиц и повторов. Начинающий — простые слова.

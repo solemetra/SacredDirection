@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:right="@dimen/neo_depth_offset"
+        android:bottom="@dimen/neo_depth_offset">
+        <shape android:shape="oval">
+            <solid android:color="@color/neo_shadow_soft" />
+        </shape>
+    </item>
+    <item
+        android:left="@dimen/neo_depth_offset"
+        android:top="@dimen/neo_depth_offset">
+        <shape android:shape="oval">
+            <solid android:color="@color/neo_surface" />
+        </shape>
+    </item>
+</layer-list>

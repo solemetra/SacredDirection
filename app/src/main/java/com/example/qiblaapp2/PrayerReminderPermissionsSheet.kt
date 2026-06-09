@@ -129,7 +129,13 @@ class PrayerReminderPermissionsSheet : BottomSheetDialogFragment() {
         primaryBtn.text = getString(
             if (allReady) R.string.reminder_perm_all_ready else R.string.reminder_perm_later
         )
-        primaryBtn.setTextColor(ContextCompat.getColor(context, R.color.white_text))
+        if (allReady) {
+            primaryBtn.setBackgroundResource(R.drawable.neo_sheet_button_primary)
+            primaryBtn.setTextAppearance(R.style.TextAppearance_SacredDirection_LabelLarge_Button)
+        } else {
+            primaryBtn.setBackgroundResource(R.drawable.neo_sheet_button_secondary)
+            primaryBtn.setTextAppearance(R.style.TextAppearance_SacredDirection_LabelLarge_ButtonSecondary)
+        }
     }
 
     private fun updateStatus(statusView: TextView, granted: Boolean) {
@@ -140,7 +146,7 @@ class PrayerReminderPermissionsSheet : BottomSheetDialogFragment() {
             statusView.setBackgroundResource(R.drawable.perm_status_done_bg)
         } else {
             statusView.setText(R.string.reminder_perm_status_allow)
-            statusView.setTextColor(ContextCompat.getColor(context, R.color.blue_primary_variant))
+            statusView.setTextColor(ContextCompat.getColor(context, R.color.alarm_label_on))
             statusView.setBackgroundResource(R.drawable.perm_status_allow_bg)
         }
     }

@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/blue_background"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <FrameLayout
         android:id="@+id/headerSectionSettings"
@@ -14,7 +17,6 @@
         android:layout_marginEnd="@dimen/screen_horizontal_margin"
         android:background="@drawable/header_section_bg"
         android:clipChildren="false"
-        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,12 +74,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/header_section_bg"
+                android:background="@drawable/prayer_card_background"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:elevation="4dp"
                 android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
@@ -126,10 +127,11 @@
                         android:text="Fixed Fajr Time"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.example.qiblaapp2.NeumorphicSwitchView
                         android:id="@+id/switchFajrFixed"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/switch_fixed_fajr" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
@@ -151,10 +153,11 @@
                         android:text="Fixed Isha Time"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
-                    <androidx.appcompat.widget.SwitchCompat
+                    <com.example.qiblaapp2.NeumorphicSwitchView
                         android:id="@+id/switchIshaFixed"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/switch_fixed_isha" />
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
@@ -169,12 +172,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/header_section_bg"
+                android:background="@drawable/prayer_card_background"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:elevation="4dp"
                 android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
@@ -184,38 +186,46 @@
                     android:text="@string/hijri_settings_title"
                     android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
 
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/toggleHijriOffset"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    app:singleSelection="true"
-                    app:selectionRequired="true">
+                    android:background="@drawable/hijri_segment_group_bg"
+                    android:clipToOutline="true"
+                    android:padding="1dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHijriMinus"
-                        style="@style/Widget.SacredDirection.SegmentedButton"
-                        android:layout_width="0dp"
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/toggleHijriOffset"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hijri_offset_minus" />
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHijriZero"
-                        style="@style/Widget.SacredDirection.SegmentedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hijri_offset_zero" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHijriMinus"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Left"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/hijri_offset_minus" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnHijriPlus"
-                        style="@style/Widget.SacredDirection.SegmentedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/hijri_offset_plus" />
-                </com.google.android.material.button.MaterialButtonToggleGroup>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHijriZero"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Middle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/hijri_offset_zero" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnHijriPlus"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Right"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/hijri_offset_plus" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -223,12 +233,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/header_section_bg"
+                android:background="@drawable/prayer_card_background"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:elevation="4dp"
                 android:layout_marginBottom="@dimen/header_content_gap">
 
                 <LinearLayout
@@ -266,12 +275,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/header_section_bg"
+                android:background="@drawable/prayer_card_background"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="14dp"
-                android:elevation="4dp"
                 android:layout_marginBottom="@dimen/header_content_gap"
                 android:gravity="center_horizontal">
 
@@ -289,12 +297,21 @@
                     android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium.Secondary" />
 
                 <TextView
+                    android:id="@+id/textSettingsColorPalette"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="@string/about_color_palette"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
+
+                <TextView
                     android:id="@+id/btnPrivacyPolicy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="@string/privacy_open"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Link"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Link.Warm"
                     android:padding="4dp"
                     android:background="?android:attr/selectableItemBackground" />
 
@@ -308,6 +325,9 @@
         layout="@layout/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="@dimen/bottom_nav_height"
+        android:layout_marginStart="@dimen/bottom_nav_floating_margin_horizontal"
+        android:layout_marginEnd="@dimen/bottom_nav_floating_margin_horizontal"
+        android:layout_marginBottom="@dimen/bottom_nav_floating_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Playing: raised warm disc, accent ring — same footprint as idle -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="72%p"
+                android:centerX="0.36"
+                android:centerY="0.36"
+                android:startColor="#EDE9E1"
+                android:centerColor="#E2DDD4"
+                android:endColor="#C8C0B4" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="oval">
+            <stroke
+                android:width="1.5dp"
+                android:color="@color/alarm_label_on" />
+        </shape>
+    </item>
+</layer-list>

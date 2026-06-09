@@ -1,4 +1,5 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-    <solid android:color="@android:color/white" />
-    <stroke android:width="4dp" android:color="@color/blue_background" />
-</shape> 
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/neo_alarm_off_circle"
+    android:insetRight="@dimen/neo_depth_offset"
+    android:insetBottom="@dimen/neo_depth_offset" />

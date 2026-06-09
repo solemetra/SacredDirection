@@ -20,8 +20,8 @@ android {
         applicationId "com.example.qiblaapp2"
         minSdk 24
         targetSdk 34
-        versionCode 4
-        versionName "1.2"
+        versionCode 6
+        versionName "2.0"
         buildConfigField "String", "MAPTILER_API_KEY", "\"${mapTilerApiKey}\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
