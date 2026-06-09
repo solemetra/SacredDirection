@@ -1,0 +1,61 @@
+Sacred Direction — Attribution License
+Copyright (c) 2025–2026 Solemetra. All rights reserved.
+
+You may use, study, modify, and distribute this software and derivative works,
+including forks and apps based on this source code, only if you comply with
+the conditions below.
+
+## 1. Attribution in every repository
+
+In any public or private repository that contains this code or a derivative,
+you must include:
+
+1. This LICENSE file (or a copy of these terms).
+2. A clear statement in README (or equivalent top-level documentation), for example:
+
+   Based on Sacred Direction by Solemetra.
+   Original project: https://github.com/solemetra/SacredDirection
+
+The statement must remain visible and must not be removed in later updates.
+
+## 2. Attribution in every distributed app
+
+If you publish an application (APK, AAB, or store listing) that is based on
+this project or includes substantial portions of its code, you must provide
+user-visible credit, for example in Settings → About or an equivalent screen:
+
+   Based on Sacred Direction
+   https://github.com/solemetra/SacredDirection
+
+The credit must be readable, tappable or copyable as a link where the platform
+allows, and must not be hidden behind paid features or obscure UI.
+
+## 3. No implied endorsement
+
+You may not suggest that Solemetra or the Sacred Direction project endorses
+your fork or product without written permission.
+
+## 4. Trademark
+
+"Sacred Direction" and associated branding (icons, store listing assets) remain
+the property of the copyright holder. Forks must use their own app name,
+package id, and store identity unless explicitly authorized.
+
+## 5. Third-party components
+
+This project includes third-party libraries and fonts under their own licenses
+(see app dependencies and res/font/). Those terms remain in effect.
+
+## 6. Disclaimer
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Contact
+
+solemetra@gmail.com
