@@ -80,4 +80,11 @@ Contact: solemetra@gmail.com
 
 ## License
 
-Private project. All rights reserved unless stated otherwise.
+Copyright (c) Solemetra. See [LICENSE](LICENSE).
+
+You may fork and build on this code if you **keep attribution**:
+
+- In the **repo** (README): link to [github.com/solemetra/SacredDirection](https://github.com/solemetra/SacredDirection)
+- In a **published app** (About or similar): *Based on Sacred Direction* + the same link
+
+Use your own app name, package id, and signing key for store listings.
