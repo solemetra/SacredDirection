@@ -18,10 +18,11 @@ alwaysApply: true
 | Dua layout | Bismillah отдельно, без налезания текста |
 | GitHub | README + push `a4a8408` |
 | Alarm label fix | Обрезка снизу на Huawei — layout, не смена текста |
+| Fajr high latitude fix | v2.0.1 — Fixed Fajr от NOAA sunrise + полночь |
 
 ## Текущая база
 
-- v1.1 (`versionCode 3`), 4 вкладки, виджет, adhan alarms
+- v2.0.1 (`versionCode 7`), 4 вкладки, виджет, adhan alarms
 - EN UI (часть строк в layout hardcoded)
 
 ## Открытые технические долги

@@ -70,6 +70,10 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 
 **Повторная подача (июнь 2026, пользователь сделал):**
 - Версия **2.0 (versionCode 6)**, signed APK загружен.
+
+**Патч 2.0.1 (июнь 2026):**
+- **Fix Fajr at high latitude** — Fixed Fajr (1.5 h до восхода): Fajr от NOAA-восхода + `fixHour` через полночь. Баг с v1.1: Fajr от PrayTimes, на экране NOAA → на Ямале 22:59 вместо 00:00.
+- В коде **2.0.1 (versionCode 7)**. AppGallery: описание `Fix Fajr at high latitude`.
 - Скрины, full/brief intro, New features — **без compass**; позиционирование: Qibla on map from GPS + prayer times + widget + Dua.
 - Отправлено на проверку AppGallery Connect.
 
@@ -114,7 +118,7 @@ SharedPreferences `prayer_settings`: latitude, longitude, asr_method, alarm_stat
 
 ## Huawei AppGallery — техника
 
-- В коде **2.0 (versionCode 6)** — Huawei берёт версию из **APK**.
+- В коде **2.0.1 (versionCode 7)** — Huawei берёт версию из **APK**.
 - Privacy URL: https://telegra.ph/Privacy-Policy-09-18-69
 
 ## Стиль общения

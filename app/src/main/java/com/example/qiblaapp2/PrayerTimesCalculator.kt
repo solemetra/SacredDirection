@@ -135,36 +135,15 @@ class PrayerTimesCalculator(
             times["midnight"] = times["sunset"]!! + timeDiff(times["sunset"]!!, times["sunrise"]!!) / 2.0
         }
 
-        // --- Фиксированные времена применяем в самом конце ---
+        // Sunrise from NOAA (shown in UI); fixed Fajr must use the same value
+        times["sunrise"] = calculateSunriseNoaa(date, latitude, longitude, timezone)
+
         if (fajrFixed) {
-            val sunriseTime = times["sunrise"]!!
-            val sunriseHours = floor(sunriseTime)
-            val sunriseMinutes = (sunriseTime - sunriseHours) * 60.0
-            val totalSunriseMinutes = sunriseHours * 60.0 + sunriseMinutes
-            val fajrTotalMinutes = totalSunriseMinutes - 90.0
-            val fajrHours = floor(fajrTotalMinutes / 60.0)
-            val fajrMinutes = fajrTotalMinutes % 60.0
-            val fajrTime = fajrHours + fajrMinutes / 60.0
-            times["fajr"] = fajrTime
+            times["fajr"] = fixHour(times["sunrise"]!! - 1.5)
         }
         if (ishaFixed) {
-            val maghribTime = times["maghrib"]!!
-            val maghribHours = floor(maghribTime)
-            val maghribMinutes = (maghribTime - maghribHours) * 60.0
-            val totalMaghribMinutes = maghribHours * 60.0 + maghribMinutes
-            val ishaTotalMinutes = totalMaghribMinutes + 90.0
-            val ishaHours = floor(ishaTotalMinutes / 60.0)
-            val ishaMinutes = ishaTotalMinutes % 60.0
-            val ishaTime = ishaHours + ishaMinutes / 60.0
-            times["isha"] = ishaTime
+            times["isha"] = fixHour(times["maghrib"]!! + 1.5)
         }
-        // --- конец фиксации ---
-
-        // --- Новый sunrise по NOAA ---
-        val sunriseNoaa = calculateSunriseNoaa(date, latitude, longitude, timezone)
-        // Подменяем sunrise на sunriseNoaa для PrayerTimes
-        times["sunrise"] = sunriseNoaa
-        // --- конец нового кода ---
 
         return PrayerTimes(
             fajr = getFormattedTime(times["fajr"]!!),

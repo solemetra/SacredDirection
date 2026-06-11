@@ -16,6 +16,8 @@
 
 Android app for **Qibla direction**, **prayer times**, a **home-screen widget**, and **Dua** with audio.
 
+**No magnetic compass.** Phone compasses are often inaccurate — metal and interference throw them off, and many prayer apps add one mostly for looks. Sacred Direction shows Qibla from **GPS on the map** (bearing, direction, line to the Kaaba). **Trust the map.**
+
 Built with **Huawei AppGallery** in mind: many devices ship **without Google Play Services**, so Google Maps is not a reliable baseline. The map uses **OpenStreetMap** via OSMDroid instead — it works on Huawei/Honor and worldwide without a Google account or proprietary map SDK.
 
 Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/service/josp/agc/index.html) (package: `com.example.qiblaapp2`).
@@ -81,7 +83,19 @@ tools/nav-icons-svg/           — build script for tab PNG icons
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **2.0** (`versionCode` 6)
+Current version: **2.0.1** (`versionCode` 7)
+
+## Changelog
+
+### 2.0.1 (versionCode 7)
+
+- **Fix Fajr at high latitude** — with *Fixed Fajr* (1.5 h before sunrise) enabled, Fajr now uses the same NOAA sunrise shown in the app and wraps correctly past midnight (e.g. sunrise 01:30 → Fajr 00:00, not 22:59). Affects northern regions with early summer dawn (Yamal, Murmansk, etc.).
+
+**AppGallery / release notes (copy-paste):** `Fix Fajr at high latitude when Fixed Fajr is enabled in Settings.`
+
+### 2.0 (versionCode 6)
+
+- Neumorphic UI, privacy policy update, Huawei listing alignment (no compass).
 
 ## Privacy
 
