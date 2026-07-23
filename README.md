@@ -83,9 +83,15 @@ tools/nav-icons-svg/           — build script for tab PNG icons
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **2.0.1** (`versionCode` 7)
+Current version: **2.0.2** (`versionCode` 8)
 
 ## Changelog
+
+### 2.0.2 (versionCode 8)
+
+- **Fix OpenStreetMap tile loading (User-Agent block)** — set unique User-Agent compliant with OSM Tile Usage Policy to prevent 403 tile load errors.
+
+**AppGallery / release notes (copy-paste):** `Fix map tile loading (OpenStreetMap User-Agent policy compliance).`
 
 ### 2.0.1 (versionCode 7)
 

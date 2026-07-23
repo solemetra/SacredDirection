@@ -104,9 +104,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private fun initOsmdroid() {
         val osmPrefs = getSharedPreferences("osmdroid", MODE_PRIVATE)
         val config = Configuration.getInstance()
-        config.userAgentValue = packageName
+        config.userAgentValue = "SacredDirectionQiblaApp/2.0.2 (solemetra@gmail.com)"
         config.load(this, osmPrefs)
-        config.userAgentValue = packageName
+        config.userAgentValue = "SacredDirectionQiblaApp/2.0.2 (solemetra@gmail.com)"
         config.osmdroidBasePath = File(cacheDir, "osmdroid")
         config.osmdroidTileCache = File(config.osmdroidBasePath, "tiles")
         config.tileFileSystemCacheMaxBytes = TILE_CACHE_MAX_BYTES
