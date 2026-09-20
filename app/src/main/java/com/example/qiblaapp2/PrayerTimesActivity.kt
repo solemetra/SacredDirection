@@ -58,8 +58,12 @@ class PrayerTimesActivity : AppCompatActivity(), ReminderPermissionHost {
 
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguagePrefs.wrapContext(newBase))
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        LanguagePrefs.applyLocale(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_prayer_times)

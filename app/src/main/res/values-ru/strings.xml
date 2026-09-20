@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sacred Direction</string>
+
+    <!-- Navigation -->
+    <string name="nav_direction">Кыбла</string>
+    <string name="nav_prayer">Время намаза</string>
+    <string name="nav_compass">Компас</string>
+    <string name="nav_dua">Дуа</string>
+    <string name="nav_settings">Настройки</string>
+
+    <!-- Main Activity -->
+    <string name="searching_location">Поиск местоположения…</string>
+    <string name="qibla_direction">🕌 Направление на Кыблу: %1$d°</string>
+    <string name="distance_to_kaaba">📍 Расстояние: %1$d км</string>
+    <string name="your_location">Ваше местоположение</string>
+    <string name="pray_towards_qibla">Молитесь в сторону Кыблы</string>
+    <string name="kaaba_title">🕋 Кааба</string>
+    <string name="kaaba_description">Священная Кааба в Мекке, Саудовская Аравия</string>
+
+    <!-- Compass Activity -->
+    <string name="qibla_compass">🕌 Компас Кыблы</string>
+    <string name="searching_gps">Поиск GPS…</string>
+    <string name="north">С</string>
+    <string name="south">Ю</string>
+    <string name="east">В</string>
+    <string name="west">З</string>
+    <string name="qibla_bearing">Кыбла: %1$d° | Устройство: %2$d°</string>
+
+    <!-- Dua Activity -->
+    <string name="dua_bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</string>
+    <string name="play_dua">Слушать дуа</string>
+    <string name="pause_dua">⏸️ Пауза</string>
+    <string name="dua_arabic">اللَّهُمَّ اغْفِرْ لِلْمُسْلِمِينَ وَالْمُسْلِمَاتِ ، وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ ، الأَحْيَاءِ مِنْهُمْ وَالأَمْوَاتِ</string>
+    <string name="dua_translation">О Аллах, прости мусульман и мусульманок, верующих мужчин и женщин, живых из них и умерших</string>
+    <string name="jazakallahu_khairan">جزاك الله خيرا</string>
+    <string name="may_allah_reward">Да воздаст вам Аллах благом</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_title">⚙️ Настройки</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="dark_mode">Тёмная тема</string>
+    <string name="notifications">Уведомления</string>
+    <string name="enable_notifications">Включить уведомления</string>
+    <string name="prayer_notifications">Уведомления о времени намаза</string>
+    <string name="compass_settings">Настройки компаса</string>
+    <string name="enable_vibration">Включить вибрацию</string>
+    <string name="calibrate_compass">Калибровать компас</string>
+    <string name="calculation_method">Метод расчёта намаза</string>
+    <string name="data_management">Управление данными</string>
+    <string name="backup_settings">Резервная копия настроек</string>
+    <string name="restore_settings">Восстановить настройки</string>
+    <string name="about">О приложении</string>
+    <string name="version">Версия %1$s</string>
+    <string name="share_app_title">Поделиться с друзьями</string>
+    <string name="share_app_text">Sacred Direction — удобное приложение для определения направления Киблы и точного времени намаза.\nСкачать: %1$s</string>
+    <string name="share_app_chooser_title">Поделиться приложением</string>
+
+    <!-- Permissions -->
+    <string name="location_permission_required">Геолокация необходима для точного определения направления на Кыблу и расписания намазов.</string>
+    <string name="location_permission_title">Доступ к геолокации</string>
+    <string name="location_permission_allow">Разрешить</string>
+    <string name="location_permission_not_now">Не сейчас</string>
+    <string name="gps_disabled_title">Включите геолокацию</string>
+    <string name="gps_open_settings">Открыть настройки</string>
+    <string name="gps_settings_failed">Не удалось открыть настройки</string>
+    <string name="notification_permission_required">Разрешение на уведомления необходимо для напоминаний о намазе</string>
+
+    <!-- Errors -->
+    <string name="location_not_found">Не удалось определить местоположение</string>
+    <string name="gps_disabled">GPS отключен. Пожалуйста, включите его в настройках</string>
+    <string name="compass_not_available">Датчик компаса недоступен на этом устройстве</string>
+
+    <!-- Calibration -->
+    <string name="calibration_title">Калибровка компаса</string>
+    <string name="calibration_instructions">Для калибровки компаса:\n\n1. Отойдите от металлических предметов\n2. Опишите устройством в воздухе восьмёрку\n3. Поверните устройство во всех направлениях\n\nЭто повысит точность компаса.</string>
+    <string name="start_calibration">Начать калибровку</string>
+    <string name="cancel">Отмена</string>
+
+    <!-- Toast Messages -->
+    <string name="settings_backed_up">Настройки успешно сохранены</string>
+    <string name="settings_restored">Настройки успешно восстановлены</string>
+    <string name="calibration_complete">Калибровка компаса завершена</string>
+    <string name="distance_unit_km">КМ</string>
+    <string name="pause_error">Ошибка паузы</string>
+    <string name="alarm_on">Включен</string>
+    <string name="alarm_off">Выключен</string>
+    <string name="reminder_before_prayer_hint">Напоминание за 10 минут до каждого намаза</string>
+    <string name="reminder_settings_title">Разрешения</string>
+    <string name="reminder_perm_title">Разрешения</string>
+    <string name="reminder_perm_message">Нажмите на каждый пункт ниже, затем выберите «Разрешить» на системном экране.</string>
+    <string name="reminder_perm_location">Геолокация</string>
+    <string name="reminder_perm_location_desc">Для направления на Кыблу и времени намазов</string>
+    <string name="reminder_perm_status_allow">Разрешить</string>
+    <string name="reminder_perm_status_done">Готово</string>
+    <string name="reminder_perm_next_location">Далее: нажмите «Геолокация» во вкладке Кыблы, затем «Разрешить»</string>
+    <string name="reminder_perm_next_notifications">Далее: нажмите «Уведомления», затем «Разрешить»</string>
+    <string name="reminder_perm_next_exact">Далее: нажмите «Точные будильники», затем «Разрешить»</string>
+    <string name="reminder_perm_next_battery">Далее: нажмите «Фоновый режим», затем «Разрешить»</string>
+    <string name="reminder_perm_all_ready">Всё готово — продолжить</string>
+    <string name="reminder_perm_notifications">Уведомления</string>
+    <string name="reminder_perm_notifications_desc">Для напоминаний о намазе и баннеров</string>
+    <string name="reminder_perm_exact_alarms">Точные будильники</string>
+    <string name="reminder_perm_exact_alarms_desc">Точное срабатывание за 10 мин до намаза</string>
+    <string name="reminder_perm_battery">Без ограничений батареи</string>
+    <string name="reminder_perm_battery_desc">Надёжные оповещения после сна или перезагрузки</string>
+    <string name="reminder_perm_summary_done">Всё настроено</string>
+    <string name="reminder_perm_summary_count">%1$d из %2$d готово</string>
+    <string name="reminder_perm_later">Позже</string>
+    <string name="reminder_test_notification_title">Sacred Direction</string>
+    <string name="reminder_test_notification_body">Напоминания о намазе работают</string>
+    <string name="reminder_perm_allow_notifications">Разрешить уведомления</string>
+    <string name="reminder_perm_allow_exact">Разрешить точные будильники</string>
+    <string name="reminder_perm_allow_battery">Разрешить фоновую работу</string>
+    <string name="reminder_notification_title">%1$s через 10 минут</string>
+    <string name="reminder_notification_body">Скоро начнётся намаз %1$s</string>
+
+    <!-- Settings -->
+    <string name="hijri_settings_title">Дата по Хиджре</string>
+    <string name="hijri_settings_hint">Умм аль-Кура. Смещение ±1 день для соответствия вашей мечети.</string>
+    <string name="hijri_offset_label">Смещение дней</string>
+    <string name="hijri_offset_minus">−1</string>
+    <string name="hijri_offset_zero">0</string>
+    <string name="hijri_offset_plus">+1</string>
+    <string name="hijri_tap_date_hint">Нажмите на дату во вкладке Намаза для переключения Григорианский / Хиджра</string>
+    <string name="switch_fixed_fajr">Фиксированный Фаджр</string>
+    <string name="switch_fixed_isha">Фиксированный Иша</string>
+    <string name="unknown_location">-</string>
+    <string name="prayer_sunrise">Восход</string>
+    <string name="prayer_sunset">Заход</string>
+    
+    <!-- Privacy Consent -->
+    <string name="privacy_title">Политика конфиденциальности</string>
+    <string name="privacy_message">Мы используем ваше местоположение для показа направления на Кыблу и времени намазов. Пожалуйста, ознакомьтесь с Политикой конфиденциальности.</string>
+    <string name="privacy_agree">Принять</string>
+    <string name="privacy_disagree">Отклонить</string>
+    <string name="privacy_open">Политика конфиденциальности</string>
+    
+    <!-- Compass Calibration -->
+    <string name="compass_calibration">Калибровка: %d%%</string>
+    <string name="calibration_poor">Слабая</string>
+    <string name="calibration_fair">Средняя</string>
+    <string name="calibration_good">Хорошая</string>
+    <string name="move_device_slowly">Медленно вращайте устройство</string>
+    <string name="compass_calibration_title">Калибровка компаса</string>
+    <string name="move_device_to_calibrate">Медленно вращайте устройство для калибровки</string>
+    <string name="widget_description">Виджет времени намазов с 5 ежедневными молитвами</string>
+
+    <!-- Prayer Methods -->
+    <string-array name="high_latitude_methods">
+        <item>Авто</item>
+        <item>1/7 ночи</item>
+        <item>1/7 ночи, медиана</item>
+        <item>По углу</item>
+        <item>Полночь</item>
+    </string-array>
+
+    <!-- Language Selection -->
+    <string name="language_title">Язык</string>
+    <string name="lang_en">English</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_ar">العربية</string>
+
+    <!-- Directions -->
+    <string name="label_direction_to_qibla">НАПРАВЛЕНИЕ НА КЫБЛУ</string>
+    <string name="label_distance_to_qibla">РАССТОЯНИЕ ДО КЫБЛЫ</string>
+    <string name="dir_north">СЕВЕР</string>
+    <string name="dir_north_east">СЕВЕРО-ВОСТОК</string>
+    <string name="dir_east">ВОСТОК</string>
+    <string name="dir_south_east">ЮГО-ВОСТОК</string>
+    <string name="dir_south">ЮГ</string>
+    <string name="dir_south_west">ЮГО-ЗАПАД</string>
+    <string name="dir_west">ЗАПАД</string>
+    <string name="dir_north_west">СЕВЕРО-ЗАПАД</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_fajr">Фаджр</string>
+    <string name="prayer_fajr_time">Время Фаджр</string>
+    <string name="prayer_dhuhr">Зухр</string>
+    <string name="prayer_dhuhr_time">Время Зухр</string>
+    <string name="prayer_asr">Аср</string>
+    <string name="prayer_asr_time">Время Аср</string>
+    <string name="prayer_maghrib">Магриб</string>
+    <string name="prayer_maghrib_time">Время Магриб</string>
+    <string name="prayer_isha">Иша</string>
+    <string name="prayer_isha_time">Время Иша</string>
+
+    <!-- Settings Controls -->
+    <string name="asr_calculation_method">Расчёт времени Аср</string>
+    <string name="asr_shafii">Шафии</string>
+    <string name="asr_hanafi">Ханафи</string>
+    <string name="fixed_fajr_desc">1.5 ч до восхода</string>
+    <string name="fixed_isha_desc">1.5 ч после Магриба</string>
+
+    <!-- Hijri Months -->
+    <string-array name="hijri_months">
+        <item>Мухаррам</item>
+        <item>Сафар</item>
+        <item>Раби аль-авваль</item>
+        <item>Раби ас-сани</item>
+        <item>Джумада аль-уля</item>
+        <item>Джумада аль-ахира</item>
+        <item>Раджаб</item>
+        <item>Шаабан</item>
+        <item>Рамадан</item>
+        <item>Шавваль</item>
+        <item>Зуль-Каада</item>
+        <item>Зуль-Хиджа</item>
+    </string-array>
+</resources>

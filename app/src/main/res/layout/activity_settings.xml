@@ -8,56 +8,16 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <FrameLayout
-        android:id="@+id/headerSectionSettings"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/header_fixed_height"
-        android:layout_marginStart="@dimen/screen_horizontal_margin"
-        android:layout_marginTop="@dimen/screen_top_margin"
-        android:layout_marginEnd="@dimen/screen_horizontal_margin"
-        android:background="@drawable/header_section_bg"
-        android:clipChildren="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_max="@dimen/header_card_width">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineLarge.AppName" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Settings"
-                android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium" />
-
-        </LinearLayout>
-    </FrameLayout>
-
     <ScrollView
         android:id="@+id/settingsScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/scroll_content_bottom_padding"
         android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerSectionSettings">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/settingsContent"
@@ -67,7 +27,107 @@
             android:gravity="center_horizontal"
             android:paddingStart="@dimen/screen_horizontal_margin"
             android:paddingEnd="@dimen/screen_horizontal_margin"
-            android:paddingTop="@dimen/header_content_gap">
+            android:paddingTop="@dimen/screen_top_margin"
+            android:paddingBottom="@dimen/scroll_content_bottom_padding">
+
+            <!-- Шапка: Настройки -->
+            <FrameLayout
+                android:id="@+id/headerSectionSettings"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_fixed_height"
+                android:background="@drawable/header_section_bg"
+                android:layout_marginBottom="@dimen/header_content_gap">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.HeadlineLarge.AppName" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/nav_settings"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Карточка выбора языка (Language Switcher) -->
+            <LinearLayout
+                android:id="@+id/settingsLanguageCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/prayer_card_background"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/language_title"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/hijri_segment_group_bg"
+                    android:clipToOutline="true"
+                    android:padding="1dp">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/toggleLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="false"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLangEn"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Left"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:saveEnabled="false"
+                            android:text="@string/lang_en" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLangRu"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Middle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:saveEnabled="false"
+                            android:text="@string/lang_ru" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnLangAr"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Right"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:saveEnabled="false"
+                            android:text="@string/lang_ar" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </FrameLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/settingsPrayerCard"
@@ -85,7 +145,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calculation Asr Method"
+                    android:text="@string/asr_calculation_method"
                     android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
 
                 <RadioGroup
@@ -100,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="36dp"
-                        android:text="Shafi'i"
+                        android:text="@string/asr_shafii"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <RadioButton
@@ -108,7 +168,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minHeight="36dp"
-                        android:text="Hanafi"
+                        android:text="@string/asr_hanafi"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
                         android:layout_marginStart="20dp" />
@@ -124,7 +184,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Fixed Fajr Time"
+                        android:text="@string/switch_fixed_fajr"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <com.example.qiblaapp2.NeumorphicSwitchView
@@ -136,7 +196,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1.5 hours before sunrise"
+                    android:text="@string/fixed_fajr_desc"
                     android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
                     android:layout_marginStart="4dp" />
 
@@ -150,7 +210,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Fixed Isha Time"
+                        android:text="@string/switch_fixed_isha"
                         android:textColor="@color/dark_text"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
                     <com.example.qiblaapp2.NeumorphicSwitchView
@@ -162,7 +222,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1.5 hours after Maghrib"
+                    android:text="@string/fixed_isha_desc"
                     android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
                     android:layout_marginStart="4dp" />
             </LinearLayout>
@@ -271,6 +331,45 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/cardShareApp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/prayer_card_background"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_marginBottom="@dimen/header_content_gap"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_share"
+                    android:contentDescription="@string/share_app_title" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/share_app_title"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
+                    android:textColor="@color/dark_text" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_chevron_forward"
+                    android:contentDescription="@null" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/settingsExtraCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -296,14 +395,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium.Secondary" />
 
-                <TextView
-                    android:id="@+id/textSettingsColorPalette"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:gravity="center"
-                    android:text="@string/about_color_palette"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
 
                 <TextView
                     android:id="@+id/btnPrivacyPolicy"

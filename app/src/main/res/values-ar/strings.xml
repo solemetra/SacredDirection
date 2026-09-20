@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sacred Direction</string>
+
+    <!-- Navigation -->
+    <string name="nav_direction">القبلة</string>
+    <string name="nav_prayer">أوقات الصلاة</string>
+    <string name="nav_compass">البوصلة</string>
+    <string name="nav_dua">دعاء</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Main Activity -->
+    <string name="searching_location">جارٍ تحديد الموقع…</string>
+    <string name="qibla_direction">🕌 اتجاه القبلة: %1$d°</string>
+    <string name="distance_to_kaaba">📍 المسافة: %1$d كم</string>
+    <string name="your_location">موقعك الحالي</string>
+    <string name="pray_towards_qibla">صلِّ باتجاه القبلة</string>
+    <string name="kaaba_title">🕋 الكعبة المشرفة</string>
+    <string name="kaaba_description">الكعبة المشرفة في مكة المكرمة، المملكة العربية السعودية</string>
+
+    <!-- Compass Activity -->
+    <string name="qibla_compass">🕌 بوصلة القبلة</string>
+    <string name="searching_gps">جارٍ البحث عن GPS…</string>
+    <string name="north">ش</string>
+    <string name="south">ج</string>
+    <string name="east">ق</string>
+    <string name="west">غ</string>
+    <string name="qibla_bearing">القبلة: %1$d° | الجهاز: %2$d°</string>
+
+    <!-- Dua Activity -->
+    <string name="dua_bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</string>
+    <string name="play_dua">تشغيل الدعاء</string>
+    <string name="pause_dua">⏸️ إيقاف مؤقت</string>
+    <string name="dua_arabic">اللَّهُمَّ اغْفِرْ لِلْمُسْلِمِينَ وَالْمُسْلِمَاتِ ، وَالْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ ، الأَحْيَاءِ مِنْهُمْ وَالأَمْوَاتِ</string>
+    <string name="dua_translation">اللهم اغفر للمسلمين والمسلمات والمؤمنين والمؤمنات الأحياء منهم والأموات</string>
+    <string name="jazakallahu_khairan">جزاك الله خيرا</string>
+    <string name="may_allah_reward">جزاكم الله خير الجزاء</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_title">⚙️ الإعدادات</string>
+    <string name="appearance">المظهر</string>
+    <string name="dark_mode">الوضع الداكن</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="enable_notifications">تفعيل الإشعارات</string>
+    <string name="prayer_notifications">إشعارات أوقات الصلاة</string>
+    <string name="compass_settings">إعدادات البوصلة</string>
+    <string name="enable_vibration">تفعيل الاهتزاز</string>
+    <string name="calibrate_compass">معايرة البوصلة</string>
+    <string name="calculation_method">طريقة حساب الصلاة</string>
+    <string name="data_management">إدارة البيانات</string>
+    <string name="backup_settings">نسخ احتياطي للإعدادات</string>
+    <string name="restore_settings">استعادة الإعدادات</string>
+    <string name="about">حول التطبيق</string>
+    <string name="version">الإصدار %1$s</string>
+    <string name="share_app_title">مشاركة مع الأصدقاء</string>
+    <string name="share_app_text">Sacred Direction — تطبيق دقيق لتحديد اتجاه القبلة ومواقيت الصلاة.\nتحميل: %1$s</string>
+    <string name="share_app_chooser_title">مشاركة التطبيق</string>
+
+    <!-- Permissions -->
+    <string name="location_permission_required">يُستخدم الموقع لعرض اتجاه القبلة وأوقات الصلاة لمنطقتك.</string>
+    <string name="location_permission_title">الوصول إلى الموقع</string>
+    <string name="location_permission_allow">سماح</string>
+    <string name="location_permission_not_now">ليس الآن</string>
+    <string name="gps_disabled_title">تفعيل الموقع</string>
+    <string name="gps_open_settings">فتح الإعدادات</string>
+    <string name="gps_settings_failed">تعذر فتح الإعدادات</string>
+    <string name="notification_permission_required">إذن الإشعارات مطلوب للتنبيه بالصلوات</string>
+
+    <!-- Errors -->
+    <string name="location_not_found">تعذر تحديد الموقع</string>
+    <string name="gps_disabled">GPS معطل. يرجى تفعيله في الإعدادات</string>
+    <string name="compass_not_available">مستشعر البوصلة غير متوفر في هذا الجهاز</string>
+
+    <!-- Calibration -->
+    <string name="calibration_title">معايرة البوصلة</string>
+    <string name="calibration_instructions">لمعايرة البوصلة:\n\n1. ابتعد عن الأجسام المعدنية\n2. حرك جهازك على شكل رقم 8 في الهواء\n3. قم بتدوير الجهاز في جميع الاتجاهات\n\nسيؤدي ذلك إلى تحسين دقة البوصلة.</string>
+    <string name="start_calibration">بدء المعايرة</string>
+    <string name="cancel">إلغاء</string>
+
+    <!-- Toast Messages -->
+    <string name="settings_backed_up">تم النسخ الاحتياطي للإعدادات بنجاح</string>
+    <string name="settings_restored">تمت استعادة الإعدادات بنجاح</string>
+    <string name="calibration_complete">اكتملت معايرة البوصلة</string>
+    <string name="distance_unit_km">كم</string>
+    <string name="pause_error">خطأ في الإيقاف</string>
+    <string name="alarm_on">المنبه مفعل</string>
+    <string name="alarm_off">المنبه معطل</string>
+    <string name="reminder_before_prayer_hint">تنبيه قبل 10 دقائق من كل صلاة</string>
+    <string name="reminder_settings_title">الأذونات</string>
+    <string name="reminder_perm_title">الأذونات</string>
+    <string name="reminder_perm_message">اضغط على كل عنصر أدناه ثم اضغط سماح في شاشة النظام.</string>
+    <string name="reminder_perm_location">الموقع</string>
+    <string name="reminder_perm_location_desc">لاتجاه القبلة وأوقات الصلاة</string>
+    <string name="reminder_perm_status_allow">سماح</string>
+    <string name="reminder_perm_status_done">تم</string>
+    <string name="reminder_perm_next_location">التالي: اضغط على الموقع في شاشة القبلة ثم سماح</string>
+    <string name="reminder_perm_next_notifications">التالي: اضغط على الإشعارات ثم سماح</string>
+    <string name="reminder_perm_next_exact">التالي: اضغط على المنبهات الدقيقة ثم سماح</string>
+    <string name="reminder_perm_next_battery">التالي: اضغط على العمل بالخلفية ثم سماح</string>
+    <string name="reminder_perm_all_ready">اكتمل الإعداد — متابعة</string>
+    <string name="reminder_perm_notifications">الإشعارات</string>
+    <string name="reminder_perm_notifications_desc">لتنبيهات الصلاة والإشعارات</string>
+    <string name="reminder_perm_exact_alarms">المنبهات الدقيقة</string>
+    <string name="reminder_perm_exact_alarms_desc">توقيت دقيق قبل 10 دقائق من الصلاة</string>
+    <string name="reminder_perm_battery">بدون قيود على البطارية</string>
+    <string name="reminder_perm_battery_desc">تنبيهات موثوقة بعد السكون أو إعادة التشغيل</string>
+    <string name="reminder_perm_summary_done">اكتمل الإعداد</string>
+    <string name="reminder_perm_summary_count">%1$d من %2$d مكتمل</string>
+    <string name="reminder_perm_later">لاحقاً</string>
+    <string name="reminder_test_notification_title">Sacred Direction</string>
+    <string name="reminder_test_notification_body">تنبيهات الصلاة تعمل بنجاح</string>
+    <string name="reminder_perm_allow_notifications">السماح بالإشعارات</string>
+    <string name="reminder_perm_allow_exact">السماح بالمنبهات الدقيقة</string>
+    <string name="reminder_perm_allow_battery">السماح بالخلفية</string>
+    <string name="reminder_notification_title">%1$s بعد 10 دقائق</string>
+    <string name="reminder_notification_body">صلاة %1$s ستبدأ قريباً</string>
+
+    <!-- Settings -->
+    <string name="hijri_settings_title">التاريخ الهجري</string>
+    <string name="hijri_settings_hint">تقويم أم القرى. تعديل ±1 يوم ليتوافق مع مسجدك.</string>
+    <string name="hijri_offset_label">تعديل الأيام</string>
+    <string name="hijri_offset_minus">−1</string>
+    <string name="hijri_offset_zero">0</string>
+    <string name="hijri_offset_plus">+1</string>
+    <string name="hijri_tap_date_hint">اضغط على التاريخ في شاشة الصلاة للتبديل بين الميلادي والهجري</string>
+    <string name="switch_fixed_fajr">وقت الفجر الثابت</string>
+    <string name="switch_fixed_isha">وقت العشاء الثابت</string>
+    <string name="unknown_location">-</string>
+    <string name="prayer_sunrise">الشروق</string>
+    <string name="prayer_sunset">الغروب</string>
+    
+    <!-- Privacy Consent -->
+    <string name="privacy_title">سياسة الخصوصية</string>
+    <string name="privacy_message">نستخدم موقعك لعرض اتجاه القبلة وأوقات الصلاة. يرجى مراجعة سياسة الخصوصية وتأكيد موافقتك.</string>
+    <string name="privacy_agree">موافق</string>
+    <string name="privacy_disagree">رفض</string>
+    <string name="privacy_open">سياسة الخصوصية</string>
+    
+    <!-- Compass Calibration -->
+    <string name="compass_calibration">المعايرة: %d%%</string>
+    <string name="calibration_poor">ضعيفة</string>
+    <string name="calibration_fair">متوسطة</string>
+    <string name="calibration_good">جيدة</string>
+    <string name="move_device_slowly">حرك الجهاز ببطء</string>
+    <string name="compass_calibration_title">معايرة البوصلة</string>
+    <string name="move_device_to_calibrate">حرك الجهاز ببطء لمعايرة البوصلة</string>
+    <string name="widget_description">أداة أوقات الصلاة تعرض الصلوات الخمس اليومية</string>
+
+    <!-- Prayer Methods -->
+    <string-array name="high_latitude_methods">
+        <item>تلقائي</item>
+        <item>سبع الليل</item>
+        <item>سبع الليل، متوسط</item>
+        <item>حسب الزاوية</item>
+        <item>منتصف الليل</item>
+    </string-array>
+
+    <!-- Language Selection -->
+    <string name="language_title">اللغة</string>
+    <string name="lang_en">English</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_ar">العربية</string>
+
+    <!-- Directions -->
+    <string name="label_direction_to_qibla">اتجاه القبلة</string>
+    <string name="label_distance_to_qibla">المسافة إلى القبلة</string>
+    <string name="dir_north">شمال</string>
+    <string name="dir_north_east">شمال شرق</string>
+    <string name="dir_east">شرق</string>
+    <string name="dir_south_east">جنوب شرق</string>
+    <string name="dir_south">جنوب</string>
+    <string name="dir_south_west">جنوب غرب</string>
+    <string name="dir_west">غرب</string>
+    <string name="dir_north_west">شمال غرب</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_fajr">الفجر</string>
+    <string name="prayer_fajr_time">وقت الفجر</string>
+    <string name="prayer_dhuhr">الظهر</string>
+    <string name="prayer_dhuhr_time">وقت الظهر</string>
+    <string name="prayer_asr">العصر</string>
+    <string name="prayer_asr_time">وقت العصر</string>
+    <string name="prayer_maghrib">المغرب</string>
+    <string name="prayer_maghrib_time">وقت المغرب</string>
+    <string name="prayer_isha">العشاء</string>
+    <string name="prayer_isha_time">وقت العشاء</string>
+
+    <!-- Settings Controls -->
+    <string name="asr_calculation_method">طريقة حساب العصر</string>
+    <string name="asr_shafii">شافعي</string>
+    <string name="asr_hanafi">حنفي</string>
+    <string name="fixed_fajr_desc">قبل الشروق بـ 1.5 ساعة</string>
+    <string name="fixed_isha_desc">بعد المغرب بـ 1.5 ساعة</string>
+
+    <!-- Hijri Months -->
+    <string-array name="hijri_months">
+        <item>محرم</item>
+        <item>صفر</item>
+        <item>ربيع الأول</item>
+        <item>ربيع الثاني</item>
+        <item>جمادى الأولى</item>
+        <item>جمادى الآخرة</item>
+        <item>رجب</item>
+        <item>شعبان</item>
+        <item>رمضان</item>
+        <item>شوال</item>
+        <item>ذو القعدة</item>
+        <item>ذو الحجة</item>
+    </string-array>
+</resources>

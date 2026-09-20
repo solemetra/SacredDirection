@@ -1,5 +1,6 @@
 package com.example.qiblaapp2
 
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -13,7 +14,12 @@ class DuaActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private lateinit var btnPlayDua: ImageButton
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguagePrefs.wrapContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguagePrefs.applyLocale(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dua)
         TabUiHelper.applyBottomNavInsets(this)

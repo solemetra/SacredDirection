@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import android.net.Uri
 import org.osmdroid.config.Configuration
+import org.osmdroid.tileprovider.MapTileProviderBasic
+import org.osmdroid.tileprovider.modules.SqlTileWriter
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import java.io.File
@@ -80,7 +82,12 @@ class MainActivity : AppCompatActivity(), LocationListener {
         private const val TILE_CACHE_EXPIRY_MS = 60L * 24 * 60 * 60 * 1000 // 60 days
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguagePrefs.wrapContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguagePrefs.applyLocale(this)
         super.onCreate(savedInstanceState)
 
         try {
@@ -104,21 +111,33 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private fun initOsmdroid() {
         val osmPrefs = getSharedPreferences("osmdroid", MODE_PRIVATE)
         val config = Configuration.getInstance()
-        config.userAgentValue = "SacredDirectionQiblaApp/2.0.2 (solemetra@gmail.com)"
         config.load(this, osmPrefs)
-        config.userAgentValue = "SacredDirectionQiblaApp/2.0.2 (solemetra@gmail.com)"
-        config.osmdroidBasePath = File(cacheDir, "osmdroid")
-        config.osmdroidTileCache = File(config.osmdroidBasePath, "tiles")
+        config.userAgentValue = "SacredDirectionQiblaApp/${BuildConfig.VERSION_NAME} (solemetra@gmail.com)"
+
+        val baseDir = File(filesDir, "osmdroid")
+        val tileDir = File(baseDir, "tiles")
+        val oldBaseDir = File(cacheDir, "osmdroid")
+        if (oldBaseDir.exists() && !baseDir.exists()) {
+            oldBaseDir.renameTo(baseDir)
+        }
+
+        config.osmdroidBasePath = baseDir
+        config.osmdroidTileCache = tileDir
         config.tileFileSystemCacheMaxBytes = TILE_CACHE_MAX_BYTES
         config.tileFileSystemCacheTrimBytes = TILE_CACHE_TRIM_BYTES
         config.expirationOverrideDuration = TILE_CACHE_EXPIRY_MS
+        config.expirationExtendedDuration = TILE_CACHE_EXPIRY_MS
+        config.cacheMapTileCount = 40.toShort()
+        config.cacheMapTileOvershoot = 12.toShort()
         config.tileDownloadThreads = 4
+        SqlTileWriter.setCleanupOnStart(false)
         config.save(this, osmPrefs)
     }
 
     private fun setupMap() {
         try {
             applyOsmTileSource()
+            (mapView.tileProvider as? MapTileProviderBasic)?.setOfflineFirst(true)
             mapView.setUseDataConnection(true)
             mapView.setMultiTouchControls(true)
             mapView.controller.setZoom(16.0)
@@ -443,7 +462,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             kaabaLatitude, kaabaLongitude
         )
         textQiblaAngle.text = String.format(Locale.getDefault(), "%.1f°", angle)
-        textQiblaDirection.text = getDirectionNameEn(angle)
+        textQiblaDirection.text = getDirectionName(angle)
         val distance = calculateDistance(
             location.latitude, location.longitude,
             kaabaLatitude, kaabaLongitude
@@ -452,18 +471,19 @@ class MainActivity : AppCompatActivity(), LocationListener {
         textDistanceUnit.text = getString(R.string.distance_unit_km)
     }
 
-    private fun getDirectionNameEn(angle: Double): String {
-        return when {
-            angle >= 337.5 || angle < 22.5 -> "NORTH"
-            angle >= 22.5 && angle < 67.5 -> "NORTH-EAST"
-            angle >= 67.5 && angle < 112.5 -> "EAST"
-            angle >= 112.5 && angle < 157.5 -> "SOUTH-EAST"
-            angle >= 157.5 && angle < 202.5 -> "SOUTH"
-            angle >= 202.5 && angle < 247.5 -> "SOUTH-WEST"
-            angle >= 247.5 && angle < 292.5 -> "WEST"
-            angle >= 292.5 && angle < 337.5 -> "NORTH-WEST"
-            else -> ""
+    private fun getDirectionName(angle: Double): String {
+        val resId = when {
+            angle >= 337.5 || angle < 22.5 -> R.string.dir_north
+            angle >= 22.5 && angle < 67.5 -> R.string.dir_north_east
+            angle >= 67.5 && angle < 112.5 -> R.string.dir_east
+            angle >= 112.5 && angle < 157.5 -> R.string.dir_south_east
+            angle >= 157.5 && angle < 202.5 -> R.string.dir_south
+            angle >= 202.5 && angle < 247.5 -> R.string.dir_south_west
+            angle >= 247.5 && angle < 292.5 -> R.string.dir_west
+            angle >= 292.5 && angle < 337.5 -> R.string.dir_north_west
+            else -> 0
         }
+        return if (resId != 0) getString(resId) else ""
     }
 
     private fun setupNavigation() {
@@ -672,7 +692,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         try {
             mapView.onResume()
             mapView.setUseDataConnection(true)
-            applyOsmTileSource()
             refreshConnectivity()
             refreshLocationPermissionState()
             refreshGpsState()

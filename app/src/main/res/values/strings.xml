@@ -52,7 +52,9 @@
     <string name="restore_settings">Restore Settings</string>
     <string name="about">About</string>
     <string name="version">Version %1$s</string>
-    <string name="about_color_palette">Cloud Dancer PANTONE 11-4201</string>
+    <string name="share_app_title">Share with friends</string>
+    <string name="share_app_text">Sacred Direction — accurate Qibla direction and prayer times.\nDownload: %1$s</string>
+    <string name="share_app_chooser_title">Share Sacred Direction</string>
 
     <!-- Permissions -->
     <string name="location_permission_required">Location is used to show Qibla direction and prayer times for your area.</string>
@@ -152,5 +154,58 @@
         <item>1/7th night, median</item>
         <item>Angle-based</item>
         <item>Midnight</item>
+    </string-array>
+
+    <!-- Language Selection -->
+    <string name="language_title">Language</string>
+    <string name="lang_en">English</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_ar">العربية</string>
+
+    <!-- Directions -->
+    <string name="label_direction_to_qibla">DIRECTION TO QIBLA</string>
+    <string name="label_distance_to_qibla">DISTANCE TO QIBLA</string>
+    <string name="dir_north">NORTH</string>
+    <string name="dir_north_east">NORTH-EAST</string>
+    <string name="dir_east">EAST</string>
+    <string name="dir_south_east">SOUTH-EAST</string>
+    <string name="dir_south">SOUTH</string>
+    <string name="dir_south_west">SOUTH-WEST</string>
+    <string name="dir_west">WEST</string>
+    <string name="dir_north_west">NORTH-WEST</string>
+
+    <!-- Prayer Names -->
+    <string name="prayer_fajr">Fajr</string>
+    <string name="prayer_fajr_time">Fajr Time</string>
+    <string name="prayer_dhuhr">Dhuhr</string>
+    <string name="prayer_dhuhr_time">Dhuhr Time</string>
+    <string name="prayer_asr">Asr</string>
+    <string name="prayer_asr_time">Asr Time</string>
+    <string name="prayer_maghrib">Maghrib</string>
+    <string name="prayer_maghrib_time">Maghrib Time</string>
+    <string name="prayer_isha">Isha</string>
+    <string name="prayer_isha_time">Isha Time</string>
+
+    <!-- Settings Controls -->
+    <string name="asr_calculation_method">Calculation Asr Method</string>
+    <string name="asr_shafii">Shafi\'i</string>
+    <string name="asr_hanafi">Hanafi</string>
+    <string name="fixed_fajr_desc">1.5 hours before sunrise</string>
+    <string name="fixed_isha_desc">1.5 hours after Maghrib</string>
+
+    <!-- Hijri Months -->
+    <string-array name="hijri_months">
+        <item>Muharram</item>
+        <item>Safar</item>
+        <item>Rabi\' al-awwal</item>
+        <item>Rabi\' al-thani</item>
+        <item>Jumada al-awwal</item>
+        <item>Jumada al-thani</item>
+        <item>Rajab</item>
+        <item>Sha\'ban</item>
+        <item>Ramadan</item>
+        <item>Shawwal</item>
+        <item>Dhu al-Qi\'dah</item>
+        <item>Dhu al-Hijjah</item>
     </string-array>
 </resources>

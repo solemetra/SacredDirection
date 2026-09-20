@@ -1,5 +1,6 @@
 package com.example.qiblaapp2
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.Manifest
@@ -40,7 +41,12 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         }
     }
 
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LanguagePrefs.wrapContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        LanguagePrefs.applyLocale(this)
         super.onCreate(savedInstanceState)
         clearOldIntPrefs()
         setContentView(R.layout.activity_settings)
@@ -48,6 +54,8 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         TabUiHelper.highlightBottomTab(this, TabUiHelper.BottomTab.SETTINGS)
         setupNavigation()
         setupAboutCard()
+        setupShareCard()
+        setupLanguageToggle()
         setupHijri()
         setupReminderPermissionsCard()
 
@@ -122,6 +130,32 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         }
     }
 
+    private fun setupLanguageToggle() {
+        val toggle = findViewById<MaterialButtonToggleGroup>(R.id.toggleLanguage) ?: return
+        val currentLang = LanguagePrefs.getLanguage(this)
+
+        val targetButtonId = when (currentLang) {
+            LanguagePrefs.LANG_RU -> R.id.btnLangRu
+            LanguagePrefs.LANG_AR -> R.id.btnLangAr
+            else -> R.id.btnLangEn
+        }
+        toggle.check(targetButtonId)
+
+        toggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            val newLang = when (checkedId) {
+                R.id.btnLangRu -> LanguagePrefs.LANG_RU
+                R.id.btnLangAr -> LanguagePrefs.LANG_AR
+                else -> LanguagePrefs.LANG_EN
+            }
+            if (newLang != LanguagePrefs.getLanguage(this)) {
+                LanguagePrefs.setLanguage(this, newLang)
+                sendPrayerTimesUpdateBroadcast()
+                recreate()
+            }
+        }
+    }
+
     private fun setupHijri() {
         val toggle = findViewById<MaterialButtonToggleGroup>(R.id.toggleHijriOffset)
         var updatingSelection = false
@@ -156,6 +190,19 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
 
         findViewById<TextView>(R.id.btnPrivacyPolicy).setOnClickListener {
             startActivity(Intent(this, PrivacyPolicyActivity::class.java))
+        }
+    }
+
+    private fun setupShareCard() {
+        findViewById<View>(R.id.cardShareApp).setOnClickListener {
+            val appUrl = "https://appgallery.huawei.com/app/C115319577"
+            val shareText = getString(R.string.share_app_text, appUrl)
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.share_app_chooser_title)))
         }
     }
 

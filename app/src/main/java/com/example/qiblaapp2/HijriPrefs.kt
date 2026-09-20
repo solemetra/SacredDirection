@@ -62,7 +62,7 @@ object HijriPrefs {
         val calendar = Calendar.getInstance()
         calendar.set(year, month - 1, day, 12, 0, 0)
         calendar.set(Calendar.MILLISECOND, 0)
-        return SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH).format(calendar.time)
+        return SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(calendar.time)
     }
 
     fun formatHijriUmmAlQura(context: Context, year: Int, month: Int, day: Int): String {
@@ -77,9 +77,15 @@ object HijriPrefs {
             hijri.add(IslamicCalendar.DATE, offset)
         }
 
+        val months = try {
+            context.resources.getStringArray(R.array.hijri_months)
+        } catch (e: Exception) {
+            hijriMonthsEnglish
+        }
+
         val hijriDay = hijri.get(IslamicCalendar.DAY_OF_MONTH)
-        val hijriMonth = hijri.get(IslamicCalendar.MONTH).coerceIn(0, hijriMonthsEnglish.lastIndex)
-        return "$hijriDay ${hijriMonthsEnglish[hijriMonth]}"
+        val hijriMonth = hijri.get(IslamicCalendar.MONTH).coerceIn(0, months.lastIndex)
+        return "$hijriDay ${months[hijriMonth]}"
     }
 
     fun formatDateForPrayerScreen(context: Context, year: Int, month: Int, day: Int): String {

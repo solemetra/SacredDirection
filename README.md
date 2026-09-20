@@ -20,7 +20,7 @@ Android app for **Qibla direction**, **prayer times**, a **home-screen widget**,
 
 Built with **Huawei AppGallery** in mind: many devices ship **without Google Play Services**, so Google Maps is not a reliable baseline. The map uses **OpenStreetMap** via OSMDroid instead — it works on Huawei/Honor and worldwide without a Google account or proprietary map SDK.
 
-Available on [Huawei AppGallery](https://developer.huawei.com/consumer/en/service/josp/agc/index.html) (package: `com.example.qiblaapp2`).
+Available on [Huawei AppGallery](https://appgallery.huawei.com/app/C115319577) (App ID: `C115319577`, package: `com.example.qiblaapp2`).
 
 ## Screenshots
 
@@ -83,9 +83,19 @@ tools/nav-icons-svg/           — build script for tab PNG icons
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **2.0.2** (`versionCode` 8)
+Current version: **2.1.0** (`versionCode` 9)
 
 ## Changelog
+
+### 2.1.0 (versionCode 9)
+
+- **Multilingual Support** — full localization into Russian and Arabic (with RTL layout support).
+- **In-App Language Switcher** — 3-state segmented switcher in Settings (English / Русский / العربية) with instant runtime language switching.
+- **Share Feature** — added "Share with friends" card in Settings with universal Huawei AppGallery link.
+- **Map Tile Caching Improvements** — eliminated tile cache purge on tab resume, expanded RAM tile cache, enabled persistent storage in `filesDir`, and added offline-first loading.
+- **UI Cleanups** — fixed settings card scroll overlapping, prayer alarm status label alignment, and removed redundant design palette labels.
+
+**AppGallery / release notes (copy-paste):** `Multilingual support (Russian, Arabic with RTL), in-app language switcher, share feature, improved offline map caching, UI enhancements.`
 
 ### 2.0.2 (versionCode 8)
 

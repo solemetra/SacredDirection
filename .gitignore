@@ -25,3 +25,6 @@ local.properties
 
 __pycache__/
 *.pyc
+
+# Local references and temp files
+_zenith_ref/

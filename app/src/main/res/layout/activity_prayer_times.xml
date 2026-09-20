@@ -162,7 +162,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fajr Time"
+                        android:text="@string/prayer_fajr_time"
                         android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
@@ -192,14 +192,12 @@
 
                     <TextView
                         android:id="@+id/alarmTextFajr"
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
                         android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:ellipsize="none"
                         android:includeFontPadding="false"
                         android:layout_marginTop="3dp"
                         android:paddingBottom="1dp" />
@@ -232,7 +230,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dhuhr Time"
+                        android:text="@string/prayer_dhuhr_time"
                         android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
@@ -261,14 +259,12 @@
 
                     <TextView
                         android:id="@+id/alarmTextDhuhr"
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
                         android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:ellipsize="none"
                         android:includeFontPadding="false"
                         android:layout_marginTop="3dp"
                         android:paddingBottom="1dp" />
@@ -301,7 +297,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Asr Time"
+                        android:text="@string/prayer_asr_time"
                         android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
@@ -330,14 +326,12 @@
 
                     <TextView
                         android:id="@+id/alarmTextAsr"
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
                         android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:ellipsize="none"
                         android:includeFontPadding="false"
                         android:layout_marginTop="3dp"
                         android:paddingBottom="1dp" />
@@ -370,7 +364,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Maghrib Time"
+                        android:text="@string/prayer_maghrib_time"
                         android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
@@ -399,14 +393,12 @@
 
                     <TextView
                         android:id="@+id/alarmTextMaghrib"
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
                         android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:ellipsize="none"
                         android:includeFontPadding="false"
                         android:layout_marginTop="3dp"
                         android:paddingBottom="1dp" />
@@ -439,7 +431,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Isha Time"
+                        android:text="@string/prayer_isha_time"
                         android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.PrayerName" />
 
                     <TextView
@@ -468,14 +460,12 @@
 
                     <TextView
                         android:id="@+id/alarmTextIsha"
-                        android:layout_width="76dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Alarm ON"
                         android:textAppearance="@style/TextAppearance.SacredDirection.LabelSmall.Alarm"
                         android:maxLines="1"
-                        android:singleLine="true"
-                        android:ellipsize="none"
                         android:includeFontPadding="false"
                         android:layout_marginTop="3dp"
                         android:paddingBottom="1dp" />
