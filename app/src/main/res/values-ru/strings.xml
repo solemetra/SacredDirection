@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Sacred Direction</string>
+    <string name="app_name">Sacred Direction: Qibla Compass &amp; Prayer</string>
+    <string name="brand_name">Sacred Direction</string>
 
     <!-- Navigation -->
     <string name="nav_direction">Кыбла</string>
