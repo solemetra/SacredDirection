@@ -30,7 +30,7 @@ Available on [Huawei AppGallery](https://appgallery.huawei.com/app/C115319577) (
 
 | Dua | Settings |
 |:---:|:---:|
-| ![Dua](docs/screenshots/03-dua.png) | ![Settings](docs/screenshots/04-settings.png) |
+| ![Dua](docs/screenshots/03-dua.png) | ![Settings](docs/screenshots/04-settings-v2.png) |
 
 ## Features
 
