@@ -41,6 +41,10 @@ Available on [Huawei AppGallery](https://appgallery.huawei.com/app/C115319577) (
 - **Dua** — Bismillah, Arabic text, translation, and audio playback
 - **Settings** — Asr method, fixed Fajr/Isha, Hijri offset, permissions, About, Privacy Policy
 
+## Roadmap
+
+- [ ] **Next Prayer Countdown Timer** — live countdown to next prayer (*"Next: Asr in 1h 24m"*) with active prayer card highlight on the Prayer Times tab.
+
 ## Why OpenStreetMap (not Google Maps)
 
 - **Huawei / no GMS** — Google Maps SDK expects Google Play services; OSM tiles load over HTTPS like a normal web map.
