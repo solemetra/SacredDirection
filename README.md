@@ -83,9 +83,17 @@ tools/nav-icons-svg/           — build script for tab PNG icons
 
 Release signing keystore is **not** included in this repository. Keep your `.jks` file local and never commit it.
 
-Current version: **2.1.0** (`versionCode` 9)
+Current version: **2.1.1** (`versionCode` 10)
 
 ## Changelog
+
+### 2.1.1 (versionCode 10)
+
+- **Official App Name Update** — updated store and package title to `Sacred Direction: Qibla Compass & Prayer` for enhanced store discovery and ASO.
+- **Redesigned Settings Screen (Tab 4)** — balanced 4-card structure, converted Asr calculation to segmented control, combined services & about into a unified card with dividers.
+- **Universal Share Link** — updated to hash-routed AppGallery URL (`/#/app/C115319577`) for full desktop and mobile compatibility.
+
+**AppGallery / release notes (copy-paste):** `Обновлён экран настроек, улучшен расчёт времени Аср, добавлена удобная ссылка «Поделиться», улучшен интерфейс.`
 
 ### 2.1.0 (versionCode 9)
 

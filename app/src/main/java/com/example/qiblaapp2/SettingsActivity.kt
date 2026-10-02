@@ -61,11 +61,12 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
 
         val prefs = getSharedPreferences("prayer_settings", MODE_PRIVATE)
 
-        val radioGroupAsr = findViewById<RadioGroup>(R.id.radioGroupAsr)
+        val toggleAsrMethod = findViewById<MaterialButtonToggleGroup>(R.id.toggleAsrMethod)
         val asrMethod = prefs.getString("asr_method", "shafii")
-        radioGroupAsr.check(if (asrMethod == "hanafi") R.id.radioAsrHanafi else R.id.radioAsrShafii)
-        radioGroupAsr.setOnCheckedChangeListener { _, checkedId ->
-            prefs.edit { putString("asr_method", if (checkedId == R.id.radioAsrHanafi) "hanafi" else "shafii") }
+        toggleAsrMethod.check(if (asrMethod == "hanafi") R.id.btnAsrHanafi else R.id.btnAsrShafii)
+        toggleAsrMethod.addOnButtonCheckedListener { _, checkedId, isChecked ->
+            if (!isChecked) return@addOnButtonCheckedListener
+            prefs.edit { putString("asr_method", if (checkedId == R.id.btnAsrHanafi) "hanafi" else "shafii") }
             sendPrayerTimesUpdateBroadcast()
         }
 
@@ -188,14 +189,16 @@ class SettingsActivity : AppCompatActivity(), ReminderPermissionHost {
         findViewById<TextView>(R.id.textSettingsVersion).text =
             getString(R.string.version, BuildConfig.VERSION_NAME)
 
-        findViewById<TextView>(R.id.btnPrivacyPolicy).setOnClickListener {
+        val openPrivacy = {
             startActivity(Intent(this, PrivacyPolicyActivity::class.java))
         }
+        findViewById<View>(R.id.btnPrivacyPolicy)?.setOnClickListener { openPrivacy() }
+        findViewById<View>(R.id.rowPrivacyPolicy)?.setOnClickListener { openPrivacy() }
     }
 
     private fun setupShareCard() {
         findViewById<View>(R.id.cardShareApp).setOnClickListener {
-            val appUrl = "https://appgallery.huawei.com/app/C115319577"
+            val appUrl = "https://appgallery.huawei.com/#/app/C115319577"
             val shareText = getString(R.string.share_app_text, appUrl)
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND

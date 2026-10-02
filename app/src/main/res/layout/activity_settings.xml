@@ -148,31 +148,69 @@
                     android:text="@string/asr_calculation_method"
                     android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section" />
 
-                <RadioGroup
-                    android:id="@+id/radioGroupAsr"
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/hijri_segment_group_bg"
+                    android:clipToOutline="true"
+                    android:padding="1dp">
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/toggleAsrMethod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAsrShafii"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Left"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/asr_shafii" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnAsrHanafi"
+                            style="@style/Widget.SacredDirection.SegmentedButton.Right"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/asr_hanafi" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
+                </FrameLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginTop="2dp">
-                    <RadioButton
-                        android:id="@+id/radioAsrShafii"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/switch_fixed_fajr"
+                            android:textColor="@color/dark_text"
+                            android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="@string/fixed_fajr_desc"
+                            android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
+                    </LinearLayout>
+                    <com.example.qiblaapp2.NeumorphicSwitchView
+                        android:id="@+id/switchFajrFixed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:minHeight="36dp"
-                        android:text="@string/asr_shafii"
-                        android:textColor="@color/dark_text"
-                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
-                    <RadioButton
-                        android:id="@+id/radioAsrHanafi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:minHeight="36dp"
-                        android:text="@string/asr_hanafi"
-                        android:textColor="@color/dark_text"
-                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
-                        android:layout_marginStart="20dp" />
-                </RadioGroup>
+                        android:contentDescription="@string/switch_fixed_fajr" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,51 +218,30 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:layout_marginTop="8dp">
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/switch_fixed_fajr"
-                        android:textColor="@color/dark_text"
-                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
-                    <com.example.qiblaapp2.NeumorphicSwitchView
-                        android:id="@+id/switchFajrFixed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:contentDescription="@string/switch_fixed_fajr" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fixed_fajr_desc"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
-                    android:layout_marginStart="4dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="6dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/switch_fixed_isha"
-                        android:textColor="@color/dark_text"
-                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/switch_fixed_isha"
+                            android:textColor="@color/dark_text"
+                            android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="1dp"
+                            android:text="@string/fixed_isha_desc"
+                            android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
+                    </LinearLayout>
                     <com.example.qiblaapp2.NeumorphicSwitchView
                         android:id="@+id/switchIshaFixed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/switch_fixed_isha" />
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fixed_isha_desc"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary"
-                    android:layout_marginStart="4dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -288,30 +305,30 @@
                 </FrameLayout>
             </LinearLayout>
 
+            <!-- Карточка сервисов и о приложении (Unified Services & About Card) -->
             <LinearLayout
-                android:id="@+id/settingsReminderCard"
+                android:id="@+id/settingsServicesCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/prayer_card_background"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
-                android:paddingTop="12dp"
+                android:paddingTop="4dp"
                 android:paddingBottom="12dp"
                 android:layout_marginBottom="@dimen/header_content_gap">
 
+                <!-- Строка: Напоминания -->
                 <LinearLayout
                     android:id="@+id/rowReminderPermissions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:minHeight="44dp"
-                    android:orientation="horizontal"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
@@ -325,86 +342,103 @@
                         android:id="@+id/textReminderPermSummary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
                         android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium"
                         android:textColor="@color/gray_text" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_chevron_forward"
+                        android:contentDescription="@null" />
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/cardShareApp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/prayer_card_background"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:layout_marginBottom="@dimen/header_content_gap"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/sheet_row_divider" />
 
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:src="@drawable/ic_share"
-                    android:contentDescription="@string/share_app_title" />
-
-                <TextView
-                    android:layout_width="0dp"
+                <!-- Строка: Поделиться с друзьями -->
+                <LinearLayout
+                    android:id="@+id/cardShareApp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:text="@string/share_app_title"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
-                    android:textColor="@color/dark_text" />
+                    android:minHeight="48dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_chevron_forward"
-                    android:contentDescription="@null" />
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_share"
+                        android:contentDescription="@string/share_app_title" />
 
-            <LinearLayout
-                android:id="@+id/settingsExtraCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/prayer_card_background"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="14dp"
-                android:layout_marginBottom="@dimen/header_content_gap"
-                android:gravity="center_horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="6dp"
+                        android:text="@string/share_app_title"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
+                        android:textColor="@color/dark_text" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_chevron_forward"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/sheet_row_divider" />
+
+                <!-- Строка: Политика конфиденциальности -->
+                <LinearLayout
+                    android:id="@+id/rowPrivacyPolicy"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/about"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.TitleMedium.Section"
-                    android:layout_marginBottom="4dp" />
+                    android:minHeight="48dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/btnPrivacyPolicy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/privacy_open"
+                        android:textAppearance="@style/TextAppearance.SacredDirection.BodyLarge.Control"
+                        android:textColor="@color/dark_text" />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_chevron_forward"
+                        android:contentDescription="@null" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/sheet_row_divider" />
+
+                <!-- Нижняя строка: Версия -->
                 <TextView
                     android:id="@+id/textSettingsVersion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.BodyMedium.Secondary" />
-
-
-                <TextView
-                    android:id="@+id/btnPrivacyPolicy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="@string/privacy_open"
-                    android:textAppearance="@style/TextAppearance.SacredDirection.LabelLarge.Link.Warm"
-                    android:padding="4dp"
-                    android:background="?android:attr/selectableItemBackground" />
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textAppearance="@style/TextAppearance.SacredDirection.BodySmall.Secondary" />
 
             </LinearLayout>
 
